@@ -1,0 +1,26 @@
+<svg id="huawei-mate-x2-camera-system-icon2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="93.916" height="93.916" viewBox="0 0 93.916 93.916">
+  <defs>
+    <linearGradient id="linear-gradient" x1="7.066" y1="4.623" x2="8.066" y2="4.623" gradientUnits="objectBoundingBox">
+      <stop offset="0.187" stop-color="#ca3027"/>
+      <stop offset="1" stop-color="#602e93"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#355de6"/>
+      <stop offset="0.885" stop-color="#602e93"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="-0.82" y1="3.133" x2="0.18" y2="3.133" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff0"/>
+      <stop offset="0.779" stop-color="#ea8c34"/>
+    </linearGradient>
+  </defs>
+  <path id="路径_2278" data-name="路径 2278" d="M23.164,0H70.752A23.164,23.164,0,0,1,93.916,23.164V70.752A23.164,23.164,0,0,1,70.752,93.916H23.164A23.164,23.164,0,0,1,0,70.752V23.164A23.164,23.164,0,0,1,23.164,0Z" fill="#222"/>
+  <g id="组_3789" data-name="组 3789" transform="translate(11.814 13.511)">
+    <rect id="矩形_1575" data-name="矩形 1575" width="41.065" height="41.065" rx="20.532" transform="translate(64.761 69.378) rotate(-166.124)" fill="url(#linear-gradient)"/>
+    <rect id="矩形_1576" data-name="矩形 1576" width="41.065" height="41.065" rx="20.532" transform="translate(0 23.988)" fill="url(#linear-gradient-2)"/>
+    <rect id="矩形_1577" data-name="矩形 1577" width="41.065" height="41.065" rx="20.532" transform="translate(53.814) rotate(84.613)" fill="url(#linear-gradient-3)"/>
+    <path id="路径_2272" data-name="路径 2272" d="M1270.888,444.771h0a20.533,20.533,0,0,0-24.857,15.009h0a20.757,20.757,0,0,0-.444,2.444c.368.113.741.219,1.12.313h0a20.533,20.533,0,0,0,24.857-15.009h0a20.733,20.733,0,0,0,.444-2.444C1271.64,444.97,1271.267,444.864,1270.888,444.771Z" transform="translate(-1216.291 -420.238)" fill="#ea8c34"/>
+    <path id="路径_2273" data-name="路径 2273" d="M1251.363,453.083a20.43,20.43,0,0,0-5.438,9.622h0a20.518,20.518,0,0,0,5.507,19.534,20.467,20.467,0,0,0,6.042-14.545h0A20.465,20.465,0,0,0,1251.363,453.083Z" transform="translate(-1216.205 -423.141)" fill="#602e93"/>
+    <path id="路径_2274" data-name="路径 2274" d="M1250.4,462.3a20.532,20.532,0,0,0-20.379-18.062h0a20.514,20.514,0,0,0-5.8.837,20.537,20.537,0,0,0,15.46,17.464h0A20.435,20.435,0,0,0,1250.4,462.3Z" transform="translate(-1209.336 -420.261)" fill="#4da16b"/>
+    <path id="路径_2275" data-name="路径 2275" d="M1251.595,453.083a20.431,20.431,0,0,0-5.438,9.622h0a20.622,20.622,0,0,0-.445,2.445c.368.113.741.219,1.12.312h0a20.428,20.428,0,0,0,10.721-.238A20.466,20.466,0,0,0,1251.595,453.083Z" transform="translate(-1216.332 -423.141)"/>
+  </g>
+</svg>
