@@ -73,17 +73,21 @@ const StoreOff = () => {
           }}
           breakpoints={{
             300: {
-              slidesPerView: 3,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
 
             450: {
-              slidesPerView: 3,
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            750: {
+              slidesPerView: 4,
               spaceBetween: 10,
             },
 
             900: {
-              slidesPerView: 6,
+              slidesPerView: 5,
               spaceBetween: 20,
             },
             1000: {
