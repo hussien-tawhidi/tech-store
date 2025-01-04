@@ -26,14 +26,14 @@ const SearchConainer = ({ searchField, setSearchField }: Props) => {
           ? "absolute transition-all duration-300 opacity-100 top-0 left-0 right-0 backdrop-blur-sm bg-slate-900/50 pointer-events-auto h-screen overflow-hidden z-50"
           : "absolute top-0 transition-all duration-300 opacity-0 right-[30vw] pointer-events-none h-screen overflow-hidden"
       }>
-      <div className='md:w-[50vw]  sm:w-[80vw] w-[100vw] mx-auto bg-slate-600/80 rounded overflow-hidden'>
+      <div className='md:w-[50vw]  sm:w-[80vw] w-[100vw] mx-auto bg-white rounded-br-md rounded-bl-md overflow-hidden'>
         <form
           className=' flex items-center mx-auto mt-5 relative '
           onSubmit={handleSubmit}>
           <div
             className={
               searchField
-                ? "h-[5vh] flex items-center px-2 text-slate-200 cursor-pointer delay-75 duration-300 hover:text-slate-50 transition-all"
+                ? "h-[5vh] flex items-center px-2 text-slate-600 cursor-pointer delay-75 duration-300 hover:text-slate-50 transition-all"
                 : "translate-x-[20vw] opacity-0 transition-all"
             }>
             <CiSearch className='' />
@@ -42,7 +42,7 @@ const SearchConainer = ({ searchField, setSearchField }: Props) => {
             type='text'
             className={
               searchField
-                ? "w-full relative text-sm text-slate-300 bg-transparent h-[5vh] border-b border-b-slate-300 duration-300 delay-100 transition-all  placeholder:text-slate-200"
+                ? "w-full relative text-sm text-slate-600 bg-transparent h-[5vh] border-b border-b-slate-600 duration-300 delay-100 transition-all  placeholder:text-slate-600"
                 : "translate-x-[30vw] opacity-0 transition-all"
             }
             placeholder='Search what you want to...'
@@ -50,7 +50,7 @@ const SearchConainer = ({ searchField, setSearchField }: Props) => {
           <RiCloseLargeFill
             className={
               searchField
-                ? "text-slate-300 cursor-pointer pr-1 hover:text-slate-600 transition-all h-[5vh] duration-300 delay-150"
+                ? "text-slate-600 cursor-pointer pr-1 hover:text-slate-900 transition-all h-[5vh] duration-300 delay-150"
                 : "opacity-0 translate-x-[30vw]"
             }
             onClick={toggleSearchField}
@@ -66,7 +66,7 @@ const SearchConainer = ({ searchField, setSearchField }: Props) => {
                   : "opacity-0 translate-x-[30vw]"
               }>
               <Link href={`/search/[id]`} as={`/search/${data.id}`}>
-                <span className='sm:text-sm text-[12px] text-slate-200 hover:text-slate-50 transition-all'>
+                <span className='sm:text-sm text-[12px] text-slate-600 font-normal hover:text-slate-500 transition-all'>
                   {data.title}
                 </span>
               </Link>

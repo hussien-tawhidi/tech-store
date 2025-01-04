@@ -1,17 +1,20 @@
 import type { NextConfig } from "next";
-import path from "path";
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cdn.dummyjson.com",
+        hostname: "lh3.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "drive.google.com",
       },
     ],
-  },
-  sassOptions: {
-    includePaths: [path.join(__dirname, "styles")],
-    quietDeps: true, // Suppress deprecation warnings
   },
 };
 

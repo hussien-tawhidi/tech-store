@@ -16,7 +16,7 @@ const HomeFeauters = () => {
         grabCursor={true}
         loop={true}
         autoplay={{
-          delay: 1000,
+          delay: 2000,
           disableOnInteraction: false,
         }}
         keyboard={{
@@ -48,7 +48,7 @@ const HomeFeauters = () => {
           <SwiperSlide key={f.id}>
             <div
               key={f.id}
-              className='flex items-center md:gap-5 gap-3 md:p-5 p-3 h-full text-slate-600 shadow-md'>
+              className='flex animate__animated animate__lightSpeedInRight items-center md:gap-5 gap-3 md:p-5 p-3 h-full text-slate-600 shadow-md'>
               {f.icon && (
                 <f.icon className='text-3xl text-slate-500 font-extrabold' />
               )}

@@ -4,37 +4,51 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { BiSolidOffer } from "react-icons/bi";
 import { useRouter } from "next/navigation";
+import {  BsCartPlus } from "react-icons/bs";
 
 interface props {
   brand: string;
-  title: string;
+  name: string;
   price: number;
   discount: number | 0;
   id: string;
   image: string;
+  descriptions: string;
 }
 
-const BestSellsCard = ({ title, brand, price, discount, id, image }: props) => {
-    
+const BestSellsCard = ({
+  name,
+  price,
+  discount,
+  id,
+  image,
+  descriptions,
+}: props) => {
   const router = useRouter();
 
   return (
-    <div className='shadow-lg'>
-      <div className='relative w-full h-full bg-slate-200 p-5 rounded-md  overflow-hidden'>
+    <div className='shadow-lg cursor-pointer'>
+      <div className='relative w-full h-full p-5 rounded-md  overflow-hidden'>
         <div className='z-10 text-left'>
-          <p className='text-slate-600 text-[12px] font-semibold text-left '>
-            {brand}
-          </p>
           <div className='relative text-left'>
-            <span className='absolute right-0 text-2xl font-semibold text-slate-600 w-full leading-6'>
-              {title}
-            </span>
+            <h1 className='text-xl font-semibold -mb-14  w-full leading-6'>
+              {name?.length > 10 ? (
+                <>
+                  {/* {name?.split(" ")[0]} First word */}
+                  <strong className='block text-transparent stroke -z-10 text-6xl -inset-1'>
+                    {name?.split(" ")?.slice(1)?.join(" ")}{" "}
+                  </strong>
+                </>
+              ) : (
+                name
+              )}
+            </h1>
             <Image
               src={image}
-              alt='title'
-              width={500}
-              height={500}
-              className='object-cover mx-auto z-10 w-auto h-[30vh]'
+              alt='name'
+              width={1000}
+              height={1000}
+              className='object-cover mx-auto z-10 w-auto h-[35vh]'
             />
           </div>
           <div className='relative'>
@@ -45,17 +59,28 @@ const BestSellsCard = ({ title, brand, price, discount, id, image }: props) => {
           </div>
           <div className='flex justify-end'>
             <Button
-              variant='outline'
+              variant='link'
               className='shadow-xl  text-slate-600 font-semibold'
               onClick={() => router.push(`/product_detials/${id}`)}>
-              Buy now
+              <BsCartPlus />
             </Button>
           </div>
           <p className='text-slate-600 font-semibold font-mono flex items-center gap-1'>
             %{discount} <BiSolidOffer />
           </p>
         </div>
-        {/* <span className='w-[90%] -z-0 bottom-2 h-1 bg-gray-600 absolute rounded-md'></span> */}
+        <p className='text-[10px] sm:w-[50%] w-[90%] leading-5 text-right ml-auto opacity-45 text-muted-foreground'>
+          {descriptions}
+          <span
+            className='shadow-xl mx-1  text-slate-600 font-semibold'
+            onClick={() =>
+              router.push(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/product_detials/${id}`
+              )
+            }>
+            more...
+          </span>
+        </p>
       </div>
     </div>
   );

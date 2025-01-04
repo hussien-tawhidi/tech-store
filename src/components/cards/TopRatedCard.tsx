@@ -1,6 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
+import { BsCartPlus } from "react-icons/bs";
+import ChooseColor from "../ChooseColor";
+import { Button } from "../ui/button";
 
 interface TopRatedCardProps {
   productName: string;
@@ -10,6 +14,8 @@ interface TopRatedCardProps {
   onAddToCart?: () => void;
   title: string;
   id: string;
+  colors: { name: string; hex: string }[];
+  setColors: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const TopRatedCard: React.FC<TopRatedCardProps> = ({
@@ -17,15 +23,16 @@ const TopRatedCard: React.FC<TopRatedCardProps> = ({
   productDescription,
   productImage,
   price,
-  title,
+  colors,
   id,
-  onAddToCart,
 }) => {
   return (
-    <div className='relative mx-auto max-w-sm bg-slate-200 rounded-3xl shadow-xl text-slate-600 p-6 w-full flex flex-col  justify-center'>
+    <div className='relative mx-auto max-w-sm rounded-3xl shadow-xl text-slate-600 p-6 w-full flex flex-col  justify-between'>
       {/* Product Image */}
       <div className='flex justify-center'>
-        <img
+        <Image
+          width={400}
+          height={400}
           src={productImage}
           alt={productName}
           className='h-48 w-auto object-contain rounded-xl'
@@ -41,23 +48,22 @@ const TopRatedCard: React.FC<TopRatedCardProps> = ({
 
       {/* Buttons */}
       <div className='flex justify-between items-center mt-6'>
-        <div className='flex space-x-2'>
-          <button className='h-3 w-3 bg-white rounded-full' />
-          <button className='h-3 w-3 bg-gray-400 rounded-full' />
-          <button className='h-3 w-3 bg-gray-400 rounded-full' />
+        <div className='flex-1'>
+          <ChooseColor colors={colors} />
         </div>
-        <button
+        <Button
           onClick={() => {}}
-          className='bg-white text-gray-800 px-6 py-2 rounded-full text-sm font-medium shadow-md hover:shadow-lg transition'>
-          <Link href={`/product_detials/${id}`}>See the info...</Link>
-        </button>
+          className='hover:text-slate-800 text-slate-600 transition-all border-none!'>
+          <Link
+            href={`${process.env.NEXT_PUBLIC_BASE_URL}/product_detials/${id}`}>
+            <BsCartPlus />
+          </Link>
+        </Button>
       </div>
 
       {/* Specifications Link */}
       <div className='mt-6 text-center'>
-        <button className='text-gray-400 underline text-sm'>
-          Specifications
-        </button>
+        <Button variant={"link"}>Specifications</Button>
       </div>
     </div>
   );

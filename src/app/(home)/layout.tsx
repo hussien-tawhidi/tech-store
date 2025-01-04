@@ -3,7 +3,7 @@ import Header from "@/components/header/Header";
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <div className="z-0 over">
       <Header />
       {children}
       <Footer/>

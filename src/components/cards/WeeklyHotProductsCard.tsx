@@ -4,15 +4,19 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { BiSolidOffer } from "react-icons/bi";
 import { useRouter } from "next/navigation";
+import Brands from "../Brands";
+import Rate from "../Rate";
+import { BsCartPlus } from "react-icons/bs";
 
 interface props {
   brand: string;
   title: string;
   price: number;
   discount: number | 0;
-  id: string;
+  _id: string;
   image: string;
   description: string;
+  rate: number;
 }
 
 const WeeklyHotProductsCard = ({
@@ -20,64 +24,73 @@ const WeeklyHotProductsCard = ({
   brand,
   price,
   discount,
-  id,
+  _id,
+  rate,
   image,
   description,
 }: props) => {
   const router = useRouter();
+
+  const discountedPrice = (price - (price * discount) / 100).toFixed(2);
+
   return (
     <div className='shadow-lg'>
-      <div className='relative w-full h-full bg-slate-200 p-5 rounded-md  overflow-hidden'>
-        <div className='z-10 text-left'>
-          <p className='text-slate-600 text-sm font-semibold text-left capitalize h-5'>
-            {brand}
-          </p>
-          <p className='text-slate-600 font-semibold font-mono flex items-center gap-1 text-xl justify-center shadow-xl py-2 px-3 rounded-md border-slate-600 w-[100px]'>
-            %{discount}
-            <BiSolidOffer />
-          </p>
+      <div className='relative w-full h-full p-5 rounded-md flex flex-col justify-between overflow-hidden'>
+        <div className='z-10 text-left flex flex-col justify-between h-full'>
+          <Brands brand={brand} />
 
-          <div className='relative text-left '>
-            <Image
-              src={image}
-              alt='title'
-              width={500}
-              height={500}
-              className='object-cover mx-auto z-10 w-auto h-[30vh]'
-            />
+          <div className='relative text-left my-5'>
+            {image && (
+              <Image
+                src={image}
+                alt='title'
+                width={500}
+                height={500}
+                className='object-cover mx-auto z-10 w-auto h-[30vh]'
+              />
+            )}
           </div>
-          <div className='relative'>
-            <p className='relative font-semibold text-slate-600'>
-              {price}
-              <span className='absolute -top-1 text-[10px]'>$</span>
+          <div className='relative flex items-center justify-between'>
+            <Rate rating={rate} />
+            <p className='relative font-bold text-xl text-slate-600'>
+              {discountedPrice}
+              <span className='absolute font-normal -top-1 text-[12px]'>$</span>
+              <span className='font-bold opacity-85 text-red-600 text-sm flex items-center gap-1'>
+                <span className='flex items-center text-red-600'>
+                  {discount}
+                  <BiSolidOffer />
+                </span>
+                -<span className='text-red-600'>{price}</span>
+              </span>
             </p>
           </div>
 
           <div className='flex gap'>
             <div className=''>
               <h3 className='text-slate-600 font-bold text-2xl relative my-3'>
-                {title}
-                <span className='w-[30%] h-[3px] absolute -bottom-1 left-0 bg-slate-600'></span>
+                {title.length > 20 ? <>{title.slice(0, 20)}...</> : title}
+                {/* <span className='w-[30%] h-[3px] absolute -bottom-1 left-0 bg-slate-600'></span> */}
               </h3>
-              <p className='text-muted-foreground text-sm tracking-wide'>
+              <p className='text-muted-foreground text-[12px] leading-5 tracking-wide opacity-80'>
                 {description.length > 50 ? (
-                  <>{description.slice(0, 70)}...</>
+                  <>{description.slice(0, 50)}...</>
                 ) : (
                   <>{description}</>
                 )}
               </p>
             </div>
-            <div className='flex justify-end'>
-              <Button
-                variant='outline'
-                className='shadow-lg text-slate-600 font-semibold'
-                onClick={() => router.push(`/product_detials/${id}`)}>
-                Buy now
-              </Button>
-            </div>
           </div>
         </div>
-        {/* <span className='w-[90%] -z-0 bottom-2 h-1 bg-red-500 absolute rounded-md'></span> */}
+        <Button
+          className='w-full mt-10 border-slate-500! text-slate-600'
+          variant={"outline"}
+          onClick={() =>
+            router.push(
+              `${process.env.NEXT_PUBLIC_BASE_URL}/product_detials/${_id}`
+            )
+          }>
+          See & Add to <BsCartPlus />
+        </Button>
       </div>
     </div>
   );

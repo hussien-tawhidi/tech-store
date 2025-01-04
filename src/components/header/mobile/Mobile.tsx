@@ -38,19 +38,19 @@ const Mobile = () => {
           setSearchField={setSearchField}
         />
         <HiOutlineShoppingBag className='cursor-pointer hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-100 text-slate-600 transition-all font-semibold' />
+      </div>
+      <div className='flex items-center gap-3 font-semibold text-xl'>
         <CiSearch
           onClick={handleSearchContainerToggle}
           className='cursor-pointer hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-100 text-slate-600 transition-all font-semibold'
         />
-      </div>
-      <div className='flex items-center gap-3 font-semibold text-xl'>
         <CiUser className='cursor-pointer hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-100 text-slate-600 transition-all font-semibold' />
-        <IoMdMenu
+        {/* <IoMdMenu
           className='cursor-pointer hover:text-slate-950 text-2xl dark:text-slate-300 dark:hover:text-slate-100 text-slate-600 transition-all font-semibold'
           onClick={handleMenu}
-        />
+        /> */}
       </div>
-      {menu && (
+      {/* {menu && (
         <div
           className={
             menu
@@ -84,7 +84,7 @@ const Mobile = () => {
             </ul>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

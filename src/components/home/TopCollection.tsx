@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const TopCollection = () => {
-  const router = useRouter();
   return (
     <div className='relative mt-16'>
       <div className='flex md:flex-row flex-col md:gap-5 gap-3'>

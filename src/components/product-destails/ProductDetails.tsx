@@ -1,62 +1,60 @@
 "use client";
 import { useEffect, useState } from "react";
 import ProductDetailsCard from "./ProductDetailsCard";
-import axios from "axios";
+import { fetchProductById } from "@/actions/products";
+import LoadingSkillate from "./LoadingSkillate";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const ProductDetails = ({ id }: { id: string }) => {
   const [data, setData] = useState<any>();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const cartItems = useSelector((state: RootState) => state?.cart?.items);
+  const cartItemeById = cartItems?.find((item) => item?._id === id);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadProduct = async () => {
       setLoading(true);
-      setError(null); // Reset error state
-      try {
-        const response = await axios.get("https://dummyjson.com/products");
-        const { products } = await response?.data;
+      const { data, error } = await fetchProductById(id);
 
-        const findById = products?.find((p: any) => p?.id === Number(id));
-        setData(findById); // Update data with the fetched response
-      } catch (err) {
-        if (axios.isAxiosError(err)) {
-          // Axios-specific error handling
-          setError(
-            err.response?.data?.message ||
-              "An error occurred while fetching data."
-          );
-        } else {
-          // Generic error handling
-          setError("An unexpected error occurred.");
-        }
-        console.error("Fetch error:", err);
-      } finally {
-        setLoading(false); // Always reset loading state
-      }
+      setData(data);
+      setError(error);
+      setLoading(false);
     };
 
-    fetchData();
+    loadProduct();
   }, []);
-  console.log(data);
+
   return (
-    <h1>
-      <ProductDetailsCard
-        title={data?.title}
-        brand={data?.brand}
-        category={data?.category}
-        description={data?.description}
-        price={data?.price}
-        discountPercentage={data?.discountPercentage}
-        stock={data?.stock}
-        rating={data?.rating}
-        thumbnail={data?.thumbnail}
-        images={data?.images}
-        availabilityStatus={data?.availabilityStatus}
-        warrantyInformation={data?.warrantyInformation}
-        returnPolicy={data?.returnPolicy}
-        shippingInformation={data?.shippingInformation}
-      />
-    </h1>
+    <div>
+      {loading ? (
+        <LoadingSkillate />
+      ) : (
+        <div className='animate-in animate__animated'>
+          <ProductDetailsCard
+            id={data?._id}
+            colors={data?.colors}
+            title={data?.name}
+            brand={data?.brand}
+            category={data?.category}
+            description={data?.description}
+            price={data?.price}
+            discountPercentage={data?.discountPrice}
+            stock={data?.stock}
+            features={data?.features}
+            rating={data?.ratings}
+            thumbnail={data?.thumbnail}
+            images={data?.images}
+            availabilityStatus={data?.availabilityStatus}
+            warrantyInformation={data?.warrantyInformation}
+            returnPolicy={data?.returnPolicy}
+            shippingInformation={data?.shippingInformation}
+            quantity={cartItemeById?.quantity}
+          />
+        </div>
+      )}
+    </div>
   );
 };
 

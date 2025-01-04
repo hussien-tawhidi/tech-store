@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import ProductLists from "./ProductLists";
 import Link from "next/link";
@@ -6,7 +8,9 @@ const Products = () => {
   return (
     <section className='my-5 px-3'>
       <Button variant={"outline"}>
-        <Link href='/dashboard/products/create' className="flex gap-3 items-center">
+        <Link
+          href='/dashboard/products/create'
+          className='flex gap-3 items-center'>
           Add new <IoMdAdd />{" "}
         </Link>
       </Button>

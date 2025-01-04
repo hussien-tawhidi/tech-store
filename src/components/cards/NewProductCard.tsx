@@ -1,79 +1,92 @@
 "use client";
-import Image from "next/image";
-import { Button } from "../ui/button";
-import { BsCartPlus } from "react-icons/bs";
-import { useRouter } from "next/navigation";
-import { GiNewShoot } from "react-icons/gi";
-import { BiSolidOffer } from "react-icons/bi";
 
+import Image from "next/image";
+import { BsCartPlus } from "react-icons/bs";
+import { Button } from "../ui/button";
+import { BiSolidOffer } from "react-icons/bi";
+import Brands from "../Brands";
+import ChooseColor from "../ChooseColor";
+import { useRouter } from "next/navigation";
+import Rate from "../Rate";
+import Link from "next/link";
 interface props {
   brand: string;
-  title: string;
+  name: string;
   price: number;
   discount: number | 0;
-  id: string;
+  _id: string;
   image: string;
   descriptions: string;
+  rating: number;
+  colors: { name: string; hex: string }[];
 }
 const NewProductCard = ({
-  title,
+  name,
   brand,
   price,
   discount,
-  id,
+  _id,
   image,
+  colors,
   descriptions,
+  rating,
 }: props) => {
   const router = useRouter();
-
+  const discountedPrice = (price - (price * discount) / 100).toFixed(2);
   return (
-    <div className='bg-slate-200 h-full'>
-      <div className='relative flex flex-col justify-between rounded-lg mb-16 h-full shadow-xl'>
-        <div className=' flex justify-between'>
-          <span className=' bg-slate-600 py-1 px-2 sm:text-md text-[10px] text-white spin-in-6 flex items-center'>
-            <GiNewShoot /> NEW
-          </span>
-          <div className='py-1 relative px-2 md:gap-1 text-xl  sm:text-md text-[10px] text-slate-600 spin-in-6 flex items-center'>
-            %{discount} <BiSolidOffer />
-            <span className='w-[50%] h-[2px] absolute bottom-0 left-0 right-0 mx-auto bg-slate-600'></span>
+    <div className='overflow-hidden rounded-lg'>
+      <div className='relative flex flex-col justify-between rounded-lg mb-32 h-full shadow-xl'>
+        <div className='relative overflow-hidden'>
+          <div className='w-[20rem] h-[40vh]  overflow-hidden'>
+            <Image
+              src={image}
+              width={500}
+              height={500}
+              alt={name}
+              className='mx-auto object-cover h-full w-full'
+            />
           </div>
         </div>
-        <div className='relative'>
-          <Image
-            src={image}
-            width={500}
-            height={500}
-            alt={title}
-            className='sm:h-[30vh] h-auto mx-auto object-cover w-[200px]'
-          />
-          <div className='absolute md:-bottom-4 bottom-0 bg-slate-200/50 left-0 text-slate-600 backdrop-blur-sm sm:p-3 p-2 rounded-tl-md overflow-hidden'>
-            <p className='md:text-sm text-[12px] tracking-tight font-semibold border-b'>
-              {title.length > 10 ? <>{title.slice(0, 15)}...</> : title}
-            </p>
-            <p className='md:text-sm text-[10px] flex justify-between sm:my-2 my-0 capitalize'>
-              price : <span>${price}</span>
-            </p>
-            <button
-              className='text-slate-600'
+        <div className=' px-4'>
+          <div className='font-semibold text-md mb-3 pt-3 justify-between flex gap-3 items-center text-slate-600'>
+            <Button
+              variant={"link"}
+              className='shadow-xl py-3 px-5 rounded-md'
               onClick={() =>
                 router.push(
-                  `/product_detials/${id}`
+                  `${process.env.NEXT_PUBLIC_BASE_URL}/product_detials/${_id}`
                 )
               }>
               <BsCartPlus />
-            </button>
+            </Button>
+            <p className='flex flex-col items-center'>
+              {discountedPrice}$
+              <span className='text-[10px] flex items-center'>
+                {price}$ - {discount}
+                <BiSolidOffer className='' />
+              </span>
+            </p>
           </div>
-        </div>
-        <div className='sm:mt-5 mt-1 p-4'>
-          <p className='font-semibold text-[10px] pt-3 text-slate-600 border-t-2 border-slate-600'>
-            Brand: {brand ? brand : "Brand Name"}
-          </p>
-          <p className='text-slate-600 tracking-wide font-sans sm:text-sm text-[10px] h-[10vh]'>
-            {descriptions.length > 70 ? (
-              <>{descriptions.slice(0, 50)} ...</>
+          <Rate rating={rating} />
+          <ChooseColor colors={colors} />
+          <h3 className='text-slate-600 font-bold flex md:text-xl relative'>
+            {name?.length > 10 ? <>{name?.slice(0, 15)}...</> : name}
+            <Brands brand={brand} />
+          </h3>
+          <p className='text-slate-600 tracking-wide font-sans sm:text-[12px] text-[10px] h-[10vh]'>
+            {descriptions?.length > 90 ? (
+              <Link
+                href={`/product_detials/${_id}`}
+                className='text-muted-foreground'>
+                {descriptions?.slice(0, 90)}{" "}
+                <span className='font-semibold underline'>more...</span>
+              </Link>
             ) : (
-              descriptions
-            )}
+              <>
+                {descriptions}
+                <span className='font-semibold underline'>more...</span>
+              </>
+            )}{" "}
           </p>
         </div>
       </div>
