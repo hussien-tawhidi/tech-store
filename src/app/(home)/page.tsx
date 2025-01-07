@@ -15,8 +15,8 @@ export default function Home() {
     <main className='overflow-hidden z-0 relative'>
       <Hero />
       <Menu />
-        <HomeFeauters />
-        <StoreOff />
+      <HomeFeauters />
+      <StoreOff />
       <div className='md:w-[90vw] mx-auto my-5 w-[95vw]'>
         <NewProducts />
         <TopCollection />

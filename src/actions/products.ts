@@ -309,3 +309,53 @@ export const fetchTechStoreOffers = async () => {
 
   return { data, error, loading }; // Return the updated states
 };
+
+export const updateProduct = async (
+  productId: string,
+  updatedFields: Record<string, any>
+) => {
+  try {
+    // Create FormData to handle file uploads and other data
+    const formData = new FormData();
+
+    // Append required product ID
+    formData.append("productId", productId);
+
+    // Append optional fields only if provided
+    Object.keys(updatedFields).forEach((key) => {
+      const value = updatedFields[key];
+      if (value !== undefined && value !== null) {
+        // Handle array fields
+        if (Array.isArray(value)) {
+          formData.append(key, value.join(","));
+        }
+        // Handle file uploads
+        else if (value instanceof File || value instanceof Blob) {
+          formData.append(key, value);
+        }
+        // Handle other fields
+        else {
+          formData.append(key, value.toString());
+        }
+      }
+    });
+
+    // Make PATCH request to the server
+    const response = await fetch("/api/admin/products", {
+      method: "PATCH",
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    // Handle errors or return success
+    if (!response.ok) {
+      throw new Error(result.error || "Failed to update product");
+    }
+
+    return result; // Updated product data
+  } catch (error) {
+    console.error("Error updating product:", error);
+    throw error;
+  }
+};

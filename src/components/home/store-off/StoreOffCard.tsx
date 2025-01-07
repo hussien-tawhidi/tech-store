@@ -30,17 +30,16 @@ const StoreOffCard = ({
       ) : (
         <div className='border rounded-lg text-slate-600 capitalize h-full! relative overflow-hidden'>
           <div className='md:p-5 p-3 flex flex-col items-center justify-center h-full'>
-            <div className='w-[15rem] h-[30vh]  overflow-hidden'>
+            <div className='overflow-hidden'>
               <Image
                 src={src}
                 alt={`${title} image`}
-                width={1000}
-                height={1000}
-                className='object-cover mx-auto w-[10rem]'
+                width={400}
+                height={400}
+                className='object-cover h-auto w-[100%] mx-auto'
               />
             </div>
-
-            <h2 className='md:text-[16px] sm:text-[13px] text-[12px] md:mt-10'>
+            <h2 className='md:text-[16px] sm:text-[13px] text-[12px] md:mt-5'>
               {title.length > 20 ? <>{title.slice(0, 20)}...</> : title}
             </h2>
             <p className='md:text-[12px] text-center text-slate-500 mt-1 font-light'>

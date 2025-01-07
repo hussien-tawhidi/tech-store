@@ -53,7 +53,7 @@ const StoreOff = () => {
         </p>
       </div>
       {/* products */}
-      <div className='md:py-14 py-7'>
+      <div className=''>
         <Swiper
           slidesPerView={4}
           centeredSlides={true}

@@ -48,7 +48,7 @@ const FileInput = ({ onChange, error }: Props) => {
   return (
     <span className='mb-2 flex gap-3 items-center'>
       <span>
-        <label className='mb-2 text-slate-200 transition-all hover:bg-slate-50 hover:text-slate-700 cursor-pointer text-sm gap-5 p-5 bg-slate-600 rounded-md  flex items-center justify-center relative'>
+        <label className='mb-2 text-slate-600 transition-all hover:bg-slate-50 hover:text-slate-800 cursor-pointer text-sm gap-5 p-5  rounded-md  flex items-center justify-center relative'>
           <IoCameraOutline className='dark:text-gray-200 font-semibold text-xl' />
           Upload images
           <input

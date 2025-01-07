@@ -126,6 +126,100 @@ export async function POST(req: Request) {
   }
 }
 
+export async function PATCH(req: Request) {
+  const form = await req.formData();
+  const productId = form.get("productId")?.toString();
+
+  console.log("Form Data Entries:");
+  for (const pair of form.entries()) {
+    console.log(pair[0], pair[1]); // Log each field in the form data
+  }
+
+  // Validate productId
+  if (!productId) {
+    return NextResponse.json(
+      { error: "Missing product ID for update" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    await dbConnect();
+
+    // Fetch existing product
+    const existingProduct = await Product.findById(productId);
+    if (!existingProduct) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
+
+    // Prepare update data
+    const updateData: Record<string, any> = {};
+
+    // Update only fields that are provided
+    const name = form.get("name")?.toString();
+    if (name) updateData.name = name;
+
+    const price = form.get("price")?.toString();
+    if (price) updateData.price = parseFloat(price);
+
+    const discountPrice = form.get("discount")?.toString();
+    if (discountPrice) updateData.discountPrice = parseFloat(discountPrice);
+
+    const description = form.get("description")?.toString();
+    if (description) updateData.description = description;
+
+    const category = form.get("category")?.toString();
+    if (category) updateData.category = category;
+
+    const features = form.get("features")?.toString();
+    if (features) {
+      updateData.features = features
+        .split(",")
+        .map((feature) => feature.trim());
+    }
+
+    const stock = form.get("stock")?.toString();
+    if (stock) updateData.stock = parseInt(stock, 10);
+
+    // Handle image updates
+    const existingImages = form.getAll("existingImages[]"); // Get IDs of images to keep
+   const newImages = Array.from(form.getAll("newImages")).filter(
+     (file): file is File => file instanceof File
+   );
+    // Retain only the specified existing images
+    let updatedImages = existingProduct.images.filter((img: any) =>
+      existingImages.includes(img.public_id)
+    );
+
+    // Upload new images if provided
+    if (newImages.length > 0) {
+      const uploadedImages = await uploadToCloudinary(newImages, "tech-store");
+      updatedImages = [...updatedImages, ...uploadedImages]; // Combine old and new images
+    }
+
+    updateData.images = updatedImages; // Update images field
+
+    // Update product in database
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      { $set: updateData }, // Only update provided fields
+      { new: true } // Return updated product
+    );
+
+    return NextResponse.json(
+      { message: "Product updated successfully", product: updatedProduct },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Internal server error:", error);
+    return NextResponse.json(
+      { error: "Internal server error", details: error },
+      { status: 500 }
+    );
+  }
+}
+
+
 export async function GET() {
   try {
     // Connect to the database
@@ -141,7 +235,7 @@ export async function GET() {
     }
 
     // Fetch products with increased timeout
-    const products = await Product.find().maxTimeMS(30000);
+    const products = await Product.find();
 
     // Handle empty response
     if (!products || products.length === 0) {

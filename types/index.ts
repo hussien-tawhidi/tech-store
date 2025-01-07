@@ -25,8 +25,6 @@ interface Dimensions {
   depth: number;
 }
 
-
-
 interface Meta {
   createdAt: string;
   updatedAt: string;
@@ -173,4 +171,38 @@ export interface SubmitProductParams {
   features: string;
   colors: ColorType[];
   image: File[] | null;
+}
+
+export interface upateFormProps {
+  // General Form Fields
+  handleSubmit: (e: React.FormEvent) => void;
+  name: string;
+  setName: (name: string) => void;
+  description: string;
+  setDescription: (description: string) => void;
+  features: string;
+  setFeatures: (features: string) => void;
+  price: string;
+  setPrice: (price: string) => void;
+  handleImageChange: (files: File[]) => void;
+  discount: string;
+  setDiscount: (discount: string) => void;
+  category: string;
+  setCategory: (category: string) => void;
+  stock: string;
+  setStock: (stock: string) => void;
+  error: string;
+  setError: (error: string) => void;
+  formLoading: boolean;
+  data: any;
+
+  // Image Handling Props
+  images: any[];
+  setImages?: (images: any[]) => void;
+  selectedImageId: string;
+  setSelectedImageId: (id: string) => void;
+  handleDeleteImage: (id: string) => Promise<void>;
+  handleUpdate: () => Promise<void>;
+  handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  imageLoading: boolean;
 }

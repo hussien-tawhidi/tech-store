@@ -29,7 +29,7 @@ const ProductLists = () => {
     const getDate = async () => {
       setLoading(true);
       try {
-         const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
+        const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
 
         const { data } = await axios.get(apiUrl);
 
@@ -74,12 +74,11 @@ const ProductLists = () => {
           </tr>
         </thead>
         {getProducts?.map((product: productProps, index) => (
-          <tbody
-            className='dark:divide-gray-400'
-            key={product?._id}
-            onClick={() => router.push(`/product_detials/${product?._id}`)}>
+          <tbody className='dark:divide-gray-400' key={product?._id}>
             <tr className='hover:bg-slate-50 dark:hover:bg-slate-600 cursor-pointer border-b'>
-              <th className='flex gap-3 px-6 py-4 font-normal text-slate-900 dark:text-slate-400'>
+              <th
+                className='flex gap-3 px-6 py-4 font-normal text-slate-900 dark:text-slate-400'
+                onClick={() => router.push(`/product_detials/${product?._id}`)}>
                 <span className='text-slate-600 dark:text-slate-300 flex items-center justify-center text-sm rounded-full font-semibold'>
                   <p>{index}</p>
                 </span>
@@ -126,7 +125,13 @@ const ProductLists = () => {
                     {" "}
                     <AiOutlineDelete className='text-xl' />
                   </Button>
-                  <Button variant={"outline"}>
+                  <Button
+                    variant={"outline"}
+                    onClick={() =>
+                      router.push(
+                        `/dashboard/products/${product?._id}`
+                      )
+                    }>
                     <CiEdit className='text-xl' />
                   </Button>
                 </div>
