@@ -23,11 +23,11 @@ const StoreOff = () => {
       setLoading(true);
       try {
         const response = await fetch("/api/admin/products", {
-          method: "PATCH",
+          method: "GET",
         });
         const result = await response.json();
-
-        if (result.ok) setData(result?.products);
+        console.log(result);
+        if (result.status===200) setData(result?.products);
       } catch (error) {
         console.log(error, "Error getting products admin data [store-off]");
       } finally {
