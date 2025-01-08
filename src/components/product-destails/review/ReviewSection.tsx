@@ -23,18 +23,22 @@ const ReviewSection = ({ productId }: Props) => {
 
   const userId = session?.user._id;
   // **Fetch Reviews**
-  const fetchReviews = async () => {
-    try {
-      const res = await fetch("/api/admin/products/reviews", {
+const fetchReviews = async () => {
+  try {
+     // Replace with your dynamic productId
+    const res = await fetch(
+      `/api/admin/products/reviews?productId=${productId}`,
+      {
         method: "GET",
-      });
-      if (!res.ok) throw new Error("Failed to fetch reviews.");
-      const data = await res?.json();
-      setReviews(data.reviews);
-    } catch (err) {
-      setError("Error fetching reviews." + err);
-    }
-  };
+      }
+    );
+    if (!res.ok) throw new Error("Failed to fetch reviews.");
+    const data = await res.json();
+    setReviews(data.reviews);
+  } catch (err) {
+    setError("Error fetching reviews: " + err);
+  }
+};
 
   // **Handle Add Review**
   const handleAddReview = async () => {

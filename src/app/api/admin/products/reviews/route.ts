@@ -58,22 +58,44 @@ export async function POST(req: Request) {
 // **GET - Fetch Reviews for a Product**
 export async function GET(req: Request) {
   try {
+    // Connect to database
     await dbConnect();
-    const reviews = await Review.find();
+
+    // Get productId from query params
+    const { searchParams } = new URL(req.url!); // Extract query string
+    const productId = searchParams.get("productId"); // Get productId
+
+    // Validate productId
+    if (!productId) {
+      return NextResponse.json(
+        { message: "Product ID is required", status: 400 },
+        { status: 400 }
+      );
+    }
+
+    // Fetch reviews for the specific product
+    const reviews = await Review.find({ product: productId }).sort({
+      createdAt: -1,
+    });
+
+    // Return reviews with a success message
     return NextResponse.json({
-      message: "Rewiews found successfully",
+      message: "Reviews fetched successfully",
       reviews,
       status: 200,
     });
   } catch (error) {
-    // console.log(error, "Error in fetching reviews API BACKEND");
-    logger.warn(error);
-    return NextResponse.json({
-      message: "Error fetching reviews API BACKEND",
-      error: error,
-    });
+    console.error(error, "Error in fetching reviews API BACKEND");
+    return NextResponse.json(
+      {
+        message: "Error fetching reviews API BACKEND",
+        error: error,
+      },
+      { status: 500 }
+    );
   }
 }
+
 // **DELETE - Remove a Review**
 export async function DELETE(req: Request) {
   try {
