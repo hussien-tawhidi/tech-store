@@ -7,6 +7,7 @@ import { FaStar } from "react-icons/fa";
 import TextareaInput from "@/components/TextareaInput";
 import DeleteReviewBtn from "./DeleteReviewBtn";
 import { ReviewComment } from "../../../../types";
+import axios from "axios";
 
 interface Props {
   productId: string;
@@ -25,13 +26,10 @@ const ReviewSection = ({ productId }: Props) => {
   // **Fetch Reviews**
   const fetchReviews = async () => {
     try {
-      const res = await fetch(`/api/admin/products/reviews`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-      if (!res.ok) throw new Error("Failed to fetch reviews.");
-      const data = await res.json();
-      setReviews(data.reviews?.filter((p: any) => p?.product === productId));
+      const res = await axios.get("/api/admin/products/reviews");
+
+      const { reviews } = res.data;
+      setReviews(reviews?.filter((p: any) => p?.product === productId));
     } catch (err) {
       setError("Error fetching reviews.");
     }
