@@ -227,7 +227,6 @@ export async function PATCH(req: Request) {
 }
 
 
-
 export async function GET(req: NextRequest) {
   try {
     await dbConnect();

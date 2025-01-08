@@ -26,7 +26,8 @@ const ReviewSection = ({ productId }: Props) => {
   const fetchReviews = async () => {
     try {
       const res = await fetch(
-        `/api/admin/products/reviews?productId=${productId}`
+        `/api/admin/products/reviews?productId=${productId}`,
+        { method: "GET" }
       );
       if (!res.ok) throw new Error("Failed to fetch reviews.");
       const data = await res.json();
