@@ -53,9 +53,8 @@ const ProductLists = () => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
 
-        const { data } = await axios.get(apiUrl);
+        const { data } = await axios.get("api/admin/products");
         if (data) setGetProducts(data?.products);
 
         // Set offset based on the current page number in URL

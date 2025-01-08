@@ -22,9 +22,12 @@ const StoreOff = () => {
     const getDate = async () => {
       setLoading(true);
       try {
-      
-        const { data } = await axios.get(`/api/admin/products`);
-        if (data) setData(data?.products);
+        const response = await fetch("/api/admin/products", {
+          method: "PATCH",
+        });
+        const result = await response.json();
+
+        if (result.ok) setData(result?.products);
       } catch (error) {
         console.log(error, "Error getting products admin data [store-off]");
       } finally {
