@@ -4,6 +4,8 @@ import LoadingSkillate from "@/components/product-destails/LoadingSkillate";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { CiShoppingCart } from "react-icons/ci";
+import { MdShoppingCartCheckout } from "react-icons/md";
 
 interface props {
   src: string;
@@ -12,6 +14,7 @@ interface props {
   price: number;
   _id: string;
   loading: boolean;
+  off: number;
 }
 
 const StoreOffCard = ({
@@ -21,6 +24,7 @@ const StoreOffCard = ({
   price,
   _id,
   loading,
+  off,
 }: props) => {
   const router = useRouter();
   return (
@@ -30,13 +34,17 @@ const StoreOffCard = ({
       ) : (
         <div className='border rounded-lg text-slate-600 capitalize h-full! relative overflow-hidden'>
           <div className='md:p-5 p-3 flex flex-col items-center justify-center h-full'>
-            <div className='overflow-hidden'>
+            <div className='overflow-hidden relative'>
+              <span className='bg-slate-700 text-white px-2 py-1 absolute top-0 right-0'>
+                {off}%
+              </span>
               <Image
+                loading='lazy'
                 src={src}
                 alt={`${title} image`}
                 width={400}
                 height={400}
-                className='object-cover h-auto w-[100%] mx-auto'
+                className='object-cover h-full w-auto mx-auto'
               />
             </div>
             <h2 className='md:text-[16px] sm:text-[13px] text-[12px] md:mt-5'>
@@ -52,9 +60,9 @@ const StoreOffCard = ({
             <p className='text-slate-700'>{price}$</p>
           </div>
           <Button
-            className='w-full bg-slate-600 text-white hover:text-slate-600'
+            className='w-full bg-slate-600 flex items-center text-white hover:text-slate-600'
             onClick={() => router.push(`/product_details/${_id}`)}>
-            Buy now
+            Buy now <CiShoppingCart />
           </Button>
         </div>
       )}

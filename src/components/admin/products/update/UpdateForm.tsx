@@ -26,13 +26,11 @@ const UpdateForm = ({
   stock,
   setStock,
   handleSubmit,
-  error,
   formLoading,
   data,
   // Image Props
   handleImageChange,
   images,
-  setImages,
   selectedImageId,
   setSelectedImageId,
   handleDeleteImage,
@@ -105,17 +103,19 @@ const UpdateForm = ({
                 alt={`Image ${index + 1}`}
                 className={`rounded-md object-cover h-[10vh] shadow-md cursor-pointer ${
                   selectedImageId === image.public_id
-                    ? "ring-2 ring-blue-500"
+                    ? "ring-2 ring-slate-500"
                     : ""
                 }`}
                 onClick={() => setSelectedImageId(image.public_id)} // Select Image
               />
 
-              <div className='flex items-center relative'>
+              <div className='flex items-center'>
                 {/* Update Image (only for selected image) */}
                 {selectedImageId === image.public_id && (
                   <div className='mt-6'>
-                    <label htmlFor='update-image' className="flex items-center justify-center">
+                    <label
+                      htmlFor='update-image'
+                      className='flex items-center justify-center cursor-pointer transition-all'>
                       <input
                         type='file'
                         accept='image/*'
@@ -124,7 +124,7 @@ const UpdateForm = ({
                         onChange={handleFileChange}
                         disabled={imageLoading}
                       />
-                      <CiCamera />
+                      <CiCamera className='text-xl' /> <span>New</span>
                     </label>
                     <Button
                       onClick={handleUpdate}
@@ -136,12 +136,11 @@ const UpdateForm = ({
                 )}
 
                 {/* Delete Button */}
-                <Button
+                <span
                   onClick={() => handleDeleteImage(image.public_id)}
-                  className='mt-2 bg-red-500 text-white hover:text-red-500'
-                  disabled={imageLoading}>
+                  className=' absolute top-0 left-0 rounded-full h-6 flex items-center justify-center w-6 bg-red-600/80 text-slate-100 cursor-pointer hover:bg-white hover:text-red-600 transition-all'>
                   {imageLoading ? "Deleting..." : <PiTrashSimpleLight />}
-                </Button>
+                </span>
               </div>
             </div>
           ))}
@@ -149,7 +148,11 @@ const UpdateForm = ({
         </div>
 
         {/* Form Submission */}
-        <Button type='submit' disabled={formLoading} className='mt-4'>
+        <Button
+          type='submit'
+          variant={"outline"}
+          disabled={formLoading}
+          className='mt-4 w-full'>
           {formLoading ? "Please wait" : "Update"}
         </Button>
       </form>

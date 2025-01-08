@@ -73,14 +73,17 @@ export async function POST(req: Request) {
     // Upload banner image
     const uploadedImageData = await uploadbannerToCloudinary(
       banner,
-      "tech-store"
+      `tech-store/banner/${name}`
     );
     const imageUrl = uploadedImageData.secure_url;
 
     // Upload product images
     let imageUrls: { url: any; public_id: any }[] = [];
     if (image.length > 0) {
-      const uploadedImages = await uploadToCloudinary(image, name);
+      const uploadedImages = await uploadToCloudinary(
+        image,
+        `tech-store/${name}`
+      );
       imageUrls = uploadedImages;
     }
 
@@ -321,4 +324,3 @@ export async function DELETE(req: Request) {
     );
   }
 }
-

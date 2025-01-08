@@ -5,13 +5,15 @@ import { fetchProductById } from "@/actions/products";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import UpdateForm from "./UpdateForm";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { TbArrowBackUp } from "react-icons/tb";
 
 const Update = ({ productId }: { productId: string }) => {
   const [data, setData] = useState<any>({});
   const [images, setImages] = useState([]);
   const [formLoading, setFormLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
-
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [features, setFeatures] = useState("");
@@ -79,6 +81,7 @@ const Update = ({ productId }: { productId: string }) => {
       toast.success("Product updated successfully!");
       setData(result.product); // Refresh product data
       setImages(result.product.images || []);
+      setAddImage([]);
     } catch (error) {
       toast.error("Failed to update product.");
     } finally {
@@ -152,36 +155,45 @@ const Update = ({ productId }: { productId: string }) => {
     });
   };
 
+  const backTo = () => {
+    window.history.back();
+  };
+
   return (
-    <UpdateForm
-      handleImageChange={handleImageChange}
-      data={data}
-      handleDeleteImage={handleDeleteImage}
-      handleFileChange={handleFileChange}
-      handleUpdate={handleUpdate}
-      selectedImageId={selectedImageId}
-      setSelectedImageId={setSelectedImageId}
-      category={category}
-      description={description}
-      discount={discount}
-      features={features}
-      handleSubmit={handleSubmit}
-      images={images}
-      imageLoading={imageLoading}
-      name={name}
-      price={price}
-      stock={stock}
-      formLoading={formLoading}
-      setCategory={setCategory}
-      setDescription={setDescription}
-      setDiscount={setDiscount}
-      setFeatures={setFeatures}
-      setName={setName}
-      setPrice={setPrice}
-      setStock={setStock}
-      error={error}
-      setError={setError}
-    />
+    <div className=''>
+      <Button variant={"outline"} onClick={backTo}>
+        <TbArrowBackUp /> Back to products
+      </Button>
+      <UpdateForm
+        handleImageChange={handleImageChange}
+        data={data}
+        handleDeleteImage={handleDeleteImage}
+        handleFileChange={handleFileChange}
+        handleUpdate={handleUpdate}
+        selectedImageId={selectedImageId}
+        setSelectedImageId={setSelectedImageId}
+        category={category}
+        description={description}
+        discount={discount}
+        features={features}
+        handleSubmit={handleSubmit}
+        images={images}
+        imageLoading={imageLoading}
+        name={name}
+        price={price}
+        stock={stock}
+        formLoading={formLoading}
+        setCategory={setCategory}
+        setDescription={setDescription}
+        setDiscount={setDiscount}
+        setFeatures={setFeatures}
+        setName={setName}
+        setPrice={setPrice}
+        setStock={setStock}
+        error={error}
+        setError={setError}
+      />
+    </div>
   );
 };
 

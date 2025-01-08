@@ -2,14 +2,13 @@
 
 import Loading from "@/components/Loading";
 import axios from "axios";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { CiEdit } from "react-icons/ci";
-import { AiOutlineDelete } from "react-icons/ai";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { deleteProduct } from "@/actions/products";
+import ReactPaginate from "react-paginate";
+import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
+import ProductItems from "./ProductItems";
 
 interface productProps {
   _id: string;
@@ -23,29 +22,53 @@ interface productProps {
 }
 
 const ProductLists = () => {
+  const searchParams = useSearchParams();
   const [getProducts, setGetProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [deleteProductsLoading, setDeleteProductsLoading] = useState(false);
 
+  // ******************************************************************
+  // pagination
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + 10;
+  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  const currentItems = getProducts.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(getProducts.length / 10);
+  const currentPage = Number(searchParams.get("page")) || 1;
+
+  const handlePageClick = (event: any) => {
+    const newPage = event.selected + 1;
+    const newOffset = (event.selected * 10) % getProducts.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+    // Update URL with the new page number
+    router.push(`?page=${newPage}`, { scroll: false });
+  };
+
+  // ******************************************************************
   useEffect(() => {
-    const getDate = async () => {
+    const fetchProducts = async () => {
       setLoading(true);
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
 
         const { data } = await axios.get(apiUrl);
-
         if (data) setGetProducts(data?.products);
+
+        // Set offset based on the current page number in URL
+        const initialOffset = (currentPage - 1) * 10;
+        setItemOffset(initialOffset);
       } catch (error) {
         console.log(error, "Error getting products admin data");
       } finally {
         setLoading(false);
       }
     };
-    getDate();
-  }, []);
-
+    fetchProducts();
+  }, [currentPage]);
   const handleDelete = async (productId: string) => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this product?"
@@ -68,106 +91,33 @@ const ProductLists = () => {
   return (
     <div className='overflow-hidden w-full m-5 z-10'>
       {loading && <Loading />}
-      <table className='w-full border-collaps text-left text-sm text-slate-500'>
-        <thead className=''>
-          <tr>
-            <th
-              scope='col'
-              className='px-6 py-4 font-medium text-slate-600 dark:text-slate-300'>
-              Product
-            </th>
-            <th
-              scope='col'
-              className='px-6 py-4 font-medium text-slate-600 dark:text-slate-300'>
-              Price
-            </th>
-            <th
-              scope='col'
-              className='px-6 py-4 font-medium text-gray-600 dark:text-gray-300'>
-              Category
-            </th>
-            <th
-              scope='col'
-              className='px-6 py-4 font-medium text-gray-600 dark:text-gray-300'>
-              Descriptions
-            </th>
-            <th
-              scope='col'
-              className='px-6 py-4 font-medium text-gray-600'></th>
-          </tr>
-        </thead>
-        {getProducts?.map((product: productProps, index) => (
-          <tbody className='dark:divide-gray-400' key={product?._id}>
-            <tr className='hover:bg-slate-50 dark:hover:bg-slate-600 cursor-pointer border-b'>
-              <th
-                className='flex gap-3 px-6 py-4 font-normal text-slate-900 dark:text-slate-400'
-                onClick={() => router.push(`/product_detials/${product?._id}`)}>
-                <span className='text-slate-600 dark:text-slate-300 flex items-center justify-center text-sm rounded-full font-semibold'>
-                  <p>{index}</p>
-                </span>
-                <div className='relative h-10 w-10 overflow-hidden'>
-                  {product?.images && (
-                    <Image
-                      width={200}
-                      height={200}
-                      className='w-10 h-auto object-cover object-center'
-                      src={product?.images?.[0]?.url || ""}
-                      alt='Photo'
-                    />
-                  )}
-                </div>
-                <div className='text-sm'>
-                  <div className='font-medium text-slate-700 dark:text-slate-500'>
-                    {product.name}
-                  </div>
-                  <div className='text-slate-400 dark:text-slate-300'>
-                    {product.sku.length > 20
-                      ? product.sku.slice(0, 20)
-                      : product.sku}
-                  </div>
-                </div>
-              </th>
-              <td className='px-6 py-4'>
-                <span className='inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold'>
-                  {product.price}$
-                </span>
-              </td>
-              <td className='px-6 py-4 dark:text-slate-400'>
-                {product.category}
-              </td>
-              <td className='px-6 py-4'>
-                <div className='flex gap-2'>
-                  <span className='inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold'>
-                    {product.description.slice(0, 50)}...
-                  </span>
-                </div>
-              </td>
-              <td className='px-6 py-4'>
-                <div className='flex justify-end gap-4'>
-                  <Button
-                    variant={"outline"}
-                    onClick={() => handleDelete(product?._id)} // Trigger handleDelete on click
-                    disabled={deleteProductsLoading} // Disable delete button while loading
-                  >
-                    {deleteProductsLoading ? (
-                      "Deleting..."
-                    ) : (
-                      <AiOutlineDelete className='text-xl' />
-                    )}
-                  </Button>
-                  <Button
-                    variant={"outline"}
-                    onClick={() =>
-                      router.push(`/dashboard/products/${product?._id}`)
-                    }>
-                    <CiEdit className='text-xl' />
-                  </Button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        ))}
-      </table>
+      {/* products****************************************/}
+      <ProductItems
+        currentItems={currentItems}
+        deleteProductsLoading={deleteProductsLoading}
+        handleDelete={handleDelete}
+        itemOffset={itemOffset}
+      />
+      {/* pagination setup****************************************/}
+      <ReactPaginate
+        breakLabel='...'
+        nextLabel={
+          <GrFormNextLink className='flex items-center justify-center mt-1 text-slate-600 hover:text-slate-950 transition-all' />
+        }
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel={
+          <GrFormPreviousLink className='flex items-center justify-center mt-1 text-slate-600 hover:text-slate-950 transition-all' />
+        }
+        renderOnZeroPageCount={null}
+        containerClassName='pagination flex justify-center mt-4'
+        activeClassName='text-blue-500 font-bold text-slate-600 border border-slate-500'
+        previousClassName='px-3 py-1 border rounded-md mr-2'
+        nextClassName='px-3 py-1 border rounded-md ml-2'
+        pageClassName='px-3 py-1 border rounded-md mx-1'
+        disabledClassName='text-gray-400 cursor-not-allowed hidden'
+      />
     </div>
   );
 };

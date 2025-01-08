@@ -15,6 +15,7 @@ import { RootState } from "@/store/store";
 import AddTofavButton from "../AddTofavButton";
 import ReviewSection from "./review/ReviewSection";
 import Link from "next/link";
+import ImageFullScreen from "./ImageFullScreen";
 
 interface SelectedColor {
   name: string;
@@ -42,7 +43,6 @@ const ProductDetailsCard = ({
   const dispatch = useDispatch();
 
   const [selectedColors, setSelectedColors] = useState<SelectedColor[]>([]);
-
   const handleColorChange = (selectedColor: SelectedColor) => {
     setSelectedColors((prev) =>
       prev.some((color) => color.name === selectedColor.name)
@@ -54,9 +54,10 @@ const ProductDetailsCard = ({
   const discountedPrice = (price - (price * discountPercentage) / 100).toFixed(
     2
   );
-  
+
   return (
     <div className='container relative mx-auto p-4 md:p-8 text-slate-600 '>
+    
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-8'>
         {/* Product Images */}
         <div className='lg:col-span-5 relative'>

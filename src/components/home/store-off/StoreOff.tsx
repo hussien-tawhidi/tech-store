@@ -7,13 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { productProps } from "../best-sells/BestSells";
 import { Button } from "@/components/ui/button";
 import StoreOffCard from "./StoreOffCard";
-import {
-  Keyboard,
-  Autoplay,
-  Pagination,
-  Navigation,
-  EffectFade,
-} from "swiper/modules";
+import { Keyboard, Autoplay, Pagination, Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -23,6 +17,7 @@ import "swiper/css/navigation";
 const StoreOff = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+
   useEffect(() => {
     const getDate = async () => {
       setLoading(true);
@@ -41,6 +36,7 @@ const StoreOff = () => {
     };
     getDate();
   }, []);
+
   return (
     <div className='shadow-lg'>
       <div className='flex items-center text-slate-100 bg-gradient-to-r animated-background from-slate-800  via-slate-700 to-slate-600 md:p-5 p-3 justify-between'>
@@ -50,7 +46,7 @@ const StoreOff = () => {
         <p className='flex items-center font-semibold md:text-xl sm:text-sm text-[12px]'>
           <PiPercentLight className='md:text-5xl sm:text-3xl text-3xl' />
           <span>
-            Tech <br /> store of
+            Tech <br /> store OFF
           </span>
         </p>
       </div>
@@ -61,9 +57,6 @@ const StoreOff = () => {
           centeredSlides={true}
           spaceBetween={30}
           grabCursor={true}
-          // pagination={{
-          //   type: "fraction",
-          // }}
           navigation={{ nextEl: ".arrow-left", prevEl: ".arrow-right" }}
           loop={true}
           autoplay={{
@@ -102,7 +95,7 @@ const StoreOff = () => {
           {data.slice(16, data.length).map((menu: productProps) => (
             <SwiperSlide key={menu._id}>
               <StoreOffCard
-                _id={menu._id}
+                _id={menu._id} off={menu.discountPrice}
                 description={menu.description}
                 loading={loading}
                 price={menu.price}

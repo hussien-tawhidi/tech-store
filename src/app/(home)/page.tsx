@@ -6,7 +6,7 @@ import HomeFeauters from "@/components/home/HomeFeauters";
 import Menu from "@/components/home/menu/Menu";
 import NewProducts from "@/components/home/new-products/NewProducts";
 import Slider from "@/components/home/slider/Slider";
-// import StoreOff from "@/components/home/store-off/StoreOff";
+import StoreOff from "@/components/home/store-off/StoreOff";
 import TopRated from "@/components/home/top-rated/TopRated";
 import TopCollection from "@/components/home/TopCollection";
 import WeeklyHotProducts from "@/components/home/weekly-hot-producrs/WeeklyHotProducts";
@@ -16,7 +16,7 @@ export default function Home() {
       <Hero />
       <Menu />
       <HomeFeauters />
-      {/* <StoreOff /> */}
+      <StoreOff />
       <div className='md:w-[90vw] mx-auto my-5 w-[95vw]'>
         <NewProducts />
         <TopCollection />

@@ -23,7 +23,7 @@ export const generateMetadata = async ({ params }: any) => {
   const findById = products?.find((p: any) => p?._id === id);
 
   return {
-    title: `${findById.name} - Online Shop`,
+    title: `${findById.name} - Tech Store`,
     description: findById.description,
   };
 };

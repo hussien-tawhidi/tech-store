@@ -17,6 +17,8 @@ export default function ProductImage({
   const [changeImage, setChangeImage] = useState(images[active]?.url || "");
   const [isLoading, setIsLoading] = useState(true);
 
+
+
   useEffect(() => {
     if (images && images[active]?.url) {
       setIsLoading(false);
@@ -49,7 +51,9 @@ export default function ProductImage({
           </div>
 
           {/* Main Image */}
-          <div className='flex justify-center items-center overflow-hidden w-[400px] h-[70vh]'>
+          <div
+            className='flex justify-center items-center overflow-hidden w-[400px] h-[70vh]'
+            >
             <Image
               data-cy='imageItem'
               src={changeImage}

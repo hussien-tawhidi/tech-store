@@ -21,8 +21,7 @@ export const fetchHeroProducts = async () => {
   let data = null; // Initialize data to null
 
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
-    const response = await axios.get(apiUrl);
+    const response = await axios.get("/api/admin/products");
     const { products } = response.data;
     // Assign the filtered products directly to data
     data = products?.filter((p: HeroProductProps) => p.feature === true);
@@ -48,8 +47,7 @@ export const fetchNewProduct = async () => {
   let data: newProductsProps[] | any = null; // Initialize data as null
 
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
-    const response = await axios.get(apiUrl);
+    const response = await axios.get("/api/admin/products");
     const { products } = response.data;
     const sortedProducts = products?.sort(
       (a: newProductsProps, b: newProductsProps) =>
@@ -61,7 +59,8 @@ export const fetchNewProduct = async () => {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
       error =
-        err.response?.data?.message || "An error occurred while fetching data. [fetchNewProduct]";
+        err.response?.data?.message ||
+        "An error occurred while fetching data. [fetchNewProduct]";
     } else {
       // Generic error handling
       error = "An unexpected error occurred. [fetchNewProduct]";
@@ -79,9 +78,7 @@ export const fetchHotProducts = async () => {
   let error: string | null = null; // Initialize error as null
   let data: newProductsProps[] | any = null; // Initialize data as null
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
-
-    const response = await axios.get(apiUrl);
+    const response = await axios.get("/api/admin/products");
     const { products } = await response.data;
     // you can add hot of the week
     const sortedProducts = products.sort(
@@ -93,7 +90,8 @@ export const fetchHotProducts = async () => {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
       error =
-        err.response?.data?.message || "An error occurred while fetching data. [fetchHotProducts]";
+        err.response?.data?.message ||
+        "An error occurred while fetching data. [fetchHotProducts]";
     } else {
       // Generic error handling
       error = "An unexpected error occurred. [fetchHotProducts]";
@@ -112,9 +110,7 @@ export const fetchBestSells = async () => {
   let data: newProductsProps[] | any = null; // Initialize data as null
 
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
-
-    const response = await axios.get(apiUrl);
+    const response = await axios.get("/api/admin/products");
     const { products } = await response.data;
     // you cant add best sells
     const sortedProducts = products.sort(
@@ -126,7 +122,8 @@ export const fetchBestSells = async () => {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
       error =
-        err.response?.data?.message || "An error occurred while fetching data. [fetchBestSells]";
+        err.response?.data?.message ||
+        "An error occurred while fetching data. [fetchBestSells]";
     } else {
       // Generic error handling
       error = "An unexpected error occurred. [fetchBestSells]";
@@ -144,9 +141,7 @@ export const fetchTopRatedProducts = async () => {
   let error: string | null = null; // Initialize error as null
   let data: newProductsProps[] | any = null; // Initialize data as null
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
-
-    const response = await axios.get(apiUrl);
+    const response = await axios.get("/api/admin/products");
     const { products } = await response?.data;
     // you can add hot of the week
     const sortedProducts = products.sort(
@@ -158,7 +153,8 @@ export const fetchTopRatedProducts = async () => {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
       error =
-        err.response?.data?.message || "An error occurred while fetching data. [fetchTopRatedProducts]";
+        err.response?.data?.message ||
+        "An error occurred while fetching data. [fetchTopRatedProducts]";
     } else {
       // Generic error handling
       error = "An unexpected error occurred. [fetchTopRatedProducts]";
@@ -179,11 +175,8 @@ export const fetchProductById = async (
   let data = null;
 
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
-    if (!apiUrl) {
-      throw new Error("API URL is not defined in environment variables. [fetchProductById]");
-    }
-    const response = await axios.get(apiUrl);
+    
+    const response = await axios.get("/api/admin/products");
     const { products } = response.data;
 
     // Find product by ID
@@ -192,7 +185,8 @@ export const fetchProductById = async (
     if (axios.isAxiosError(err)) {
       // Axios-specific error
       error =
-        err.response?.data?.message || "An error occurred while fetching data. [fetchProductById]";
+        err.response?.data?.message ||
+        "An error occurred while fetching data. [fetchProductById]";
     } else {
       // Generic error
       error = "An unexpected error occurred. [fetchProductById]";
@@ -256,9 +250,8 @@ export const createProductFunction = async (
       formData.append("image", file, file.name);
     });
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
-
-    const response = await axios.post(apiUrl, formData, {
+    
+    const response = await axios.post("/api/admin/products", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -283,9 +276,8 @@ export const fetchTechStoreOffers = async () => {
   let error: string | null = null; // Initialize error as null
   let data: newProductsProps[] | any = null; // Initialize data as null
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
-
-    const response = await axios.get(apiUrl);
+   
+    const response = await axios.get("/api/admin/products");
     const { products } = await response?.data;
     // you can add hot of the week
     const sortedProducts = products.sort(
@@ -298,7 +290,8 @@ export const fetchTechStoreOffers = async () => {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
       error =
-        err.response?.data?.message || "An error occurred while fetching data. [fetchTechStoreOffers]";
+        err.response?.data?.message ||
+        "An error occurred while fetching data. [fetchTechStoreOffers]";
     } else {
       // Generic error handling
       error = "An unexpected error occurred. [fetchTechStoreOffers]";
