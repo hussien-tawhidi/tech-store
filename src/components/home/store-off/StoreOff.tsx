@@ -22,9 +22,12 @@ const StoreOff = () => {
     const getDate = async () => {
       setLoading(true);
       try {
-        const response = await fetch("/api/admin/products", {
-          method: "GET",
-        });
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products`,
+          {
+            method: "GET",
+          }
+        );
         const result = await response.json();
         console.log(result);
         if (result.status===200) setData(result?.products);
