@@ -32,7 +32,7 @@ const StoreOff = () => {
         const { data } = await axios.get(apiUrl);
         if (data) setData(data?.products);
       } catch (error) {
-        console.log(error, "Error getting products admin data");
+        console.log(error, "Error getting products admin data [store-off]");
       } finally {
         setLoading(false);
       }

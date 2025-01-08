@@ -29,9 +29,10 @@ export const fetchHeroProducts = async () => {
   } catch (err) {
     if (axios.isAxiosError(err)) {
       error =
-        err.response?.data?.message || "An error occurred while fetching data.";
+        err.response?.data?.message ||
+        "An error occurred while fetching data. [fetchHeroProducts]";
     } else {
-      error = "An unexpected error occurred."; // Handle generic error
+      error = "An unexpected error occurred. [fetchHeroProducts]"; // Handle generic error
     }
     console.error("Fetch error:", err);
   } finally {
@@ -60,10 +61,10 @@ export const fetchNewProduct = async () => {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
       error =
-        err.response?.data?.message || "An error occurred while fetching data.";
+        err.response?.data?.message || "An error occurred while fetching data. [fetchNewProduct]";
     } else {
       // Generic error handling
-      error = "An unexpected error occurred.";
+      error = "An unexpected error occurred. [fetchNewProduct]";
     }
     console.error("Fetch error:", err);
   } finally {
@@ -92,10 +93,10 @@ export const fetchHotProducts = async () => {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
       error =
-        err.response?.data?.message || "An error occurred while fetching data.";
+        err.response?.data?.message || "An error occurred while fetching data. [fetchHotProducts]";
     } else {
       // Generic error handling
-      error = "An unexpected error occurred.";
+      error = "An unexpected error occurred. [fetchHotProducts]";
     }
     console.error("Fetch error:", err);
   } finally {
@@ -125,12 +126,12 @@ export const fetchBestSells = async () => {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
       error =
-        err.response?.data?.message || "An error occurred while fetching data.";
+        err.response?.data?.message || "An error occurred while fetching data. [fetchBestSells]";
     } else {
       // Generic error handling
-      error = "An unexpected error occurred.";
+      error = "An unexpected error occurred. [fetchBestSells]";
     }
-    console.error("Fetch error:", err);
+    console.error("Fetch error: ", err);
   } finally {
     loading = false; // Always reset loading state
   }
@@ -157,10 +158,10 @@ export const fetchTopRatedProducts = async () => {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
       error =
-        err.response?.data?.message || "An error occurred while fetching data.";
+        err.response?.data?.message || "An error occurred while fetching data. [fetchTopRatedProducts]";
     } else {
       // Generic error handling
-      error = "An unexpected error occurred.";
+      error = "An unexpected error occurred. [fetchTopRatedProducts]";
     }
     console.error("Fetch error:", err);
   } finally {
@@ -180,7 +181,7 @@ export const fetchProductById = async (
   try {
     const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
     if (!apiUrl) {
-      throw new Error("API URL is not defined in environment variables.");
+      throw new Error("API URL is not defined in environment variables. [fetchProductById]");
     }
     const response = await axios.get(apiUrl);
     const { products } = response.data;
@@ -191,10 +192,10 @@ export const fetchProductById = async (
     if (axios.isAxiosError(err)) {
       // Axios-specific error
       error =
-        err.response?.data?.message || "An error occurred while fetching data.";
+        err.response?.data?.message || "An error occurred while fetching data. [fetchProductById]";
     } else {
       // Generic error
-      error = "An unexpected error occurred.";
+      error = "An unexpected error occurred. [fetchProductById]";
     }
     console.error("Fetch error:", err);
   } finally {
@@ -297,10 +298,10 @@ export const fetchTechStoreOffers = async () => {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
       error =
-        err.response?.data?.message || "An error occurred while fetching data.";
+        err.response?.data?.message || "An error occurred while fetching data. [fetchTechStoreOffers]";
     } else {
       // Generic error handling
-      error = "An unexpected error occurred.";
+      error = "An unexpected error occurred. [fetchTechStoreOffers]";
     }
     console.error("Fetch error:", err);
   } finally {
