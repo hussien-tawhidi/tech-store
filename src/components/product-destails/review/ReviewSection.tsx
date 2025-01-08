@@ -25,7 +25,7 @@ const ReviewSection = ({ productId }: Props) => {
   // **Fetch Reviews**
   const fetchReviews = async () => {
     try {
-      const productId = "12345"; // Replace this dynamically
+      // Replace this dynamically
       console.log("Fetching reviews for productId:", productId);
 
       const res = await fetch(
