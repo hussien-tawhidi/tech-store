@@ -32,7 +32,7 @@ const ReviewSection = ({ productId }: Props) => {
       const data = await res.json();
       setReviews(data.reviews);
     } catch (err) {
-      setError("Error fetching reviews.");
+      setError("Error fetching reviews." + err);
     }
   };
 
