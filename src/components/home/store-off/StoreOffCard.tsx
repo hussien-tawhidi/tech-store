@@ -61,7 +61,11 @@ const StoreOffCard = ({
           </div>
           <Button
             className='w-full bg-slate-600 flex items-center text-white hover:text-slate-600'
-            onClick={() => router.push(`/product_details/${_id}`)}>
+            onClick={() =>
+              router.push(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/product_detials/${_id}`
+              )
+            }>
             Buy now <CiShoppingCart />
           </Button>
         </div>

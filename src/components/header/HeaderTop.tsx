@@ -66,7 +66,6 @@ const HeaderTop = () => {
         ) : (
           <div className='flex items-center justify-center gap-3 text-slate-600'>
             <Link href={"/user-register"} className='flex items-center'>
-              {/* <CiUser className='cursor-pointer hover:text-slate-950 dark:text-slate-300 dark:hover:text-slate-100 text-slate-600 transition-all font-semibold animate__animated animate__backInDown' /> */}
               <span className='text-[12px] cursor-pointer hover:text-slate-900 transition-all'>
                 SignUp
               </span>

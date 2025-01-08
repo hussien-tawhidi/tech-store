@@ -38,6 +38,7 @@ export default async function RootLayout({
               defaultTheme='system'
               enableSystem
               disableTransitionOnChange>
+              <link rel='icon' href='/dark.png' sizes='any' className="h-auto w-3" />
               {children}
               <Toaster />
             </ThemeProvider>

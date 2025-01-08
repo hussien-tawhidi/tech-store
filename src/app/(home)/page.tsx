@@ -1,4 +1,4 @@
-import Banner from "@/components/home/Banner";
+
 import BestSells from "@/components/home/best-sells/BestSells";
 import BlogPosts from "@/components/home/blog/BlogPosts";
 import Hero from "@/components/home/hero/Hero";
@@ -13,6 +13,7 @@ import WeeklyHotProducts from "@/components/home/weekly-hot-producrs/WeeklyHotPr
 export default function Home() {
   return (
     <main className='overflow-hidden z-0 relative'>
+    
       <Hero />
       <Menu />
       <HomeFeauters />
@@ -22,7 +23,6 @@ export default function Home() {
         <TopCollection />
         <Slider />
         <BestSells />
-        <Banner />
         <WeeklyHotProducts />
         <TopRated />
         <BlogPosts />
