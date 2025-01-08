@@ -15,9 +15,8 @@ export default ProductDetailsPage;
 export const generateMetadata = async ({ params }: any) => {
   const param = await params;
   const { id } = await param;
-  // Replace with your own API endpoint for fetching product data
-  const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
-  const { data } = await axios.get(apiUrl);
+
+  const { data } = await axios.get("/api/admin/products");
   const { products } = await data;
 
   const findById = products?.find((p: any) => p?._id === id);
