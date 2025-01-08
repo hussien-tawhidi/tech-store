@@ -22,11 +22,8 @@ const StoreOff = () => {
     const getDate = async () => {
       setLoading(true);
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
-
-        const { data } = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products`
-        );
+      
+        const { data } = await axios.get(`/api/admin/products`);
         if (data) setData(data?.products);
       } catch (error) {
         console.log(error, "Error getting products admin data [store-off]");
@@ -95,7 +92,8 @@ const StoreOff = () => {
           {data.slice(16, data.length).map((menu: productProps) => (
             <SwiperSlide key={menu._id}>
               <StoreOffCard
-                _id={menu._id} off={menu.discountPrice}
+                _id={menu._id}
+                off={menu.discountPrice}
                 description={menu.description}
                 loading={loading}
                 price={menu.price}
