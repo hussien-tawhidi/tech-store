@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Product from "@/model/Product";
 import { dbConnect } from "@/lib/db";
 import {
@@ -226,43 +226,61 @@ export async function PATCH(req: Request) {
   }
 }
 
-export async function GET() {
+// export async function GET() {
+//   try {
+//     // Connect to the database
+//     await dbConnect();
+
+//     // Validate connection state
+//     if (mongoose.connection.readyState !== 1) {
+//       logger.error("Database connection not established");
+//       return NextResponse.json({
+//         message: "Database connection failed",
+//         status: 500,
+//       });
+//     }
+
+//     // Fetch products with increased timeout
+//     const products = await Product.find();
+
+//     // Handle empty response
+//     if (!products || products.length === 0) {
+//       return NextResponse.json({
+//         message: "No products found",
+//         status: 404,
+//       });
+//     }
+
+//     // Return products
+//     return NextResponse.json({
+//       message: "Products loaded successfully",
+//       status: 200,
+//       products,
+//     });
+//   } catch (error: any) {
+//     // Log the error and respond
+//     logger.error(`Error fetching products: ${error.message}`);
+//     return NextResponse.json({
+//       message: "Error fetching products",
+//       status: 500,
+//     });
+//   }
+// }
+
+export async function GET(req: NextRequest) {
   try {
-    // Connect to the database
     await dbConnect();
-
-    // Validate connection state
-    if (mongoose.connection.readyState !== 1) {
-      logger.error("Database connection not established");
-      return NextResponse.json({
-        message: "Database connection failed",
-        status: 500,
-      });
-    }
-
-    // Fetch products with increased timeout
     const products = await Product.find();
-
-    // Handle empty response
-    if (!products || products.length === 0) {
-      return NextResponse.json({
-        message: "No products found",
-        status: 404,
-      });
-    }
-
-    // Return products
     return NextResponse.json({
-      message: "Products loaded successfully",
+      message: "Products found successfully",
+      products: products,
       status: 200,
-      products,
     });
-  } catch (error: any) {
-    // Log the error and respond
-    logger.error(`Error fetching products: ${error.message}`);
+  } catch (error) {
+    console.log(error, "Error in fetching products API BACKEND");
     return NextResponse.json({
-      message: "Error fetching products",
-      status: 500,
+      message: "Error fetching products API BACKEND",
+      error: error,
     });
   }
 }
