@@ -26,11 +26,14 @@ const StoreOff = () => {
           `https://tech-store-blond-eight.vercel.app/api/admin/products`,
           {
             method: "GET",
+            headers: {
+              accept: "application/json",
+            },
           }
         );
         const result = await response.json();
         console.log(result);
-        if (result.status===200) setData(result?.products);
+        if (result.status === 200) setData(result?.products);
       } catch (error) {
         console.log(error, "Error getting products admin data [store-off]");
       } finally {
