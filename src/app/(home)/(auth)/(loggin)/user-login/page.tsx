@@ -1,9 +1,8 @@
-import Login from "@/components/auth/Login";
 
 const UserLoginPage = () => {
   return (
     <div>
-      <Login />
+user login
     </div>
   );
 };
