@@ -23,7 +23,7 @@ const StoreOff = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products`,
+          `https://tech-store-blond-eight.vercel.app/api/admin/products`,
           {
             method: "GET",
           }
