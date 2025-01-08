@@ -31,7 +31,7 @@ const StoreOff = () => {
         }
         const data = await response.json();
 
-        setData(data?.products);
+        setData(data?.product);
       } catch (error) {
         console.log(error, "Error getting products admin data [store-off]");
       } finally {
