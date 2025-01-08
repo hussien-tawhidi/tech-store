@@ -25,13 +25,13 @@ const ReviewSection = ({ productId }: Props) => {
   // **Fetch Reviews**
   const fetchReviews = async () => {
     try {
-      const res = await fetch(
-        `/api/admin/products/reviews?productId=${productId}`,
-        { method: "GET" }
-      );
+      const res = await fetch(`/api/admin/products/reviews`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
       if (!res.ok) throw new Error("Failed to fetch reviews.");
       const data = await res.json();
-      setReviews(data.reviews);
+      setReviews(data.reviews?.filter((p: any) => p?.product === productId));
     } catch (err) {
       setError("Error fetching reviews.");
     }
