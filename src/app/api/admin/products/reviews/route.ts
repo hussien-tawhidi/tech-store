@@ -55,42 +55,54 @@ export async function POST(req: Request) {
   }
 }
 
-// **GET - Fetch Reviews for a Product**
+// **GET - Fetch Reviews for a Product**export const config = {
+export const config = {
+  runtime: "nodejs", // Force Node.js runtime
+};
 export async function GET(req: Request) {
   try {
-    // Connect to database
-    await dbConnect();
+    console.log("Connecting to database...");
+    await dbConnect(); // Database connection
+    console.log("Database connected!");
 
-    // Get productId from query params
-    const { searchParams } = new URL(req.url!); // Extract query string
-    const productId = searchParams.get("productId"); // Get productId
+    // Extract query parameters
+    const { searchParams } = new URL(req.url!);
+    const productId = searchParams.get("productId");
+
+    console.log("Received Product ID:", productId); // Log product ID
 
     // Validate productId
     if (!productId) {
+      console.error("Product ID is missing.");
       return NextResponse.json(
         { message: "Product ID is required", status: 400 },
         { status: 400 }
       );
     }
 
-    // Fetch reviews for the specific product
+    console.log("Fetching reviews for Product ID:", productId);
     const reviews = await Review.find({ product: productId }).sort({
       createdAt: -1,
     });
 
-    // Return reviews with a success message
-    return NextResponse.json({
-      message: "Reviews fetched successfully",
-      reviews,
-      status: 200,
-    });
-  } catch (error) {
-    console.error(error, "Error in fetching reviews API BACKEND");
+    console.log("Number of reviews fetched:", reviews.length);
+
+    const averageRating =
+      reviews.length > 0
+        ? reviews.reduce((sum, review) => sum + review.rating, 0) /
+          reviews.length
+        : 0;
+
+    console.log("Average rating:", averageRating);
+
     return NextResponse.json(
-      {
-        message: "Error fetching reviews API BACKEND",
-        error: error,
-      },
+      { message: "Reviews fetched successfully", reviews, averageRating },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Server error:", error);
+    return NextResponse.json(
+      { message: "Server error", error: error },
       { status: 500 }
     );
   }
