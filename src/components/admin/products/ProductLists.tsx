@@ -8,6 +8,8 @@ import { CiEdit } from "react-icons/ci";
 import { AiOutlineDelete } from "react-icons/ai";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { deleteProduct } from "@/actions/products";
 
 interface productProps {
   _id: string;
@@ -24,6 +26,7 @@ const ProductLists = () => {
   const [getProducts, setGetProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [deleteProductsLoading, setDeleteProductsLoading] = useState(false);
 
   useEffect(() => {
     const getDate = async () => {
@@ -42,6 +45,26 @@ const ProductLists = () => {
     };
     getDate();
   }, []);
+
+  const handleDelete = async (productId: string) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+    if (!isConfirmed) return;
+
+    setDeleteProductsLoading(true);
+    try {
+      const result = await deleteProduct(productId);
+      toast.success(result.message || "Product deleted successfully!");
+      setGetProducts(
+        getProducts.filter((product: productProps) => product._id !== productId)
+      ); // Remove the deleted product from the list
+    } catch (error) {
+      toast.error("Failed to delete product.");
+    } finally {
+      setDeleteProductsLoading(false);
+    }
+  };
   return (
     <div className='overflow-hidden w-full m-5 z-10'>
       {loading && <Loading />}
@@ -88,7 +111,7 @@ const ProductLists = () => {
                       width={200}
                       height={200}
                       className='w-10 h-auto object-cover object-center'
-                      src={product?.images?.[0]?.url}
+                      src={product?.images?.[0]?.url || ""}
                       alt='Photo'
                     />
                   )}
@@ -115,22 +138,27 @@ const ProductLists = () => {
               <td className='px-6 py-4'>
                 <div className='flex gap-2'>
                   <span className='inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold'>
-                    {product.description}
+                    {product.description.slice(0, 50)}...
                   </span>
                 </div>
               </td>
               <td className='px-6 py-4'>
                 <div className='flex justify-end gap-4'>
-                  <Button variant={"outline"}>
-                    {" "}
-                    <AiOutlineDelete className='text-xl' />
+                  <Button
+                    variant={"outline"}
+                    onClick={() => handleDelete(product?._id)} // Trigger handleDelete on click
+                    disabled={deleteProductsLoading} // Disable delete button while loading
+                  >
+                    {deleteProductsLoading ? (
+                      "Deleting..."
+                    ) : (
+                      <AiOutlineDelete className='text-xl' />
+                    )}
                   </Button>
                   <Button
                     variant={"outline"}
                     onClick={() =>
-                      router.push(
-                        `/dashboard/products/${product?._id}`
-                      )
+                      router.push(`/dashboard/products/${product?._id}`)
                     }>
                     <CiEdit className='text-xl' />
                   </Button>

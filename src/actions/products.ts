@@ -265,7 +265,7 @@ export const createProductFunction = async (
 
     if (response.status === 201) {
       toast.success("Product created successfully");
-      router.push("/admin/products");
+      router.push("/dashboard/products");
     } else {
       toast.error(response.data.message);
     }
@@ -359,3 +359,20 @@ export const updateProduct = async (
     throw error;
   }
 };
+
+export async function deleteProduct(productId: string) {
+  const formData = new FormData();
+
+  formData.append("productId", productId);
+
+  const response = await fetch(`/api/admin/products`, {
+    method: "DELETE",
+    body: formData,
+  });
+
+  const result = await response.json();
+  if (!response.ok) {
+    throw new Error(result.error || "Failed to delete product.");
+  }
+  return result;
+}

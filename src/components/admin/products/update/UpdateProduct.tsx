@@ -11,30 +11,22 @@ const Update = ({ productId }: { productId: string }) => {
   const [images, setImages] = useState([]);
   const [formLoading, setFormLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
+
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [features, setFeatures] = useState("");
+  const [discount, setDiscount] = useState("");
+  const [stock, setStock] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
   const [error, setError] = useState("");
   const [selectedImageId, setSelectedImageId] = useState("");
   const [newImage, setNewImage] = useState<File | null>(null);
-  const [addImage, setAddImage] = useState<File[] | null>([]);
-
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    features: "",
-    discount: "",
-    stock: "",
-    price: "",
-    category: "",
-  });
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const [addImage, setAddImage] = useState<File[]>([]); // Change here to initialize as empty array
 
   const handleImageChange = (files: File[]) => {
     setAddImage(files);
+    console.log(files);
   };
 
   useEffect(() => {
@@ -45,73 +37,70 @@ const Update = ({ productId }: { productId: string }) => {
       // Set initial values
       setData(fetchedData);
       setImages(fetchedData.images || []);
-      setFormData({
-        name: fetchedData.name || "",
-        description: fetchedData.description || "",
-        features: fetchedData.features || "",
-        price: fetchedData.price?.toString() || "",
-        discount: fetchedData.discount?.toString() || "",
-        category: fetchedData.category || "",
-        stock: fetchedData.stock?.toString() || "",
-      });
+      setName(fetchedData.name || "");
+      setDescription(fetchedData.description || "");
+      setFeatures(fetchedData.features || "");
+      setPrice(fetchedData.price?.toString() || "");
+      setDiscount(fetchedData.discount?.toString() || "");
+      setCategory(fetchedData.category || "");
+      setStock(fetchedData.stock?.toString() || "");
     };
     fetchData();
   }, [productId]);
 
-  const validateForm = () => {
-    if (!formData.name || !formData.price || !formData.category) {
-      setError("Name, price, and category are required fields.");
-      return false;
-    }
-    return true;
-  };
-
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
-
     setFormLoading(true);
+
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("productId", productId);
-      Object.entries(formData).forEach(([key, value]) => {
-        if (value) formDataToSend.append(key, value);
-      });
-      addImage?.forEach((file) => formDataToSend.append("addImage", file));
+      const formData = new FormData();
+      formData.append("productId", productId);
+      if (name) formData.append("name", name);
+      if (addImage.length > 0) {
+        // Add image files to the form data
+        addImage.forEach((file) => formData.append("addImage", file));
+      }
+      if (price) formData.append("price", price);
+      if (discount) formData.append("discount", discount);
+      if (description) formData.append("description", description);
+      if (category) formData.append("category", category);
+      if (features) formData.append("features", features);
+      if (stock) formData.append("stock", stock.toString());
 
       const response = await fetch(`/api/admin/products`, {
         method: "PATCH",
-        body: formDataToSend,
+        body: formData,
       });
 
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Failed to update.");
 
       toast.success("Product updated successfully!");
-      setData(result.product);
+      setData(result.product); // Refresh product data
       setImages(result.product.images || []);
     } catch (error) {
-      console.error("Update Error:", error);
       toast.error("Failed to update product.");
     } finally {
       setFormLoading(false);
     }
   };
 
+  // Handle image deletion
   const handleDeleteImage = async (imageIdToDelete: string) => {
     setImageLoading(true);
     try {
       const result = await deleteImage(productId, imageIdToDelete);
-      setImages(result.product.images);
+      setImages(result.product.images); // Refresh images
       toast.success("Image deleted successfully!");
     } catch (error) {
-      console.error("Delete Image Error:", error);
       toast.error("Failed to delete image.");
     } finally {
       setImageLoading(false);
     }
   };
 
+  // Handle image update
   const handleUpdate = async () => {
     if (!selectedImageId || !newImage) {
       toast.error("Select an image and upload a new one.");
@@ -135,24 +124,25 @@ const Update = ({ productId }: { productId: string }) => {
       const response = await res.json();
       if (!res.ok) throw new Error(response.error);
 
-      setImages(response.product.images);
-      setSelectedImageId("");
-      setNewImage(null);
+      setImages(response.product.images); // Update images
+      setSelectedImageId(""); // Reset selected image
+      setNewImage(null); // Clear file input
       toast.success("Image updated successfully.");
     } catch (err: any) {
-      console.error("Image Update Error:", err);
       toast.error(err.message || "Failed to update image.");
     } finally {
       setImageLoading(false);
     }
   };
 
+  // Handle new image selection
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setNewImage(e.target.files[0]);
     }
   };
 
+  // Convert file to base64
   const convertToBase64 = (file: File) => {
     return new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
@@ -171,20 +161,26 @@ const Update = ({ productId }: { productId: string }) => {
       handleUpdate={handleUpdate}
       selectedImageId={selectedImageId}
       setSelectedImageId={setSelectedImageId}
-      category={formData.category}
-      description={formData.description}
-      discount={formData.discount}
-      features={formData.features}
+      category={category}
+      description={description}
+      discount={discount}
+      features={features}
       handleSubmit={handleSubmit}
       images={images}
       imageLoading={imageLoading}
-      name={formData.name}
-      price={formData.price}
-      stock={formData.stock}
+      name={name}
+      price={price}
+      stock={stock}
       formLoading={formLoading}
-      setError={setError}
+      setCategory={setCategory}
+      setDescription={setDescription}
+      setDiscount={setDiscount}
+      setFeatures={setFeatures}
+      setName={setName}
+      setPrice={setPrice}
+      setStock={setStock}
       error={error}
-      handleInputChange={handleInputChange}
+      setError={setError}
     />
   );
 };

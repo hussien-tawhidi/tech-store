@@ -29,7 +29,7 @@ const UpdateForm = ({
   error,
   formLoading,
   data,
-    // Image Props
+  // Image Props
   handleImageChange,
   images,
   setImages,
@@ -94,7 +94,7 @@ const UpdateForm = ({
         </div>
 
         {/* Image Management */}
-        <div className='flex items-center flex-wrap gap-4 mt-4'>
+        <div className='flex items-center justify-center flex-wrap gap-4 mt-4'>
           {images.map((image: any, index: number) => (
             <div key={index} className='relative flex flex-col items-center'>
               {/* Image Preview */}
@@ -115,7 +115,7 @@ const UpdateForm = ({
                 {/* Update Image (only for selected image) */}
                 {selectedImageId === image.public_id && (
                   <div className='mt-6'>
-                    <label htmlFor='update-image flex'>
+                    <label htmlFor='update-image' className="flex items-center justify-center">
                       <input
                         type='file'
                         accept='image/*'
@@ -124,11 +124,11 @@ const UpdateForm = ({
                         onChange={handleFileChange}
                         disabled={imageLoading}
                       />
+                      <CiCamera />
                     </label>
-                    <CiCamera />
                     <Button
                       onClick={handleUpdate}
-                      className='bg-green-500 text-white px-4 py-2 mt-4'
+                      // className='bg-green-500 text-white px-4 py-2 mt-4'
                       disabled={imageLoading}>
                       {imageLoading ? "Updating..." : "Update Image"}
                     </Button>

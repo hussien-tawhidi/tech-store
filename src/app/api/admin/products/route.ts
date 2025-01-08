@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import Product from "@/model/Product";
 import { dbConnect } from "@/lib/db";
-import { uploadbannerToCloudinary, uploadToCloudinary } from "@/lib/cloudinary";
+import {
+  deleteImageFromCloudinary,
+  uploadbannerToCloudinary,
+  uploadToCloudinary,
+} from "@/lib/cloudinary";
 import { MongoServerError } from "mongodb";
 import mongoose from "mongoose";
 import logger from "@/lib/logger";
@@ -76,7 +80,7 @@ export async function POST(req: Request) {
     // Upload product images
     let imageUrls: { url: any; public_id: any }[] = [];
     if (image.length > 0) {
-      const uploadedImages = await uploadToCloudinary(image, "tech-store");
+      const uploadedImages = await uploadToCloudinary(image, name);
       imageUrls = uploadedImages;
     }
 
@@ -182,22 +186,22 @@ export async function PATCH(req: Request) {
     if (stock) updateData.stock = parseInt(stock, 10);
 
     // Handle image updates
-    const existingImages = form.getAll("existingImages[]"); // Get IDs of images to keep
-   const newImages = Array.from(form.getAll("newImages")).filter(
-     (file): file is File => file instanceof File
-   );
-    // Retain only the specified existing images
-    let updatedImages = existingProduct.images.filter((img: any) =>
-      existingImages.includes(img.public_id)
-    );
+    const newImages = form.getAll("addImage") as File[];
+    let imageUrls: { url: string; public_id: string }[] = [];
 
-    // Upload new images if provided
     if (newImages.length > 0) {
-      const uploadedImages = await uploadToCloudinary(newImages, "tech-store");
-      updatedImages = [...updatedImages, ...uploadedImages]; // Combine old and new images
+      const uploadedImages = await uploadToCloudinary(newImages, name);
+      imageUrls = uploadedImages; // New images to add
     }
 
-    updateData.images = updatedImages; // Update images field
+    // Combine new images with existing ones
+    if (existingProduct.images) {
+      // Keep existing images and add the new ones
+      updateData.images = [...existingProduct.images, ...imageUrls];
+    } else {
+      // If no existing images, just use the new ones
+      updateData.images = imageUrls;
+    }
 
     // Update product in database
     const updatedProduct = await Product.findByIdAndUpdate(
@@ -218,7 +222,6 @@ export async function PATCH(req: Request) {
     );
   }
 }
-
 
 export async function GET() {
   try {
@@ -260,3 +263,62 @@ export async function GET() {
     });
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    // Ensure formData is parsed correctly
+    const form = await req.formData();
+    const productId = form.get("productId")?.toString();
+
+    // Validate productId
+    if (!productId) {
+      return NextResponse.json({
+        message: "Product ID is required",
+        status: 400,
+      });
+    }
+
+    // Check if productId is a valid MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return NextResponse.json({
+        message: "Invalid Product ID format",
+        status: 400,
+      });
+    }
+
+    // Attempt to delete the product
+    const product = await Product.findByIdAndDelete(productId);
+
+    // Handle case where product is not found
+    if (!product) {
+      console.error("Product not found. ID:", productId);
+      return NextResponse.json({
+        message: "Product not found",
+        status: 404,
+      });
+    }
+
+    // Return success response
+    return NextResponse.json({
+      message: "Product deleted successfully",
+      status: 200,
+    });
+  } catch (error: any) {
+    console.error("Error deleting product:", error);
+
+    // Handle specific database errors
+    if (error.name === "CastError") {
+      return NextResponse.json(
+        { error: "Invalid product ID format" },
+        { status: 400 }
+      );
+    }
+
+    // General server error fallback
+    return NextResponse.json(
+      { error: "Internal server error", details: error.message },
+      { status: 500 }
+    );
+  }
+}
+

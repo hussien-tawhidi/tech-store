@@ -8,6 +8,7 @@ import { MdOutlineFormatListBulleted } from "react-icons/md";
 import { Button } from "../ui/button";
 import { IoEyeOutline } from "react-icons/io5";
 import { userMenuData } from "../../../constant";
+import { LuLayoutDashboard } from "react-icons/lu";
 
 interface Props {}
 
@@ -18,7 +19,7 @@ const UserMenu = () => {
   const handleToggleUserMenu = () => setUserMenu(!userMenu);
 
   return (
-    <div className="relative">
+    <div className='relative'>
       <div
         className='flex items-center justify-center relative animate__fadeInDown animate__animated cursor-pointer'
         onClick={handleToggleUserMenu}>
@@ -33,6 +34,7 @@ const UserMenu = () => {
           className='object-cover rounded-full overflow-hidden'
         />
       </div>
+      
       {userMenu && (
         <div
           className='absolute z-[1000] h-[100vh] -right-5  -top-3.5 bottom-0 w-[100vw] text-slate-600  bg-slate-800/50 rounded-md shadow-md'
@@ -71,17 +73,33 @@ const UserMenu = () => {
                   <IoEyeOutline />
                 </Button>
               </Link>
+              {session?.user?.role === "admin" && (
+                <Link
+                  href={"/dashboard"}
+                  className='flex flex-col text-sm gap-3 mb-4 hover:text-slate-900 transition-all hover:underline'>
+                  <span className='flex items-center md:gap-3 gap-1.5'>
+                    <LuLayoutDashboard className='md:text-lg text-sm' />{" "}
+                    Dashboard
+                  </span>
+                  <span className='h-[.5px] w-full bg-slate-200'></span>
+                </Link>
+              )}
               {userMenuData.map((menu) => (
-                <Link href={""}
-                  className='flex items-center text-sm gap-3 mb-4 hover:text-slate-900 transition-all hover:underline'
+                <Link
+                  href={""}
+                  className='flex flex-col text-sm gap-3 mb-4 hover:text-slate-900 transition-all hover:underline'
                   key={menu.id}>
-                  {menu.icon && <menu.icon />} <span>{menu.title}</span>
+                  <span className='flex items-center md:gap-3 gap-1.5'>
+                    {menu.icon && <menu.icon className='md:text-lg text-sm' />}{" "}
+                    {menu.title}
+                  </span>
+                  <span className='h-[.5px] w-full bg-slate-200'></span>
                 </Link>
               ))}
 
               <Button
-                onClick={() => signOut()}
-                className='flex items-center text-sm gap-3 mb-4 hover:text-slate-300 transition-all hover:underline'>
+                onClick={() => signOut()} 
+                className='flex items-center bg-slate-600 text-sm gap-3 text-slate-50 mb-4 hover:text-slate-600 transition-all'>
                 <CiLogout className='text-xl' />
                 SignOut
               </Button>

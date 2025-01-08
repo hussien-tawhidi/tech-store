@@ -86,5 +86,43 @@ export async function uploadbannerToCloudinary(file: File, folder?: string) {
   return await response.json();
 }
 
+export async function deleteImageFromCloudinary(publicId: string) {
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+  const apiKey = process.env.CLOUDINARY_API_KEY;
+  const apiSecret = process.env.CLOUDINARY_API_SECRET;
 
+  if (!cloudName || !apiKey || !apiSecret) {
+    throw new Error("Cloudinary configuration is missing");
+  }
+
+  try {
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          public_id: publicId,
+          api_key: apiKey,
+          api_secret: apiSecret,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const errorDetails = await response.json();
+      throw new Error(
+        `Cloudinary image deletion failed: ${JSON.stringify(errorDetails)}`
+      );
+    }
+
+    const result = await response.json();
+    return result; // Return response data if needed
+  } catch (error) {
+    console.error("Error deleting image from Cloudinary:", error);
+    throw new Error("Failed to delete image from Cloudinary");
+  }
+}
 
