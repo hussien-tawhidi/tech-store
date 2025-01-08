@@ -23,7 +23,9 @@ const StoreOff = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://tech-store-blond-eight.vercel.app/api/admin/products`,
+          `${
+            process.env.VERCEL_URL || "http://localhost:3000"
+          }/api/admin/products`,
           {
             method: "GET",
             headers: {
