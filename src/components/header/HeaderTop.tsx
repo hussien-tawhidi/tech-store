@@ -6,9 +6,6 @@ import { CiLocationOn, CiSearch, CiUser } from "react-icons/ci";
 import { HiMiniLanguage, HiOutlineShoppingBag } from "react-icons/hi2";
 import { useState } from "react";
 import SearchConainer from "./SearchConainer";
-import { Dialog, DialogTrigger } from "../ui/dialog";
-import Register from "../auth/Register";
-import Login from "../auth/Login";
 import { useSession } from "next-auth/react";
 import UserMenu from "./UserMenu";
 import Link from "next/link";
@@ -18,7 +15,7 @@ import { RootState } from "@/store/store";
 const HeaderTop = () => {
   const router = useRouter();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-
+  const homeUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const { data: session } = useSession();
   const [searchField, setSearchField] = useState<boolean>(false);
 
@@ -65,14 +62,16 @@ const HeaderTop = () => {
           <UserMenu />
         ) : (
           <div className='flex items-center justify-center gap-3 text-slate-600'>
-            <Link href={"/user-register"} className='flex items-center'>
+            <Link
+              href={`${homeUrl}/user-register`}
+              className='flex items-center'>
               <span className='text-[12px] cursor-pointer hover:text-slate-900 transition-all'>
                 SignUp
               </span>
             </Link>
 
             <Link
-              href={"/user-login"}
+              href={`${homeUrl}/user-login`}
               className='text-sm cursor-pointer hover:text-slate-900 transition-all'>
               SignIn
             </Link>

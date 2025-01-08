@@ -33,7 +33,8 @@ const Login = () => {
       } else {
         toast.success("Successfully login ");
         router.refresh();
-        router.push("/");
+        const url = process.env.NEXT_PUBLIC_BASE_URL;
+        router.push(`${url}/user-login`);
       }
     } catch (error: any) {
       console.error("Unexpected error:", error);
