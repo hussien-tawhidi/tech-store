@@ -32,7 +32,7 @@ const StoreOff = () => {
         console.log(result);
         if (result.status===200) setData(result?.products);
       } catch (error) {
-        console.log(error, "Error getting products admin data [store-off]");
+        console.log(error, "Error getting products admin data [store-offffffff]");
       } finally {
         setLoading(false);
       }
