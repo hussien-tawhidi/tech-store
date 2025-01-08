@@ -29,7 +29,9 @@ const StoreOff = () => {
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_PRODUCTS as string;
 
-        const { data } = await axios.get("/api/admin/products");
+        const { data } = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products`
+        );
         if (data) setData(data?.products);
       } catch (error) {
         console.log(error, "Error getting products admin data [store-off]");
