@@ -22,24 +22,16 @@ const StoreOff = () => {
     const getDate = async () => {
       setLoading(true);
       try {
-        const response = await fetch(
-          `${
-            process.env.VERCEL_URL || "http://localhost:3000"
-          }/api/admin/products`,
-          {
-            method: "GET",
-            headers: {
-              accept: "application/json",
-            },
-          }
-        );
+        const response = await fetch("/api/admin/products", {
+          method: "GET",
+        });
 
-       if (!response.ok) {
-         throw new Error(`Error! Status: ${response.status}`);
-       }
-       const data = await response.json();
+        if (!response.ok) {
+          throw new Error(`Error! Status: ${response.status}`);
+        }
+        const data = await response.json();
 
-       setData(data?.products);
+        setData(data?.products);
       } catch (error) {
         console.log(error, "Error getting products admin data [store-off]");
       } finally {
