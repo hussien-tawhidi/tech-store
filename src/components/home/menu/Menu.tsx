@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Menu() {
   return (
-    <div className='md:my-20 sm:my-14 my-10'>
+    <div className='md:my-10 my-5'>
       <div>
         <Swiper
           slidesPerView={4}
