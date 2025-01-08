@@ -33,9 +33,13 @@ const StoreOff = () => {
             },
           }
         );
-        const result = await response.json();
-        console.log(result);
-        if (result.status === 200) setData(result?.products);
+
+       if (!response.ok) {
+         throw new Error(`Error! Status: ${response.status}`);
+       }
+       const data = await response.json();
+
+       setData(data?.products);
       } catch (error) {
         console.log(error, "Error getting products admin data [store-off]");
       } finally {
