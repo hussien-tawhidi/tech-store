@@ -1,20 +1,10 @@
 "use client";
 
 import TopRatedCard from "@/components/cards/TopRatedCard";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { productProps } from "../best-sells/BestSells";
 import { fetchTopRatedProducts } from "@/actions/products";
 import CardLoader from "@/components/cards/CardLoader";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  createdDate: string;
-  colors: string[]; // Assuming createdDate is an ISO date string
-  // Add other fields as needed
-}
 
 const TopRated = () => {
   const [data, setData] = useState([]);

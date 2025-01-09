@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { homeTopCollection } from "../../../constant";
 import { Button } from "../ui/button";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const TopCollection = () => {
@@ -31,7 +30,7 @@ const TopCollection = () => {
               <Button
                 variant={"outline"}
                 className='bg-slate-500 py-3 bg-transparent text-slate-600 rounded-none sm:text-[16px] text-[12px]'>
-                <Link href={t.linkTo||""}>Go to {t.title}</Link>
+                <Link href={t.linkTo}>Go to {t.title}</Link>
               </Button>
             </div>
           </div>

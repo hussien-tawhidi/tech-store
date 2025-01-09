@@ -1,6 +1,4 @@
 "use client";
-
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { productProps } from "../best-sells/BestSells";
 import { MdOutlineHotelClass } from "react-icons/md";

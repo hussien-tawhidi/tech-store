@@ -2,10 +2,10 @@
 
 import { homeFeatures } from "../../../constant";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Keyboard, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Keyboard, Pagination, Autoplay } from "swiper/modules";
 
 const HomeFeauters = () => {
   return (

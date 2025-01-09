@@ -18,14 +18,14 @@ const HeaderBottom = () => {
           }`}>
           Home
         </Link>
-      
+
         {headerData.map((header) => {
           const linkPath = `/${header.title}/${header.id}`;
           const isActive = pathname === linkPath;
 
           return (
             <Link
-              href={linkPath}
+              href={linkPath || "/"}
               key={header.id}
               className={`text-slate-600 animate__animated animate__fadeInUp dark:text-slate-300 capitalize text-sm hover:text-sky-950 transition-all hover:border-b hover:border-slate-500 dark:hover:text-slate-50 ${
                 isActive &&

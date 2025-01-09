@@ -2,15 +2,15 @@
 
 import { Swiper, SwiperSlide } from "swiper/react"; // Import from "swiper/react"
 
+import { FreeMode, Navigation, Thumbs } from "swiper/modules"; // Correct imports
+import { Swiper as SwiperType } from "swiper"; // Import Swiper type explicitly
+import { useState } from "react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 // Import required modules
-import { FreeMode, Navigation, Thumbs } from "swiper/modules"; // Correct imports
-import { Swiper as SwiperType } from "swiper"; // Import Swiper type explicitly
-import { useState } from "react";
 
 export default function ImageFullScreen() {
   // State to store the thumbs swiper instance

@@ -15,7 +15,6 @@ import { RootState } from "@/store/store";
 import AddTofavButton from "../AddTofavButton";
 import ReviewSection from "./review/ReviewSection";
 import Link from "next/link";
-import ImageFullScreen from "./ImageFullScreen";
 
 interface SelectedColor {
   name: string;

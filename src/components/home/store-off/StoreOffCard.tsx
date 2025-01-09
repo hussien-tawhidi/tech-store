@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { CiShoppingCart } from "react-icons/ci";
-import { MdShoppingCartCheckout } from "react-icons/md";
 
 interface props {
   src: string;

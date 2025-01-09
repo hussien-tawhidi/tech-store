@@ -1,6 +1,6 @@
-import Link from "next/link";
-import React from "react";
+"use client"
 
+import Link from "next/link";
 interface Props {
   title: string;
   icon: any;

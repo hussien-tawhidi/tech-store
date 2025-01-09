@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import { Keyboard, Pagination, Autoplay } from "swiper/modules";
 import { HeroProductProps } from "../../../../types";
 import { fetchHeroProducts } from "@/actions/products";
 import SliderCard from "./SliderCard";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
 const Slider = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState<string | null>(null);

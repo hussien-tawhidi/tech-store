@@ -1,16 +1,15 @@
+"use client";
+
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-import { CiHeart, CiLogout } from "react-icons/ci";
+import { useState } from "react";
+import { CiLogout } from "react-icons/ci";
 import { FaAngleDown } from "react-icons/fa6";
-import { MdOutlineFormatListBulleted } from "react-icons/md";
 import { Button } from "../ui/button";
 import { IoEyeOutline } from "react-icons/io5";
 import { userMenuData } from "../../../constant";
 import { LuLayoutDashboard } from "react-icons/lu";
-
-interface Props {}
 
 const UserMenu = () => {
   const { data: session } = useSession();
@@ -34,7 +33,7 @@ const UserMenu = () => {
           className='object-cover rounded-full overflow-hidden'
         />
       </div>
-      
+
       {userMenu && (
         <div
           className='absolute z-[1000] h-[100vh] -right-5  -top-3.5 bottom-0 w-[100vw] text-slate-600  bg-slate-800/50 rounded-md shadow-md'
@@ -86,7 +85,7 @@ const UserMenu = () => {
               )}
               {userMenuData.map((menu) => (
                 <Link
-                  href={""}
+                  href={"/"}
                   className='flex flex-col text-sm gap-3 mb-4 hover:text-slate-900 transition-all hover:underline'
                   key={menu.id}>
                   <span className='flex items-center md:gap-3 gap-1.5'>
@@ -98,7 +97,7 @@ const UserMenu = () => {
               ))}
 
               <Button
-                onClick={() => signOut()} 
+                onClick={() => signOut()}
                 className='flex items-center bg-slate-600 text-sm gap-3 text-slate-50 mb-4 hover:text-slate-600 transition-all'>
                 <CiLogout className='text-xl' />
                 SignOut

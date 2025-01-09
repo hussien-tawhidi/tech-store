@@ -65,7 +65,7 @@ const SearchConainer = ({ searchField, setSearchField }: Props) => {
                   ? "transition-all duration-700 delay-200"
                   : "opacity-0 translate-x-[30vw]"
               }>
-              <Link href={`/search/[id]`} as={`/search/${data.id}`}>
+              <Link href={"/"}>
                 <span className='sm:text-sm text-[12px] text-slate-600 font-normal hover:text-slate-500 transition-all'>
                   {data.title}
                 </span>
