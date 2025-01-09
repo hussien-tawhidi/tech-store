@@ -9,7 +9,7 @@ interface Props {
   error: string | null;
   setError: (value: string ) => void;
   setLoading: (value: boolean) => void;
-  productId: string;
+  productId?: string;
   reviewId: string;
 }
 

@@ -9,59 +9,62 @@ import DeleteReviewBtn from "./DeleteReviewBtn";
 import { ReviewComment } from "../../../../types";
 
 interface Props {
-  productId: string;
+  productId: string | undefined; // Allow productId to be undefined initially
 }
 
 const ReviewSection = ({ productId }: Props) => {
   const [reviews, setReviews] = useState<ReviewComment[]>([]);
-  const [rating, setRating] = useState(0); // Default is 0 (no selection)
-  const [hover, setHover] = useState(0); // Track hover
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const { data: session } = useSession();
 
-  const userId = session?.user._id;
+  const userId = session?.user?._id;
+
   // **Fetch Reviews**
   const fetchReviews = async () => {
-    try {
-      // Replace this dynamically
-      console.log("Fetching reviews for productId:", productId);
+    if (!productId) {
+      console.error("Product ID is missing.");
+      setError("Product ID is required.");
+      return;
+    }
 
+    try {
       const res = await fetch(
         `/api/admin/products/reviews?productId=${productId}`,
-        {
-          method: "GET",
-        }
+        { method: "GET" }
       );
 
-      console.log("Response status:", res.status);
-
       if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Failed to fetch reviews. Error: ${errorText}`);
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to fetch reviews.");
       }
 
       const data = await res.json();
-      console.log("Fetched data:", data);
-
       setReviews(data.reviews);
+      setError(null); // Clear any previous errors
     } catch (err) {
       console.error("Error fetching reviews:", err);
-      setError("Error fetching reviews: " + err);
+      setError("Failed to fetch reviews. Please try again later.");
     }
   };
 
   // **Handle Add Review**
   const handleAddReview = async () => {
     if (!comment || rating === 0) {
-      // Ensure a rating is selected
       setError("Rating and comment are required.");
       return;
     }
 
+    if (!productId) {
+      setError("Product ID is required to submit a review.");
+      return;
+    }
+
     setLoading(true);
-    setError("");
+    setError(null);
 
     try {
       const res = await fetch("/api/admin/products/reviews", {
@@ -74,35 +77,40 @@ const ReviewSection = ({ productId }: Props) => {
         }),
       });
 
-      if (!res.ok) throw new Error("Failed to add review.");
-      await fetchReviews(); // Refresh reviews
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to add review.");
+      }
+
+      await fetchReviews(); // Refresh reviews after successful addition
       setComment("");
-      setRating(0); // Reset form
+      setRating(0);
     } catch (err) {
-      setError("Error adding review.");
+      console.error("Error adding review:", err);
+      setError("Error adding review. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   // Check if logged-in user owns the review
-  const isUserReview = (reviewUserId: string) => {
-    return reviewUserId === userId;
-  };
+  const isUserReview = (reviewUserId: string) => reviewUserId === userId;
 
-  // Fetch reviews on component load
+  // Fetch reviews only when productId is defined
   useEffect(() => {
-    fetchReviews();
+    if (productId) {
+      fetchReviews();
+    }
   }, [productId]);
 
   return (
-    <div className='space-y-6 w-[100%] mx-auto'>
+    <div className='space-y-6 w-full mx-auto'>
       {error && <p className='text-red-500'>{error}</p>}
 
       {/* Review Form */}
       {!session ? (
         <div className='flex items-center text-muted-foreground'>
-          <Button variant={"outline"}>Login </Button>
+          <Button variant='outline'>Login</Button>
         </div>
       ) : (
         <div className='p-4 border rounded-md'>
@@ -115,9 +123,9 @@ const ReviewSection = ({ productId }: Props) => {
                 className={`cursor-pointer ${
                   (hover || rating) >= star ? "text-blue-500" : "text-gray-300"
                 }`}
-                onClick={() => setRating(star)} // Set rating on click
-                onMouseEnter={() => setHover(star)} // Highlight stars on hover
-                onMouseLeave={() => setHover(rating)} // Reset hover on mouse leave
+                onClick={() => setRating(star)}
+                onMouseEnter={() => setHover(star)}
+                onMouseLeave={() => setHover(rating)}
               />
             ))}
           </div>
@@ -130,7 +138,7 @@ const ReviewSection = ({ productId }: Props) => {
           <Button
             onClick={handleAddReview}
             disabled={loading}
-            variant={"outline"}
+            variant='outline'
             className='border-slate-600'>
             {loading ? "Submitting..." : "Submit Review"}
           </Button>
@@ -150,7 +158,6 @@ const ReviewSection = ({ productId }: Props) => {
                   {new Date(review?.createdAt).toLocaleDateString()}
                 </span>
               </div>
-              {/* Display stars for the review */}
               <div className='flex gap-1'>
                 {[1, 2, 3, 4, 5].map((star) => (
                   <FaStar
