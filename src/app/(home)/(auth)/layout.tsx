@@ -1,7 +1,10 @@
+"use client";
+
+import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { auth } from "../../../../auth";
-const UserLayout = async ({ children }: { children: React.ReactNode }) => {
-  const session = await auth();
+
+const UserLayout = ({ children }: { children: React.ReactNode }) => {
+  const { data: session } = useSession();
 
   const url = process.env.NEXT_PUBLIC_BASE_URL;
 
