@@ -55,10 +55,7 @@ export async function POST(req: Request) {
   }
 }
 
-// **GET - Fetch Reviews for a Product**export const config = {
-export const config = {
-  runtime: "nodejs", // Force Node.js runtime
-};
+
 export async function GET(req: Request) {
   try {
     await dbConnect(); 

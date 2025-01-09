@@ -35,22 +35,11 @@ const ReviewSection = ({ productId }: Props) => {
     const url = process.env.NEXT_PUBLIC_BASE_URL as string;
 
     try {
-      const response = await axios.get("/api/admin/products/reviews");
+      const response = await axios.get(`${url}/api/admin/products/reviews`);
 
       const reviews = await response.data;
       setReviews(reviews.reviews);
-      // const res = await fetch(
-      //   "/api/admin/products/reviews",
-      //   { method: "GET" }
-      // );
 
-      // if (!res.ok) {
-      //   const errorData = await res.json();
-      //   throw new Error(errorData.message || "Failed to fetch reviews.");
-      // }
-
-      // const data = await res.json();
-      // setReviews(data.reviews);
       setError(null); // Clear any previous errors
     } catch (err) {
       console.error("ERROR IN FETCHING REVIEWS:" + err);
