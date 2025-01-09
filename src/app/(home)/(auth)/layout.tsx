@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { auth } from "../../../../../auth";
+import { auth } from "../../../../auth";
 const UserLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth();
 
