@@ -7,7 +7,6 @@ import { FaStar } from "react-icons/fa";
 import TextareaInput from "@/components/TextareaInput";
 import DeleteReviewBtn from "./DeleteReviewBtn";
 import { ReviewComment } from "../../../../types";
-import axios from "axios";
 
 interface Props {
   productId: string | undefined; // Allow productId to be undefined initially
@@ -35,11 +34,18 @@ const ReviewSection = ({ productId }: Props) => {
     const url = process.env.NEXT_PUBLIC_BASE_URL as string;
 
     try {
-      const response = await axios.get(`${url}/api/admin/products/reviews`);
+      const res = await fetch(
+        `${url}/api/admin/products/reviews?productId=${productId}`,
+        { method: "GET" }
+      );
 
-      const reviews = await response.data;
-      setReviews(reviews.reviews);
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to fetch reviews.");
+      }
 
+      const data = await res.json();
+      setReviews(data.reviews);
       setError(null); // Clear any previous errors
     } catch (err) {
       console.error("ERROR IN FETCHING REVIEWS:" + err);
@@ -144,9 +150,9 @@ const ReviewSection = ({ productId }: Props) => {
       {/* Reviews List */}
       {reviews.length > 0 ? (
         <ul className='space-y-4'>
-          {reviews.map((review,index) => (
+          {reviews.map((review) => (
             <li
-              key={index}
+              key={review._id}
               className='p-4 border relative rounded shadow-sm'>
               <div className='flex justify-between items-center'>
                 <h5 className='font-semibold'>{review?.name}</h5>

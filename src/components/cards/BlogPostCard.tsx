@@ -16,7 +16,7 @@ const BlogPostCard = ({
   blogPostId,
 }: Props) => {
   return (
-    <section className="rounded-md overflow-hidden">
+    <section className='rounded-md overflow-hidden'>
       <div
         className='relative flex items-end justify-start w-full text-left dark:bg-gray-500 bg-center bg-cover h-96'
         style={{
@@ -42,7 +42,7 @@ const BlogPostCard = ({
         <h2 className='z-10 p-5'>
           <Link
             rel='noopener noreferrer'
-            href={`/blog/single_post/${blogPostId}`}
+            href={`${process.env.NEXT_PUBLIC_BASE_URL}/blog/single_post/${blogPostId}`}
             className='font-medium text-md hover:underline text-slate-200'>
             {" "}
             {title}

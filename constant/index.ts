@@ -112,15 +112,14 @@ export const homeTopCollection = [
   {
     id: 1,
     title: "HeadePone & AirPods",
-    linkTo: "/airpods",
+    linkTo: "/",
     description:
       "We proudly have free shipping over the country, in fast possible fase way",
     image: "/assets/AirPods/airpods_3rd_gen__dhy5bknhvtqq_large.jpg",
   },
   {
     id: 2,
-    linkTo: "/accessories",
-
+    linkTo: "/",
     title: "Mobile & Accessories",
     description:
       "You can contact 24 hours of service, and have information about your oreders",
@@ -164,10 +163,10 @@ export const mainMenu = [
     icon: CiMobile1,
     image: "/features/menu/iphone_14.png",
     subMenu: [
-      { id: 2, title: "mobile accessories", Link: "/mobile-accessories" },
-      { id: 3, title: "mobile materials", Link: "/phone-materials" },
-      { id: 4, title: "smart phone", Link: "/smart-phone" },
-      { id: 44, title: "phone", Link: "/phone" },
+      { id: 2, title: "mobile accessories", Link: "/" },
+      { id: 3, title: "mobile materials", Link: "/" },
+      { id: 4, title: "smart phone", Link: "/" },
+      { id: 44, title: "phone", Link: "/" },
     ],
   },
   {
@@ -176,9 +175,9 @@ export const mainMenu = [
     image: "/features/menu/ipad.png",
     icon: BsLaptop,
     subMenu: [
-      { id: 6, title: "labtop", Link: "/laptop" },
-      { id: 7, title: "tablet", Link: "/tablets" },
-      { id: 8, title: "laptop accessories", Link: "/laptop-accessories" },
+      { id: 6, title: "labtop", Link: "/" },
+      { id: 7, title: "tablet", Link: "/" },
+      { id: 8, title: "laptop accessories", Link: "/" },
     ],
   },
   {
@@ -187,8 +186,8 @@ export const mainMenu = [
     icon: CiHeadphones,
     image: "/features/menu/headphone.png",
     subMenu: [
-      { id: 10, title: "handsfree", Link: "/handsfree" },
-      { id: 11, title: "headphone", Link: "/headphone" },
+      { id: 10, title: "handsfree", Link: "/" },
+      { id: 11, title: "headphone", Link: "/" },
     ],
   },
 
@@ -198,8 +197,8 @@ export const mainMenu = [
     icon: PiWatchThin,
     image: "/features/menu/watch.png",
     subMenu: [
-      { id: 16, title: "smart watches", Link: "/smart-watches" },
-      { id: 17, title: "watches accessories", Link: "/watches-accessories" },
+      { id: 16, title: "smart watches", Link: "/" },
+      { id: 17, title: "watches accessories", Link: "/" },
     ],
   },
   {
@@ -208,9 +207,9 @@ export const mainMenu = [
     icon: PiComputerTowerLight,
     image: "/features/menu/imac.png",
     subMenu: [
-      { id: 19, title: "computer", Link: "/computers" },
-      { id: 18, title: "monitor", Link: "/moniter" },
-      { id: 190, title: "computer accessories", Link: "/computer-accessories" },
+      { id: 19, title: "computer", Link: "/" },
+      { id: 18, title: "monitor", Link: "/" },
+      { id: 190, title: "computer accessories", Link: "/" },
     ],
   },
   {
@@ -219,9 +218,9 @@ export const mainMenu = [
     icon: PiComputerTowerLight,
     image: "/features/menu/router.png",
     subMenu: [
-      { id: 21, title: "networks accessories", Link: "/network-accessories" },
-      { id: 22, title: "modem & others", Link: "/modem-other" },
-      { id: 23, title: "cctv", Link: "/cctv" },
+      { id: 21, title: "networks accessories", Link: "/" },
+      { id: 22, title: "modem & others", Link: "/" },
+      { id: 23, title: "cctv", Link: "/" },
     ],
   },
   {
@@ -230,11 +229,11 @@ export const mainMenu = [
     icon: CgSmartHomeRefrigerator,
     image: "/features/menu/refgi.png",
     subMenu: [
-      { id: 25, title: "refrigerator", Link: "/refrigerator" },
-      { id: 26, title: "cooking", Link: "/cooking" },
-      { id: 27, title: "tailor accessories", Link: "/tailor-accessories" },
-      { id: 28, title: "decoresion", Link: "/home-decore" },
-      { id: 29, title: "multi media", Link: "/multi-media" },
+      { id: 25, title: "refrigerator", Link: "/" },
+      { id: 26, title: "cooking", Link: "/" },
+      { id: 27, title: "tailor accessories", Link: "/" },
+      { id: 28, title: "decoresion", Link: "/" },
+      { id: 29, title: "multi media", Link: "/" },
     ],
   },
   {
@@ -243,10 +242,10 @@ export const mainMenu = [
     icon: MdTv,
     image: "/features/menu/speaker.png",
     subMenu: [
-      { id: 32, title: "tv", Link: "/tv" },
-      { id: 31, title: "speeker", Link: "/speeker" },
-      { id: 33, title: "camera", Link: "/camera" },
-      { id: 34, title: "autio assistant", Link: "/audio-assistant" },
+      { id: 32, title: "tv", Link: "/" },
+      { id: 31, title: "speeker", Link: "/" },
+      { id: 33, title: "camera", Link: "/" },
+      { id: 34, title: "autio assistant", Link: "/" },
     ],
   },
   {
@@ -255,11 +254,11 @@ export const mainMenu = [
     icon: RiGamepadLine,
     image: "/features/menu/game.png",
     subMenu: [
-      { id: 36, title: "gaming console", Link: "/gaming-console" },
-      { id: 37, title: "gaming handle", Link: "/gaming-handle" },
+      { id: 36, title: "gaming console", Link: "/" },
+      { id: 37, title: "gaming handle", Link: "/" },
       { id: 38, title: "game", Link: "/game" },
-      { id: 39, title: "gaming accessories", Link: "/gaming-accessories" },
-      { id: 40, title: "gaming system", Link: "/gaming-system" },
+      { id: 39, title: "gaming accessories", Link: "/" },
+      { id: 40, title: "gaming system", Link: "/" },
     ],
   },
   {
@@ -268,9 +267,9 @@ export const mainMenu = [
     icon: GiJewelCrown,
     image: "/features/menu/jewllery.png",
     subMenu: [
-      { id: 42, title: "coin", Link: "/coin" },
-      { id: 43, title: "gold", Link: "/gold" },
-      { id: 44, title: "watch", Link: "/watch" },
+      { id: 42, title: "coin", Link: "/" },
+      { id: 43, title: "gold", Link: "/" },
+      { id: 44, title: "watch", Link: "/" },
     ],
   },
   {
@@ -279,8 +278,8 @@ export const mainMenu = [
     icon: LiaHandHoldingHeartSolid,
     image: "/features/menu/beauty.png",
     subMenu: [
-      { id: 48, title: "personal", Link: "/personal" },
-      { id: 47, title: "health-accessories", Link: "/health-accessories" },
+      { id: 48, title: "personal", Link: "/" },
+      { id: 47, title: "health-accessories", Link: "/" },
     ],
   },
 ];

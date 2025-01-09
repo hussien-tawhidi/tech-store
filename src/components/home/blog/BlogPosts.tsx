@@ -11,7 +11,7 @@ const BlogPosts = () => {
           <IoStar /> Recently blog post added
         </h4>
         <Link
-          href={"/blog"}
+          href={`${process.env.NEXT_PUBLIC_BASE_URL}/blog`}
           className='font-semibold text-sm capitalize text-slate-600 hover:underline transition-all hover:text-slate-950'>
           see more
         </Link>
