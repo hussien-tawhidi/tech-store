@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { productProps } from "../best-sells/BestSells";
+import { productProps } from "../laptops/Laptops";
 import { MdOutlineHotelClass } from "react-icons/md";
 import WeeklyHotProductsCard from "@/components/cards/WeeklyHotProductsCard";
 import { fetchHotProducts } from "@/actions/products";

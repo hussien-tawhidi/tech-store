@@ -297,3 +297,17 @@ export const homeBanners = [
   { id: 3, src: "/features/beauty.jpg" },
   { id: 4, src: "/features/watch.jpg" },
 ];
+
+export const specialProduct = [
+  { id: 1, image: "/features/iphone.jpg", link: "/" },
+  { id: 2, image: "/features/watchGentle.jpg", link: "/" },
+  { id: 3, image: "/features/airPodPro.jpg", link: "/" },
+];
+
+export const mobileBrands = [
+  { id: 1, image: "/features/iphoneBrand.jpg", link: "/" },
+  { id: 2, image: "/features/samsungBrand.jpg", link: "/" },
+  { id: 3, image: "/features/xiamiBrand.jpg", link: "/" },
+  { id: 4, image: "/features/honorBrand.jpg", link: "/" },
+  { id: 5, image: "/features/pocoBrand.jpg", link: "/" },
+];

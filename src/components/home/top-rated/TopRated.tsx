@@ -2,7 +2,7 @@
 
 import TopRatedCard from "@/components/cards/TopRatedCard";
 import { useEffect, useState } from "react";
-import { productProps } from "../best-sells/BestSells";
+import { productProps } from "../laptops/Laptops";
 import { fetchTopRatedProducts } from "@/actions/products";
 import CardLoader from "@/components/cards/CardLoader";
 

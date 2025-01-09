@@ -2,7 +2,7 @@
 
 import { fetchNewProduct } from "@/actions/products";
 import CardLoader from "@/components/cards/CardLoader";
-import { productProps } from "@/components/home/best-sells/BestSells";
+import { productProps } from "@/components/home/laptops/Laptops";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useEffect, useState } from "react";

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { PiPercentLight } from "react-icons/pi";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { productProps } from "../best-sells/BestSells";
+import { productProps } from "../laptops/Laptops";
 import { Button } from "@/components/ui/button";
 import StoreOffCard from "./StoreOffCard";
 import { Keyboard, Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -54,7 +54,7 @@ const StoreOff = () => {
         </p>
       </div>
       {/* products */}
-      <div className=''>
+      <div className='mt-3'>
         <Swiper
           slidesPerView={4}
           centeredSlides={true}

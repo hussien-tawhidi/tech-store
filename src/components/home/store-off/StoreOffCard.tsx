@@ -26,6 +26,8 @@ const StoreOffCard = ({
   off,
 }: props) => {
   const router = useRouter();
+  const discountedPrice = (price - (price * off) / 100).toFixed(2);
+
   return (
     <>
       {loading ? (
@@ -56,7 +58,10 @@ const StoreOffCard = ({
                 description
               )}
             </p>
-            <p className='text-slate-700'>{price}$</p>
+            <p className='text-slate-700 flex gap-2 border-t mt-2'>
+              <span>{discountedPrice}$</span>
+              <del className="opacity-65 text-sm">{price}$</del>
+            </p>
           </div>
           <Button
             className='w-full bg-slate-600 flex items-center text-white hover:text-slate-600'
