@@ -5,7 +5,7 @@ const UserLayout = async ({ children }: { children: React.ReactNode }) => {
 
   const url = process.env.NEXT_PUBLIC_BASE_URL;
 
-  if (session) redirect(`${url}/user/${session?.user?._id}`);
+  if (!session) redirect(`${url}/user-login`);
 
   return <>{children}</>;
 };
