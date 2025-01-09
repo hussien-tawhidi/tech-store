@@ -35,7 +35,7 @@ const ReviewSection = ({ productId }: Props) => {
 
     try {
       const res = await fetch(
-        `${url}/api/admin/products/reviews?productId=${productId}`,
+        "/api/admin/products/reviews",
         { method: "GET" }
       );
 

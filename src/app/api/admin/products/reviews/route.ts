@@ -61,31 +61,10 @@ export const config = {
 };
 export async function GET(req: Request) {
   try {
-    console.log("Connecting to database...");
-    await dbConnect(); // Database connection
-    console.log("Database connected!");
+    await dbConnect(); 
+   
 
-    // Extract query parameters
-    const { searchParams } = new URL(req.url!);
-    const productId = searchParams.get("productId");
-
-    console.log("Received Product ID:", productId); // Log product ID
-
-    // Validate productId
-    if (!productId) {
-      console.error("Product ID is missing.");
-      return NextResponse.json(
-        { message: "Product ID is required", status: 400 },
-        { status: 400 }
-      );
-    }
-
-    console.log("Fetching reviews for Product ID:", productId);
-    const reviews = await Review.find({ product: productId }).sort({
-      createdAt: -1,
-    });
-
-    console.log("Number of reviews fetched:", reviews.length);
+    const reviews = await Review.find();
 
     const averageRating =
       reviews.length > 0
@@ -100,13 +79,61 @@ export async function GET(req: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Server error:", error);
+    console.error("Server error in fetching reviews:", error);
     return NextResponse.json(
-      { message: "Server error", error: error },
+      { message: "Server error fetching reviews", error: error },
       { status: 500 }
     );
   }
 }
+// export async function GET(req: Request) {
+//   try {
+//     console.log("Connecting to database...");
+//     await dbConnect(); // Database connection
+//     console.log("Database connected!");
+
+//     // Extract query parameters
+//     const { searchParams } = new URL(req.url!);
+//     const productId = searchParams.get("productId");
+
+//     console.log("Received Product ID:", productId); // Log product ID
+
+//     // Validate productId
+//     if (!productId) {
+//       console.error("Product ID is missing.");
+//       return NextResponse.json(
+//         { message: "Product ID is required", status: 400 },
+//         { status: 400 }
+//       );
+//     }
+
+//     console.log("Fetching reviews for Product ID:", productId);
+//     const reviews = await Review.find({ product: productId }).sort({
+//       createdAt: -1,
+//     });
+
+//     console.log("Number of reviews fetched:", reviews.length);
+
+//     const averageRating =
+//       reviews.length > 0
+//         ? reviews.reduce((sum, review) => sum + review.rating, 0) /
+//           reviews.length
+//         : 0;
+
+//     console.log("Average rating:", averageRating);
+
+//     return NextResponse.json(
+//       { message: "Reviews fetched successfully", reviews, averageRating },
+//       { status: 200 }
+//     );
+//   } catch (error) {
+//     console.error("Server error:", error);
+//     return NextResponse.json(
+//       { message: "Server error", error: error },
+//       { status: 500 }
+//     );
+//   }
+// }
 
 // **DELETE - Remove a Review**
 export async function DELETE(req: Request) {
