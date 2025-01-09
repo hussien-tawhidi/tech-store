@@ -144,9 +144,9 @@ const ReviewSection = ({ productId }: Props) => {
       {/* Reviews List */}
       {reviews.length > 0 ? (
         <ul className='space-y-4'>
-          {reviews.map((review) => (
+          {reviews.map((review,index) => (
             <li
-              key={review._id}
+              key={index}
               className='p-4 border relative rounded shadow-sm'>
               <div className='flex justify-between items-center'>
                 <h5 className='font-semibold'>{review?.name}</h5>
