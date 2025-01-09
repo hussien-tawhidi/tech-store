@@ -31,9 +31,11 @@ const ReviewSection = ({ productId }: Props) => {
       return;
     }
 
+    const url = process.env.NEXT_PUBLIC_BASE_URL as string;
+
     try {
       const res = await fetch(
-        `/api/admin/products/reviews?productId=${productId}`,
+        `${url}/api/admin/products/reviews?productId=${productId}`,
         { method: "GET" }
       );
 
@@ -46,8 +48,8 @@ const ReviewSection = ({ productId }: Props) => {
       setReviews(data.reviews);
       setError(null); // Clear any previous errors
     } catch (err) {
-      console.error("Error fetching reviews:", err);
-      setError("Failed to fetch reviews. Please try again later.");
+      console.error("ERROR IN FETCHING REVIEWS:" + err);
+      setError("Failed to fetch reviews. Please try again later.......");
     }
   };
 
