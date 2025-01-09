@@ -7,6 +7,7 @@ import { FaStar } from "react-icons/fa";
 import TextareaInput from "@/components/TextareaInput";
 import DeleteReviewBtn from "./DeleteReviewBtn";
 import { ReviewComment } from "../../../../types";
+import axios from "axios";
 
 interface Props {
   productId: string | undefined; // Allow productId to be undefined initially
@@ -34,18 +35,22 @@ const ReviewSection = ({ productId }: Props) => {
     const url = process.env.NEXT_PUBLIC_BASE_URL as string;
 
     try {
-      const res = await fetch(
-        "/api/admin/products/reviews",
-        { method: "GET" }
-      );
+      const response = await axios.get("/api/admin/products/reviews");
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || "Failed to fetch reviews.");
-      }
+      const reviews = await response.data;
+      setReviews(reviews.reviews);
+      // const res = await fetch(
+      //   "/api/admin/products/reviews",
+      //   { method: "GET" }
+      // );
 
-      const data = await res.json();
-      setReviews(data.reviews);
+      // if (!res.ok) {
+      //   const errorData = await res.json();
+      //   throw new Error(errorData.message || "Failed to fetch reviews.");
+      // }
+
+      // const data = await res.json();
+      // setReviews(data.reviews);
       setError(null); // Clear any previous errors
     } catch (err) {
       console.error("ERROR IN FETCHING REVIEWS:" + err);
