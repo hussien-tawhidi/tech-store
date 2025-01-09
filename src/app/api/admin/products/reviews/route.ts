@@ -56,6 +56,22 @@ export async function POST(req: Request) {
 }
 
 
+import fs from "fs";
+import path from "path";
+import os from "os";
+
+// Use a temporary directory instead of 'logs' to prevent errors in Vercel's environment
+const logDir = path.join(os.tmpdir(), "logs");
+
+// Ensure the directory exists or create it
+if (!fs.existsSync(logDir)) {
+  fs.mkdirSync(logDir, { recursive: true });
+}
+
+// Now you can safely use 'logDir' for logging
+// Example: You can write a log file or any logging you need
+fs.writeFileSync(path.join(logDir, "logfile.log"), "Some log content");
+
 export async function GET(req: Request) {
   try {
     await dbConnect(); 
