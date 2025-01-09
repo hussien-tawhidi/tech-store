@@ -100,6 +100,7 @@ const Login = () => {
             </Link>
           </p>
           <Button
+            onClick={() => signIn("google")}
             variant={"outline"}
             className='border-none shadow-xl flex items-center justify-center'>
             <FcGoogle />

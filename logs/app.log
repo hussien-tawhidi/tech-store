@@ -293,3 +293,5 @@
 {"level":"error","message":"Database connection not established","timestamp":"2025-01-07T08:00:52.028Z"}
 {"level":"error","message":"Database connection not established","timestamp":"2025-01-07T08:00:52.055Z"}
 {"level":"error","message":"Database connection not established","timestamp":"2025-01-07T08:00:52.352Z"}
+{"level":"info","message":"Email sent to husseintawhidi711@gmail.com with subject: CONFIRM_EMAIL","timestamp":"2025-01-09T08:35:50.937Z"}
+{"level":"info","message":"User registered successfully: husseintawhidi711@gmail.com","timestamp":"2025-01-09T08:35:50.945Z"}
