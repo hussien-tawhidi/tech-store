@@ -18,7 +18,7 @@ const Rate = ({ rating }: { rating: number }) => {
         </span>
       ))}
       {/* Show numeric value */}
-      <span className='text-slate-500'>({rating?.toFixed(1)} / 5)</span>
+      <span className='text-slate-500 text-[10px]'>({rating?.toFixed(1)} / 5)</span>
     </div>
   );
 };

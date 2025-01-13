@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import LaptopsCard from "./LaptopsCard";
 import { Button } from "@/components/ui/button";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { laptopsBrand } from "../../../../constant";
+import Image from "next/image";
+import OverlayForBanner from "../OverlayForBanner";
 
 export interface productProps {
   ratings: number;
@@ -38,32 +41,57 @@ const Laptops = () => {
   }, []);
 
   return (
-    <div className='flex flex-col my-20'>
-      <div className=''>
-        <Button
-          variant={"outline"}
-          className='flex items-center font-normal gap-2 text-sm hover:text-slate-950 border-slate-500 hover:border-slate-900'>
-          all laptops <MdKeyboardArrowRight className='text-2xl mt-1' />
-        </Button>
-      </div>
-      {loading ? (
-        <CardLoader />
-      ) : (
-        <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-5 mt-5'>
-          {data.map((d: productProps) => (
-            <LaptopsCard
-              descriptions={d.description}
-              key={d._id}
-              brand={d.brand}
-              discount={d.discountPrice}
-              id={d._id}
-              price={d.price}
-              name={d.name}
-              image={d?.images?.[0]?.url}
-            />
-          ))}
+    <div className=''>
+      <div className='flex flex-col my-20'>
+        <div className=''>
+          <Button
+            variant={"outline"}
+            className='flex items-center font-normal gap-2 text-sm hover:text-slate-950 border-slate-500 hover:border-slate-900'>
+            all laptops <MdKeyboardArrowRight className='text-2xl mt-1' />
+          </Button>
         </div>
-      )}
+        {loading ? (
+          <CardLoader />
+        ) : (
+            <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-5 mt-5'>
+              
+            {data.map((d: productProps) => (
+              <LaptopsCard
+                descriptions={d.description}
+                key={d._id}
+                brand={d.brand}
+                discount={d.discountPrice}
+                id={d._id}
+                price={d.price}
+                name={d.name}
+                image={d?.images?.[0]?.url}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+      <div className='grid md:grid-cols-5 grid-cols-2 md:gap-3 gap-2 my-10'>
+        {laptopsBrand.map((laptops) => (
+          <OverlayForBanner
+            src={laptops.image}
+            des={laptops.des}
+            title={laptops.title}
+            key={laptops.id}
+          />
+        ))}
+      </div>
+      <div className='my-10 grid sm:gap-4 gap-2 sm:grid-cols-2'>
+        <OverlayForBanner
+          des='We suggest the best laptop, those our user satisfy with using of that'
+          src='/features/laptopSuggestBanner.jpg'
+          title='Laptop Suggested'
+        />
+        <OverlayForBanner
+          des='We suggest the best laptop, those our user satisfy with using of that'
+          src='/features/laptopAccessories.jpg'
+          title='Laptop Accessories'
+        />
+      </div>
     </div>
   );
 };

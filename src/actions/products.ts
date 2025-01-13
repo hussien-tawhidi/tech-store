@@ -85,7 +85,7 @@ export const fetchHotProducts = async () => {
       (a: newProductsProps, b: newProductsProps) =>
         new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
     );
-    data = sortedProducts.slice(9, 13);
+    data = sortedProducts.slice(9, 22);
   } catch (err) {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
@@ -117,7 +117,7 @@ export const fetchBestSells = async () => {
       (a: newProductsProps, b: newProductsProps) =>
         new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
     );
-    data = sortedProducts.slice(5, 9); // Update data with the fetched response
+    data = sortedProducts.slice(5, 13); // Update data with the fetched response
   } catch (err) {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
@@ -286,6 +286,39 @@ export const fetchTechStoreOffers = async () => {
     );
     data = sortedProducts.slice(16, 23);
     console.log(data); // Update data with the fetched response
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      // Axios-specific error handling
+      error =
+        err.response?.data?.message ||
+        "An error occurred while fetching data. [fetchTechStoreOffers]";
+    } else {
+      // Generic error handling
+      error = "An unexpected error occurred. [fetchTechStoreOffers]";
+    }
+    console.error("Fetch error:", err);
+  } finally {
+    loading = false; // Always reset loading state
+  }
+
+  return { data, error, loading }; // Return the updated states
+};
+
+export const fetchApplliance = async () => {
+  let loading = true;
+  let error: string | null = null; // Initialize error as null
+  let data: newProductsProps[] | any = null; // Initialize data as null
+  try {
+   
+    const response = await axios.get("/api/admin/products");
+    const { products } = await response?.data;
+    // you can add hot of the week
+    const sortedProducts = products.sort(
+      (a: newProductsProps, b: newProductsProps) =>
+        new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+    );
+   data = sortedProducts.slice(16, 23);
+    // Update data with the fetched response
   } catch (err) {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling

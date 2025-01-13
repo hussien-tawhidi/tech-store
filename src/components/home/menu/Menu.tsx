@@ -33,10 +33,6 @@ export default function Menu() {
           // }}
           navigation={{ nextEl: ".arrow-left", prevEl: ".arrow-right" }}
           loop={true}
-          // autoplay={{
-          //   delay: 5000,
-          //   disableOnInteraction: false,
-          // }}
           keyboard={{
             enabled: true,
           }}

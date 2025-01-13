@@ -27,7 +27,7 @@ const HeaderBottom = () => {
             <Link
               href={linkPath || "/"}
               key={header.id}
-              className={`text-slate-600 animate__animated animate__fadeInUp dark:text-slate-300 capitalize text-sm hover:text-sky-950 transition-all hover:border-b hover:border-slate-500 dark:hover:text-slate-50 ${
+              className={`text-slate-600 font-bold animate__animated animate__fadeInUp dark:text-slate-300 capitalize text-sm hover:text-sky-950 transition-all hover:border-b hover:border-slate-500 dark:hover:text-slate-50 ${
                 isActive &&
                 "border-b-2 text-slate-700 dark:text-slate-500 border-slate-700 font-semibold"
               }`}>

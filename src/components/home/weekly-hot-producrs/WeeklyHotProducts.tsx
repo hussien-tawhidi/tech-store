@@ -1,58 +1,32 @@
 "use client";
-import { useEffect, useState } from "react";
-import { productProps } from "../laptops/Laptops";
-import { MdOutlineHotelClass } from "react-icons/md";
-import WeeklyHotProductsCard from "@/components/cards/WeeklyHotProductsCard";
+
+import { useEffect, useRef, useState } from "react";
+import { ProductProps } from "../../../../types";
 import { fetchHotProducts } from "@/actions/products";
-import CardLoader from "@/components/cards/CardLoader";
+import ResponsiveSlider from "@/components/sliders/ResponsiveSlider";
+import WeeklyHostProduct from "./WeeklyHotProductCard";
+import Loading from "@/components/Loading";
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  createdDate: string; // Assuming createdDate is an ISO date string
-  // Add other fields as needed
-}
 const WeeklyHotProducts = () => {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-
+  const [data, setData] = useState<ProductProps[]>([]);
+  const [loading, setLoading] = useState(false);
+  // Fetch products on mount
   useEffect(() => {
     const loadProduct = async () => {
       setLoading(true);
-      const { data, error } = await fetchHotProducts();
+      const { data } = await fetchHotProducts();
       setData(data);
-      setError(error);
       setLoading(false);
     };
-
     loadProduct();
   }, []);
+
   return (
-    <div className='mt-20'>
-      <h5 className='flex items-center gap-2 md:my-5 my-3 md:text-3xl text-xl text-gray-600 font-semibold'>
-        <MdOutlineHotelClass className='animate-ping' /> Best of the week
-      </h5>
-      {loading ? (
-        <CardLoader />
-      ) : (
-        <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-3'>
-          {data.map((data: productProps) => (
-            <WeeklyHotProductsCard
-              rate={data.ratings}
-              key={data._id}
-              brand={data.brand}
-              discount={data.discountPrice}
-              _id={data._id}
-              image={data?.images[0]?.url}
-              price={data.price}
-              title={data.name}
-              description={data.description}
-            />
-          ))}
-        </div>
-      )}
+    <div className='relative flex flex-col items-center w-full overflow-hidden'>
+      <h4 className='text-center font-bold md:text-3xl text-xl my-3'>
+        Hot of the week
+      </h4>
+      <ResponsiveSlider data={data} renderItem={WeeklyHostProduct} />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent } from "react";
 
 export interface ProductProps {
+  [x: string]: number;
   _id: string;
   name: string;
   brand: string;

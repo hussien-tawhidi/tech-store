@@ -12,7 +12,7 @@ interface SelectedColor {
   hex: string;
 }
 
-const ChooseColor = ({ colors }: Props) => {
+const ChooseColor = ({ colors }: any) => {
   const [selectedColors, setSelectedColors] = useState<SelectedColor[]>([]);
 
   const handleColorChange = (selectedColor: SelectedColor) => {
@@ -28,7 +28,7 @@ const ChooseColor = ({ colors }: Props) => {
     <ToggleGroup
       type='multiple'
       className='text-slate-600 dark:text-slate-300 flex flex-wrap items-start justify-start'>
-      {colors?.map((color, index) => (
+      {colors?.map((color: SelectedColor, index: number) => (
         <ToggleGroupItem
           key={index}
           value={color.name}

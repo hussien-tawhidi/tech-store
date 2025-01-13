@@ -58,7 +58,7 @@ const Menu = ({ hideTheMenu, menu }: Props) => {
         {mainMenu.map((menu) => (
           <li
             key={menu.id}
-            className='flex flex-col pl-5 animate__animated animate__fadeInUp capitalize border-b justify-center pt-3  text-slate-600 transition-all bg-white'
+            className='flex flex-col font-semibold pl-5 animate__animated animate__fadeInUp capitalize border-b justify-center pt-3  text-slate-600 transition-all bg-white'
             onMouseEnter={() => setHoveredMenuId(menu.id)}
             onMouseLeave={() => setHoveredMenuId(null)}>
             <Link

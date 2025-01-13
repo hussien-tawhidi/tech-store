@@ -34,7 +34,7 @@ const WeeklyHotProductsCard = ({
   const discountedPrice = (price - (price * discount) / 100).toFixed(2);
 
   return (
-    <div className='shadow-lg'>
+    <div className='border overflow-hidden'>
       <div className='relative w-full h-full p-5 rounded-md flex flex-col justify-between overflow-hidden'>
         <div className='z-10 text-left flex flex-col justify-between h-full'>
           <Brands brand={brand} />
@@ -46,7 +46,7 @@ const WeeklyHotProductsCard = ({
                 alt='title'
                 width={500}
                 height={500}
-                className='object-cover mx-auto z-10 w-auto h-[30vh]'
+                className='object-cover mx-auto z-10 w-[10rem] h-[30vh]'
               />
             )}
           </div>
@@ -55,13 +55,12 @@ const WeeklyHotProductsCard = ({
             <p className='relative font-bold text-xl text-slate-600'>
               {discountedPrice}
               <span className='absolute font-normal -top-1 text-[12px]'>$</span>
-              <span className='font-bold opacity-85 text-red-600 text-sm flex items-center gap-1'>
+              <del className='opacity-85 text-red-600 text-[10px] justify-end flex items-center gap-1'>
                 <span className='flex items-center text-red-600'>
-                  {discount}
-                  <BiSolidOffer />
+                  {discount}%
                 </span>
-                -<span className='text-red-600'>{price}</span>
-              </span>
+                -<span className='text-red-600'>{price}$</span>
+              </del>
             </p>
           </div>
 
