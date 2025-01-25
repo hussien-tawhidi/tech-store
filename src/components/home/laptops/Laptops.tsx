@@ -65,7 +65,7 @@ const Laptops = () => {
             all laptops <MdKeyboardArrowRight className='text-2xl mt-1' />
           </Button>
         </div>
-
+        {error && <p className="text-red-500 border border-red-500 py-2 px-5 rounded">{error}</p>}
         {/* Slider */}
         {loading ? (
           <CardLoader />

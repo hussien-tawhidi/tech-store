@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { CiLocationOn, CiSearch, CiUser } from "react-icons/ci";
+import { CiLocationOn, CiSearch } from "react-icons/ci";
 import { HiMiniLanguage, HiOutlineShoppingBag } from "react-icons/hi2";
 import { useState } from "react";
 import SearchConainer from "./SearchConainer";

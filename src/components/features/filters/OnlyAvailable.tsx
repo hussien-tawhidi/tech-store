@@ -1,4 +1,4 @@
-import { Checkbox } from "../../ui/checkbox"; // Update the path to your Checkbox component
+
 import StyledCheckbox from "../StyledChecbox";
 
 interface Props {

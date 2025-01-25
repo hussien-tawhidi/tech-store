@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import UpdateForm from "./UpdateForm";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { TbArrowBackUp } from "react-icons/tb";
 
 const Update = ({ productId }: { productId: string }) => {
@@ -89,6 +88,7 @@ const Update = ({ productId }: { productId: string }) => {
       setImages(result.product.images || []);
       setAddImage([]);
     } catch (error) {
+      console.log(error,"in update product")
       toast.error("Failed to update product.");
     } finally {
       setFormLoading(false);
@@ -103,6 +103,7 @@ const Update = ({ productId }: { productId: string }) => {
       setImages(result.product.images); // Refresh images
       toast.success("Image deleted successfully!");
     } catch (error) {
+      console.log(error,"in updateProduct")
       toast.error("Failed to delete image.");
     } finally {
       setImageLoading(false);

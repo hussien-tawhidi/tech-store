@@ -28,6 +28,7 @@ export default function ConfirmEmailPage() {
           setStatus("Failed to confirm email.");
         }
       } catch (error) {
+        console.log(error);
         setStatus("An error occurred.");
       }
     };

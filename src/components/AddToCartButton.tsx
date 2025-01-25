@@ -67,7 +67,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
         disabled={color.length === 0}
         variant={variant}
         type={type}
-        className='px-6 py-3 bg-slate-600 text-white rounded-md animate-in animate__animated hover:bg-slate-700'
+        className={`px-6 py-3 bg-slate-600 text-white rounded-md animate-in animate__animated hover:bg-slate-700 ${className}`}
         onClick={handleAddToCart}>
         {title && title} {Icon && <Icon />}
       </Button>

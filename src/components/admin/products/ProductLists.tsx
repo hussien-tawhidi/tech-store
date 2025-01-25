@@ -83,6 +83,7 @@ const ProductLists = () => {
         getProducts.filter((product: productProps) => product._id !== productId)
       ); // Remove the deleted product from the list
     } catch (error) {
+      console.log(error, "product list /components/admin/products");
       toast.error("Failed to delete product.");
     } finally {
       setDeleteProductsLoading(false);

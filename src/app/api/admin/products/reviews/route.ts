@@ -3,7 +3,6 @@ import Review from "@/model/Review";
 import { NextResponse } from "next/server";
 import { auth } from "../../../../../../auth";
 import { dbConnect } from "@/lib/db";
-import logger from "@/lib/logger";
 // **POST - Create a Review**
 export async function POST(req: Request) {
   const session = await auth();
@@ -51,7 +50,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(review, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    return NextResponse.json({ error: "Server error"+error }, { status: 500 });
   }
 }
 
@@ -190,6 +189,6 @@ export async function DELETE(req: Request) {
       { status: 200 }
     );
   } catch (error) {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    return NextResponse.json({ error: "Server error"+error }, { status: 500 });
   }
 }

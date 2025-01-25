@@ -30,7 +30,7 @@ const Register = () => {
     try {
       await registerUser({ email, password, name });
       router.push("/user-login");
-      router;
+     
       setName("");
       setEmail("");
       setPassword("");

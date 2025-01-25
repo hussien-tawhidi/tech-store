@@ -1,7 +1,4 @@
 import Orders from "@/components/auth/user-profile/Orders";
-import React from "react";
-
-interface Props {}
 
 const UserOrdersPage = () => {
   return (

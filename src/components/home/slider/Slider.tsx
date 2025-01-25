@@ -22,7 +22,7 @@ const Slider = () => {
       setData(data);
       setError(error);
       setLoading(false);
-      // setLoading(loading);
+      setLoading(loading);
     };
 
     loadProduct();

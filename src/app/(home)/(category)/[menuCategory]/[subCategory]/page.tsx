@@ -1,8 +1,7 @@
-import Brands from "@/components/category/mobile/Brands";
+
 import Breadcrumbs from "@/components/product-destails/Breadcrumbs";
 import React from "react";
 
-interface Props {}
 
 const page = async ({ params }: any) => {
   const param = await params;

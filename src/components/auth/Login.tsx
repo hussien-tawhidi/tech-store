@@ -92,7 +92,7 @@ const Login = () => {
         </Button>
         <div className='flex items-center justify-between'>
           <p className='text-sm text-slate-600'>
-            Don't register yet
+            Dont register yet
             <Link
               href={"/user-register"}
               className='text-slate-900 ml-1 font-semibold underline'>

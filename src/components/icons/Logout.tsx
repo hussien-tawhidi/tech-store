@@ -1,8 +1,5 @@
-import React from "react";
 
-interface Props {}
-
-const Logout: React.FC<Props> = () => {
+const Logout = () => {
   return (
     <svg
       className='svg-icon'

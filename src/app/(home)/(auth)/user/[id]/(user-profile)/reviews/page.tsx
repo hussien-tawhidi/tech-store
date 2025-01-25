@@ -22,7 +22,7 @@ const ReviewsPage = () => {
       {reviews.length <= 0
         ? (
           <div className="font-semibold">
-            <p>You don't has reiws any product yer</p>
+            <p>You dont has reiws any product yer</p>
             <Link href={"/"} className="text-blue-500 underline font-normal">Go to main page</Link>
         </div>
         )

@@ -1,14 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
+import {  NextResponse } from "next/server";
 import Product from "@/model/Product";
 import { dbConnect } from "@/lib/db";
 import {
-  deleteImageFromCloudinary,
+ 
   uploadbannerToCloudinary,
   uploadToCloudinary,
 } from "@/lib/cloudinary";
 import { MongoServerError } from "mongodb";
 import mongoose from "mongoose";
-import logger from "@/lib/logger";
 
 export async function POST(req: Request) {
   const form = await req.formData();
@@ -235,7 +234,7 @@ export async function PATCH(req: Request) {
   }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     await dbConnect();
     const products = await Product.find();

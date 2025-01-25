@@ -3,11 +3,9 @@
 import Image from "next/image";
 import { BsCartPlus } from "react-icons/bs";
 import { Button } from "../../ui/button";
-import { BiSolidOffer } from "react-icons/bi";
 import Brands from "../../Brands";
 import ChooseColor from "../../ChooseColor";
 import { useRouter } from "next/navigation";
-import Rate from "../../Rate";
 import Link from "next/link";
 interface props {
   brand: string;
@@ -29,7 +27,7 @@ const MobileCard = ({
   image,
   colors,
   descriptions,
-  rating,
+ 
 }: props) => {
   const router = useRouter();
   const discountedPrice = (price - (price * discount) / 100).toFixed(2);

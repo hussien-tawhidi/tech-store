@@ -3,10 +3,6 @@
 import { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 
-interface Props {
-  colors: { name: string; hex: string }[];
-}
-
 interface SelectedColor {
   name: string;
   hex: string;

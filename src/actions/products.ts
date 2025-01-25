@@ -1,6 +1,5 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { homeBanners } from "../../constant";
 import {
   HeroProductProps,
   ProductDetailsProps,
@@ -148,34 +147,32 @@ export const fetchBestSells = async () => {
 
 export const fetchTopRatedProducts = async () => {
   let loading = true;
-  let error: string | null = null; // Initialize error as null
-  let data: newProductsProps[] | any = null; // Initialize data as null
+  let error: string | null = null;
+  let data: newProductsProps[] | any = null;
   try {
     const response = await axios.get("/api/admin/products");
-    const { products } = await response?.data;
-    // you can add hot of the week
+    const { products } = response.data;
     const sortedProducts = products.sort(
       (a: newProductsProps, b: newProductsProps) =>
         new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
     );
-    data = sortedProducts.slice(13, 20); // Update data with the fetched response
+    data = sortedProducts.slice(13, 20);
   } catch (err) {
     if (axios.isAxiosError(err)) {
-      // Axios-specific error handling
       error =
         err.response?.data?.message ||
         "An error occurred while fetching data. [fetchTopRatedProducts]";
     } else {
-      // Generic error handling
       error = "An unexpected error occurred. [fetchTopRatedProducts]";
     }
     console.error("Fetch error:", err);
   } finally {
-    loading = false; // Always reset loading state
+    loading = false;
   }
 
-  return { data, error, loading }; // Return the updated states
+  return { data, error, loading };
 };
+
 
 export const fetchProductById = async (
   id: string
@@ -281,35 +278,34 @@ export const createProductFunction = async (
 
 export const fetchTechStoreOffers = async () => {
   let loading = true;
-  let error: string | null = null; // Initialize error as null
-  let data: newProductsProps[] | any = null; // Initialize data as null
+  let error: string | null = null;
+  let data: newProductsProps[] | any = null;
   try {
     const response = await axios.get("/api/admin/products");
-    const { products } = await response?.data;
-    // you can add hot of the week
-    const sortedProducts = products.sort(
-      (a: newProductsProps, b: newProductsProps) =>
-        new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
-    );
-    data = sortedProducts.slice(16, 23);
-    console.log(data); // Update data with the fetched response
+    if (response && response.data) {
+      const { products } = response.data;
+      const sortedProducts = products.sort(
+        (a: newProductsProps, b: newProductsProps) =>
+          new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+      );
+      data = sortedProducts.slice(16, 23);
+    }
   } catch (err) {
     if (axios.isAxiosError(err)) {
-      // Axios-specific error handling
       error =
         err.response?.data?.message ||
         "An error occurred while fetching data. [fetchTechStoreOffers]";
     } else {
-      // Generic error handling
       error = "An unexpected error occurred. [fetchTechStoreOffers]";
     }
     console.error("Fetch error:", err);
   } finally {
-    loading = false; // Always reset loading state
+    loading = false;
   }
 
-  return { data, error, loading }; // Return the updated states
+  return { data, error, loading };
 };
+
 
 export const fetchApplliance = async () => {
   let loading = true;
@@ -317,13 +313,15 @@ export const fetchApplliance = async () => {
   let data: newProductsProps[] | any = null; // Initialize data as null
   try {
     const response = await axios.get("/api/admin/products");
-    const { products } = await response?.data;
-    // you can add hot of the week
-    const sortedProducts = products.sort(
-      (a: newProductsProps, b: newProductsProps) =>
-        new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
-    );
-    data = sortedProducts.slice(16, 23);
+  if(response&&response.data){
+  const { products } = await response.data;
+  // you can add hot of the week
+  const sortedProducts = products.sort(
+    (a: newProductsProps, b: newProductsProps) =>
+      new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+  );
+  data = sortedProducts.slice(16, 23);    
+  }
     // Update data with the fetched response
   } catch (err) {
     if (axios.isAxiosError(err)) {
@@ -414,10 +412,6 @@ export const fetchProductsByCategory = async ({
   featuresName,
 }: FetchProductsProps): Promise<ProductProps[]> => {
   try {
-    const feature = homeBanners.find(
-      (feature) => feature.link === featuresName
-    );
-
     const { data } = await axios.get("/api/admin/products");
 
     const filteredProducts = data.products.filter(
@@ -426,7 +420,9 @@ export const fetchProductsByCategory = async ({
 
     return filteredProducts;
   } catch (error) {
+    console.error("Error fetching products:", error);
     toast.error("Failed to fetch products.");
     return [];
   }
 };
+

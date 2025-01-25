@@ -36,19 +36,22 @@ const DeleteReviewBtn = ({
       if (!res.ok) throw new Error("Failed to delete review.");
       toast.success("Review deleted successfully");
     } catch (err) {
-      setError("Error deleting review.");
+      setError("Error deleting review."+err);
     } finally {
       setLoading(false);
     }
   };
   return (
-    <Button
-      onClick={() => handleDeleteReview(reviewId)}
-      disabled={loading}
-      variant={"ghost"}
-      className='text-red-600 hover:text-red-800 mt-2'>
-      <RiDeleteBin5Line />
-    </Button>
+    <>
+      {error && <p className="py-2 px-5 border border-red-500 rounded text-red-500">{error}</p>}
+      <Button
+        onClick={() => handleDeleteReview(reviewId)}
+        disabled={loading}
+        variant={"ghost"}
+        className='text-red-600 hover:text-red-800 mt-2'>
+        <RiDeleteBin5Line />
+      </Button>
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import { ProductProps } from "../../../../types";
 import { fetchHotProducts } from "@/actions/products";
 import ResponsiveSlider from "@/components/sliders/ResponsiveSlider";
 import WeeklyHostProduct from "./WeeklyHotProductCard";
+import Loading from "@/components/Loading";
 const WeeklyHotProducts = () => {
   const [data, setData] = useState<ProductProps[]>([]);
   const [loading, setLoading] = useState(false);
@@ -24,6 +25,7 @@ const WeeklyHotProducts = () => {
       <h4 className='text-center font-bold md:text-3xl text-xl my-3'>
         Hot of the week
       </h4>
+      {loading&&<Loading/>}
       <ResponsiveSlider data={data} renderItem={WeeklyHostProduct} />
     </div>
   );

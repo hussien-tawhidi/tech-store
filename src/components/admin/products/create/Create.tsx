@@ -4,6 +4,7 @@ import { useState } from "react";
 import Loading from "@/components/Loading";
 import CreateForm from "./CreateForm";
 import { createProductFunction } from "@/actions/products";
+import { useSession } from "next-auth/react";
 
 const Create = () => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const Create = () => {
   const [price, setPrice] = useState<number | string>("");
   const [discount, setDiscount] = useState<number | string>("");
   const [description, setDescription] = useState("");
-const [category, setCategory] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
 
   const [subcategory, setSubcategory] = useState("");
   const [brand, setBrand] = useState("");
@@ -24,6 +25,9 @@ const [category, setCategory] = useState<string>("");
   // Colors state
   const [createdBy, setCreatedBy] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { data: session } = useSession();
+  setCreatedBy(session?.user._id);
 
   const handleImageChange = (files: File[]) => {
     setImage(files);
@@ -45,10 +49,6 @@ const [category, setCategory] = useState<string>("");
     });
   };
 
-  const handleCategoryChange = (value: string) => {
-    setCategory(value); // Update state with the selected value
-    console.log("Selected category:", value);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,7 +106,6 @@ const [category, setCategory] = useState<string>("");
           sku={sku}
           stock={stock}
           subcategory={subcategory}
-        
         />
       )}
     </>

@@ -4,8 +4,8 @@ import TopRatedCard from "@/components/cards/TopRatedCard";
 import { useEffect, useState } from "react";
 import { productProps } from "../laptops/Laptops";
 import { fetchTopRatedProducts } from "@/actions/products";
-import CardLoader from "@/components/cards/CardLoader";
 import ResponsiveSlider from "@/components/sliders/ResponsiveSlider";
+import Loading from "@/components/Loading";
 
 const TopRated = () => {
   const [data, setData] = useState([]);
@@ -24,6 +24,7 @@ const TopRated = () => {
 
     loadProduct();
   }, []);
+  console.log(colors);
   const renderLaptopCard = (product: productProps) => (
     <TopRatedCard
       colors={product.colors}
@@ -42,6 +43,8 @@ const TopRated = () => {
       <div className='flex items-center text-slate-600 '>
         <p className='text-3xl font-semibold my-3'>Top rated products</p>
       </div>
+      {error && <p className='text-red-600'>Error fetching data: {error}</p>}
+      {loading && <Loading />}
       <ResponsiveSlider data={data} renderItem={renderLaptopCard} />
     </div>
   );

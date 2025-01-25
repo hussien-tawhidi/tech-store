@@ -1,7 +1,7 @@
 "use client";
 
-import Colors from "@/components/admin/products/create/Colors";
 import ChooseColor from "@/components/ChooseColor";
+import Image from "next/image";
 import { LiaCartPlusSolid } from "react-icons/lia";
 
 interface ProductCardProps {
@@ -19,17 +19,12 @@ const WeeklyHotProductCard = ({
   colors,
   price,
 }: ProductCardProps) => {
-  const colorWidth = () => {
-    if (colors.length > 3) {
-      <span>{colors}...</span>;
-    }
-    return colors;
-  };
-
   return (
     <div className='max-w-xs bg-white shadow-md rounded-lg overflow-hidden mb-1'>
       <div className='p-4'>
-        <img
+        <Image
+          width={500}
+          height={500}
           src={images[0].url}
           alt={title}
           className='h-40 w-full object-contain'

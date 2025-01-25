@@ -1,7 +1,4 @@
 import Checkout from "@/components/checkout/CheckOut";
-import React from "react";
-
-interface Props {}
 
 const CheckOutPage = () => {
   return (

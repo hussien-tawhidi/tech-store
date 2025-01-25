@@ -42,7 +42,7 @@ const Hero = () => {
                   height={900}
                   className='object-cover'
                   src={data?.src}
-                  alt={"home banner"}
+                  alt="home banner"
                   loading='lazy'
                 />
               </Link>

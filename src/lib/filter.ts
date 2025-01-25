@@ -12,12 +12,6 @@ interface FilterProductsParams {
   maxPrice: number;
 }
 
-type Product = {
-  _id: string;
-  name: string;
-  colors: { name: string; hex: string }[];
-  // other properties
-};
 
 export const filterProducts = ({
   products,

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { BiSolidOffer } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import Brands from "../Brands";
 import Rate from "../Rate";

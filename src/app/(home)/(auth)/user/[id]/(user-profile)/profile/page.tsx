@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { userMenuData } from "../../../../../../../../constant";
 import Link from "next/link";
 
-const page = () => {
+const Profile = () => {
   const { data: session } = useSession();
   return (
     <div className='relative'>
@@ -25,4 +25,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Profile;

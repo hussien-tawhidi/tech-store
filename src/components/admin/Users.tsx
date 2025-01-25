@@ -1,6 +1,4 @@
-import React from "react";
-
-interface Props {}
+import Image from "next/image";
 
 const UsersAdminDash = () => {
   return (
@@ -37,10 +35,12 @@ const UsersAdminDash = () => {
           <tr className='hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer shadow-md dark:shadow-gray-600'>
             <th className='flex gap-3 px-6 py-4 font-normal text-gray-900 dark:text-gray-400'>
               <div className='relative h-10 w-10'>
-                <img
+                <Image
+                  width={100}
+                  height={100}
                   className='h-full w-full rounded-full object-cover object-center'
                   src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                  alt=''
+                  alt='user'
                 />
                 <span className='absolute right-0 z-10 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-gray-700 dark:ring-gray-300'></span>
               </div>

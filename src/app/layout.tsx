@@ -53,8 +53,6 @@ export default async function RootLayout({
               rel='stylesheet'
               href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css'
             />
-
-            <script src='https://unpkg.com/hs-range-slider@1.0.2/dist/index.bundle.js'></script>
           </ReduxProvider>
         </SessionProvider>
       </body>

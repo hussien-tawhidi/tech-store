@@ -44,7 +44,7 @@ const Features = ({ featuresName }: { featuresName?: string }) => {
   const allColors = useMemo(() => getUniqueColors(products), [products]);
 
   const filteredProducts = useMemo(() => {
-    let filtered = filterProducts({
+    const filtered = filterProducts({
       selectedColor,
       products,
       onlyAvailable,

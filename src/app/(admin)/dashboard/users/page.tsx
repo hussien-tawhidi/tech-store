@@ -1,7 +1,4 @@
 import UsersAdminDash from "@/components/admin/Users";
-import React from "react";
-
-interface Props {}
 
 const Users = () => {
   return (

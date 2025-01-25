@@ -1,7 +1,7 @@
 "use client";
 
 import { fetchNewProduct } from "@/actions/products";
-import CardLoader from "@/components/cards/CardLoader";
+
 import { productProps } from "@/components/home/laptops/Laptops";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -26,6 +26,7 @@ const WhishLists = () => {
 
   return (
     <div className='sm:p-5 p-2'>
+      {error && <p className='text-red-500'>Error fetching products: {error}</p>}
       <div className='flex items-center justify-between my-10 text-2xl text-gray-900'>
         <h2 className=''>My Whishlists</h2> <Button>Clear lists</Button>
       </div>

@@ -25,11 +25,14 @@ const ProductDetails = ({ id }: { id: string }) => {
     };
 
     loadProduct();
-  }, []);
-console.log(data)
+  }, [id]);
+
   return (
     <div className='pt-20'>
       <Breadcrumbs name={data?.name} />
+      {error? (
+        <div className='text-red-500'>Error: {error}</div>
+      ) : null}
       {loading ? (
         <LoadingSkillate />
       ) : (
