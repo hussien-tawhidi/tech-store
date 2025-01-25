@@ -12,14 +12,12 @@ import WeeklyHotProducts from "@/components/home/weekly-hot-producrs/WeeklyHotPr
 import HandlesFree from "@/components/home/handsfree/HandlesFree";
 import Applliance from "@/components/home/appliance/Applliance";
 import OverlayForBanner from "@/components/home/OverlayForBanner";
-import ExampleSlider from "@/components/sliders/ExampleSlider";
 
 export default function Home() {
   return (
-    <main className='overflow-hidden z-0 relative'>
+    <main className='overflow-hidden z-0 relative mt-16'>
       <Hero />
       <Menu />
-      <ExampleSlider />
       <HomeFeauters />
       <StoreOff />
       <div className='md:w-[90vw] mx-auto my-5 w-[95vw]'>

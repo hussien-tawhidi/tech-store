@@ -5,6 +5,7 @@ import { fetchProductById } from "@/actions/products";
 import LoadingSkillate from "./LoadingSkillate";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import Breadcrumbs from "./Breadcrumbs";
 
 const ProductDetails = ({ id }: { id: string }) => {
   const [data, setData] = useState<any>();
@@ -25,9 +26,10 @@ const ProductDetails = ({ id }: { id: string }) => {
 
     loadProduct();
   }, []);
-
+console.log(data)
   return (
-    <div>
+    <div className='pt-20'>
+      <Breadcrumbs name={data?.name} />
       {loading ? (
         <LoadingSkillate />
       ) : (

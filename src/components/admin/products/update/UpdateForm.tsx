@@ -8,6 +8,8 @@ import { PiTrashSimpleLight } from "react-icons/pi";
 import { upateFormProps } from "../../../../../types";
 import { CiCamera } from "react-icons/ci";
 import FileInput from "@/components/FileInput";
+import Categories from "../../Categories";
+import { categoriesData } from "../../../../../constant/categoryData";
 
 const UpdateForm = ({
   // General Form Props
@@ -37,7 +39,17 @@ const UpdateForm = ({
   handleUpdate,
   handleFileChange,
   imageLoading,
+  subCategory,
+  setSubcategory,
+  brand,
+  setBrand,
+  setSku,
+  sku,
 }: upateFormProps) => {
+const filteredSubCategories =
+  categoriesData.find((item) => item.category === category)?.subCategories ||
+  [];
+
   return (
     <div className='flex items-center'>
       <form onSubmit={handleSubmit}>
@@ -77,12 +89,18 @@ const UpdateForm = ({
             value={discount ?? ""}
             placeholder={`Discount: ${data?.discountPrice}%`}
           />
-          <TextInput
-            type='text'
-            onChange={(e) => setCategory(e.target.value)}
-            value={category ?? ""}
-            placeholder={`Category: ${data?.category}`}
+          <Categories
+            setCategory={setCategory}
+            category={category}
+            categoriesData={categoriesData.map((item) => item.category)} // Pass only category names
           />
+          {category && (
+            <Categories
+              setCategory={setSubcategory}
+              category={subCategory}
+              categoriesData={filteredSubCategories} // Pass subcategories for the selected category
+            />
+          )}
           <TextInput
             type='number'
             onChange={(e) => setStock(e.target.value)}
@@ -90,7 +108,20 @@ const UpdateForm = ({
             placeholder={`Stock: ${data?.stock}`}
           />
         </div>
-
+        <div className='grid md:grid-cols-3 grid-cols-1 gap-4 mt-4'>
+          <TextInput
+            type='text'
+            onChange={(e) => setBrand(e.target.value)}
+            value={brand}
+            placeholder={`Brand: ${data?.brand}`}
+          />
+          <TextInput
+            type='text'
+            onChange={(e) => setSku(e.target.value)}
+            value={sku}
+            placeholder={`Sku ${data.sku}`}
+          />
+        </div>
         {/* Image Management */}
         <div className='flex items-center justify-center flex-wrap gap-4 mt-4'>
           {images.map((image: any, index: number) => (
@@ -147,7 +178,6 @@ const UpdateForm = ({
           <FileInput onChange={handleImageChange} />
         </div>
 
-        {/* Form Submission */}
         <Button
           type='submit'
           variant={"outline"}

@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect,  useState } from "react";
 import { ProductProps } from "../../../../types";
 import { fetchHotProducts } from "@/actions/products";
 import ResponsiveSlider from "@/components/sliders/ResponsiveSlider";
 import WeeklyHostProduct from "./WeeklyHotProductCard";
-import Loading from "@/components/Loading";
-
 const WeeklyHotProducts = () => {
   const [data, setData] = useState<ProductProps[]>([]);
   const [loading, setLoading] = useState(false);

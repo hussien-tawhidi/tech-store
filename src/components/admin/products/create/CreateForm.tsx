@@ -5,6 +5,8 @@ import { LuHardDriveUpload } from "react-icons/lu";
 import FileInput from "@/components/FileInput";
 import Colors from "./Colors";
 import { createProductFormPropsTypes } from "../../../../../types";
+import Categories from "../../Categories";
+import { categoriesData } from "../../../../../constant/categoryData";
 
 const CreateForm = ({
   name,
@@ -16,8 +18,8 @@ const CreateForm = ({
   price,
   setPrice,
   discount,
-  setDiscount,
   category,
+  setDiscount,
   setCategory,
   stock,
   setStock,
@@ -33,7 +35,10 @@ const CreateForm = ({
   handleBannerChange,
   handleSubmit,
   loading,
-}:createProductFormPropsTypes) => {
+}: createProductFormPropsTypes) => {
+  const filteredSubCategories =
+    categoriesData.find((item) => item.category === category)?.subCategories ||
+    [];
   return (
     <form
       className='w-full mb-10 flex flex-col items-center'
@@ -73,12 +78,20 @@ const CreateForm = ({
           value={discount}
           placeholder='Discount Price'
         />
-        <TextInput
-          type='text'
-          onChange={(e) => setCategory(e.target.value)}
-          value={category}
-          placeholder='Category'
+
+        <Categories
+          setCategory={setCategory}
+          category={category}
+          categoriesData={categoriesData.map((item) => item.category)} // Pass only category names
         />
+        {category && (
+          <Categories
+            setCategory={setSubcategory}
+            category={subcategory}
+            categoriesData={filteredSubCategories} // Pass subcategories for the selected category
+          />
+        )}
+
         <TextInput
           type='number'
           onChange={(e) => setStock(e.target.value)}
@@ -87,12 +100,6 @@ const CreateForm = ({
         />
       </div>
       <div className='grid md:grid-cols-3 grid-cols-1 gap-4 mt-4'>
-        <TextInput
-          type='text'
-          onChange={(e) => setSubcategory(e.target.value)}
-          value={subcategory}
-          placeholder='Subcategory'
-        />
         <TextInput
           type='text'
           onChange={(e) => setBrand(e.target.value)}

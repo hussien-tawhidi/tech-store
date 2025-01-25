@@ -53,17 +53,11 @@ export default function Menu() {
             },
             1000: {
               slidesPerView: 6,
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
           }}
           // modules={[FreeMode, Pagination]}
-          modules={[
-            Keyboard,
-            Pagination,
-            Navigation,
-            Autoplay,
-            EffectCoverflow,
-          ]}
+          modules={[Pagination, Navigation, Autoplay, EffectCoverflow]}
           className='mySwiper'>
           {mainMenu.map((menu) => (
             <SwiperSlide key={menu.id}>
@@ -71,7 +65,7 @@ export default function Menu() {
                 title={menu.title}
                 src={menu.image}
                 alt={menu.title}
-                link='/'
+                link={menu.link}
               />
             </SwiperSlide>
           ))}
@@ -79,7 +73,7 @@ export default function Menu() {
       </div>
       <div className='flex gap-5 md:ml-20 sm:ml-10 ml-5 sm:mt-10 mt-5'>
         <Button className='arrow-left'>
-          <IoMdArrowDropleft className="" />
+          <IoMdArrowDropleft className='' />
         </Button>
         <Button className='arrow-right arrow'>
           <IoMdArrowDropright />

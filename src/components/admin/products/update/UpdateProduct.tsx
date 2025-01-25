@@ -10,6 +10,10 @@ import Link from "next/link";
 import { TbArrowBackUp } from "react-icons/tb";
 
 const Update = ({ productId }: { productId: string }) => {
+  const [brand, setBrand] = useState("");
+  const [subCategory, setSubCategory] = useState("");
+  const [sku, setSku] = useState("");
+
   const [data, setData] = useState<any>({});
   const [images, setImages] = useState([]);
   const [formLoading, setFormLoading] = useState(false);
@@ -64,6 +68,9 @@ const Update = ({ productId }: { productId: string }) => {
         addImage.forEach((file) => formData.append("addImage", file));
       }
       if (price) formData.append("price", price);
+      if (brand) formData.append("brand", brand);
+      if (subCategory) formData.append("subCategory", subCategory);
+      if (sku) formData.append("sku", sku);
       if (discount) formData.append("discount", discount);
       if (description) formData.append("description", description);
       if (category) formData.append("category", category);
@@ -77,7 +84,6 @@ const Update = ({ productId }: { productId: string }) => {
 
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Failed to update.");
-
       toast.success("Product updated successfully!");
       setData(result.product); // Refresh product data
       setImages(result.product.images || []);
@@ -192,6 +198,12 @@ const Update = ({ productId }: { productId: string }) => {
         setStock={setStock}
         error={error}
         setError={setError}
+        brand={brand}
+        setBrand={setBrand}
+        setSku={setSku}
+        sku={sku}
+        setSubcategory={setSubCategory}
+        subCategory={subCategory}
       />
     </div>
   );

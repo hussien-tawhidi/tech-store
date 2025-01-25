@@ -1,57 +1,61 @@
 "use client";
 
-import Rate from "@/components/Rate";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import Colors from "@/components/admin/products/create/Colors";
+import ChooseColor from "@/components/ChooseColor";
 import { LiaCartPlusSolid } from "react-icons/lia";
 
-interface Props {
+interface ProductCardProps {
   images: any[];
-  index: number;
-  rating: number;
-  price: number;
-  discountPrice: number;
-  name: string;
+  title: string;
   description: string;
+  price: string;
+  colors: any[];
 }
 
 const WeeklyHotProductCard = ({
-  name,
   images,
-  index,
-  price,
-  discountPrice,
+  title,
   description,
-  rating,
-}: Props) => {
+  colors,
+  price,
+}: ProductCardProps) => {
+  const colorWidth = () => {
+    if (colors.length > 3) {
+      <span>{colors}...</span>;
+    }
+    return colors;
+  };
+
   return (
-    <div className='bg-white rounded-md shadow-md h-full border'>
-      <Image
-        width={1000}
-        height={1000}
-        src={images[0].url}
-        alt={`Slide ${index}`}
-        className='object-cover w-full h-[20vh] rounded-md'
-      />
-      <div className='text-center mt-2'>
-        <Rate rating={rating || 4} />
-        <p className='flex items-center justify-between px-4 bg-red-300'>
-          <span>
-            {price && (price - (price * discountPrice) / 100).toFixed(2)}$
-          </span>
-          <del className='text-[10px]'>{price}$</del>
+    <div className='max-w-xs bg-white shadow-md rounded-lg overflow-hidden mb-1'>
+      <div className='p-4'>
+        <img
+          src={images[0].url}
+          alt={title}
+          className='h-40 w-full object-contain'
+        />
+      </div>
+      <div className='p-4'>
+        <h3 className='text-lg font-semibold text-slate-800'>{title}</h3>
+        <p className='text-sm text-slate-600 my-2'>
+          {description.length > 45 ? (
+            <span>{description.slice(0, 45)}...</span>
+          ) : (
+            description
+          )}
         </p>
-        <h3 className='font-semibold text-[16px]'>
-          {name.length > 20 ? `${name.slice(0, 20)}...` : name}
-        </h3>
-        <p className='text-xs text-slate-500 my-2'>
-          {description && description.length > 30
-            ? `${description.slice(0, 30)}...`
-            : description}
-        </p>
-        <Button className='w-full border bg-slate-600 text-white hover:bg-slate-500'>
-          <LiaCartPlusSolid />
-        </Button>
+        <div className='flex justify-center space-x-2 my-4'>
+          <ChooseColor
+            colors={colors.length > 3 ? (colors.length = 3) : colors}
+          />
+        </div>
+        <div className='flex justify-between items-center'>
+          <span className='text-lg font-bold text-gray-800'>${price}</span>
+          <button className='px-4 py-2 bg-slate-800 text-white text-sm rounded-lg hover:bg-slate-700 flex items-center'>
+            Add to
+            <LiaCartPlusSolid />
+          </button>
+        </div>
       </div>
     </div>
   );

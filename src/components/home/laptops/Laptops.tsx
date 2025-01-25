@@ -7,8 +7,8 @@ import LaptopsCard from "./LaptopsCard";
 import { Button } from "@/components/ui/button";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { laptopsBrand } from "../../../../constant";
-import Image from "next/image";
 import OverlayForBanner from "../OverlayForBanner";
+import ResponsiveSlider from "@/components/sliders/ResponsiveSlider";
 
 export interface productProps {
   ratings: number;
@@ -24,7 +24,7 @@ export interface productProps {
 }
 
 const Laptops = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<productProps[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -40,9 +40,24 @@ const Laptops = () => {
     loadProduct();
   }, []);
 
+  const renderLaptopCard = (product: productProps) => (
+    <LaptopsCard
+      descriptions={product.description}
+      key={product._id}
+      brand={product.brand}
+      discount={product.discountPrice}
+      id={product._id}
+      price={product.price}
+      name={product.name}
+      image={product?.images?.[0]?.url}
+      className='w-auto h-[35vh]'
+    />
+  );
+
   return (
     <div className=''>
-      <div className='flex flex-col my-20'>
+      {/* All Laptops Button */}
+      <div className='flex flex-col my-20 border py-10'>
         <div className=''>
           <Button
             variant={"outline"}
@@ -50,26 +65,16 @@ const Laptops = () => {
             all laptops <MdKeyboardArrowRight className='text-2xl mt-1' />
           </Button>
         </div>
+
+        {/* Slider */}
         {loading ? (
           <CardLoader />
         ) : (
-            <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-5 mt-5'>
-              
-            {data.map((d: productProps) => (
-              <LaptopsCard
-                descriptions={d.description}
-                key={d._id}
-                brand={d.brand}
-                discount={d.discountPrice}
-                id={d._id}
-                price={d.price}
-                name={d.name}
-                image={d?.images?.[0]?.url}
-              />
-            ))}
-          </div>
+          <ResponsiveSlider data={data} renderItem={renderLaptopCard} />
         )}
       </div>
+
+      {/* Laptops Brand Grid */}
       <div className='grid md:grid-cols-5 grid-cols-2 md:gap-3 gap-2 my-10'>
         {laptopsBrand.map((laptops) => (
           <OverlayForBanner
@@ -80,6 +85,8 @@ const Laptops = () => {
           />
         ))}
       </div>
+
+      {/* Additional Banner Section */}
       <div className='my-10 grid sm:gap-4 gap-2 sm:grid-cols-2'>
         <OverlayForBanner
           des='We suggest the best laptop, those our user satisfy with using of that'

@@ -185,8 +185,17 @@ export async function PATCH(req: Request) {
         .map((feature) => feature.trim());
     }
 
+    const sku = form.get("sku")?.toString();
+    if (sku) updateData.sku = sku;
+
+    const subCategory = form.get("subCategory")?.toString();
+    if (subCategory) updateData.subcategories = subCategory;
+
     const stock = form.get("stock")?.toString();
     if (stock) updateData.stock = parseInt(stock, 10);
+
+    const brand = form.get("brand")?.toString();
+    if (brand) updateData.brand=brand;
 
     // Handle image updates
     const newImages = form.getAll("addImage") as File[];
@@ -225,7 +234,6 @@ export async function PATCH(req: Request) {
     );
   }
 }
-
 
 export async function GET(req: NextRequest) {
   try {

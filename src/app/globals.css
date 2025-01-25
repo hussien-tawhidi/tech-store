@@ -36,3 +36,29 @@
   }
 }
 
+/* Custom scrollbar styles */
+.custom-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #b40808 #f4f4f4; /* Firefox */
+}
+
+/* Webkit Browsers (Chrome, Edge, Safari) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px; /* Width of the scrollbar */
+  height: 4px; /* Height of the scrollbar (for horizontal scrollbars) */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #db0505; /* Color of the scroll thumb */
+  border-radius: 2px; /* Roundness of the scroll thumb */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #ef0101; /* Hover color */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #d20303; /* Background of the scrollbar track */
+  border-radius: 2px; /* Roundness of the scroll track */
+}
+

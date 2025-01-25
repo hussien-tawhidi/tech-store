@@ -1,0 +1,150 @@
+export const phoneBrands = [
+  { name: "Apple", link: "/iphones" },
+  { name: "Samsung", link: "/samsung-phones" },
+  { name: "Google", link: "/google-phones" },
+  { name: "Xiaomi", link: "/xiami-phones" },
+  { name: "Oppo", link: "/oppo-phones" },
+  { name: "Vivo", link: "/vivo-phones" },
+  { name: "OnePlus", link: "/onepus-phones" },
+  { name: "Huawei", link: "/huawei-phones" },
+  { name: "Sony", link: "/sony-phones" },
+  { name: "Motorola", link: "/motorola-phones" },
+  { name: "Nokia", link: "/nokia-phones" },
+  { name: "Realme", link: "/realme-phones" },
+  { name: "Asus", link: "/asus-phones" },
+  { name: "Lenovo", link: "/lenono-phones" },
+  { name: "Honor", link: "/honor-phones" },
+  { name: "LG", link: "/lg-phones" },
+  { name: "ZTE", link: "/zte-phones" },
+  { name: "Meizu", link: "/meizu-phones" },
+  { name: "Infinix", link: "/infinix-phones" },
+  { name: "Tecno", link: "/tecno-phones" },
+  { name: "Alcatel", link: "/alcatel-phones" },
+  { name: "BlackBerry", link: "/blackberry-phones" },
+  { name: "iQOO", link: "/iqoo-phones" },
+  { name: "Micromax", link: "/micromax-phones" },
+  { name: "Panasonic", link: "/panasonic-phones" },
+];
+
+export const categoriesData = [
+  {
+    category: "smartphone",
+    subCategories: [
+      "Android",
+      "iOS",
+      "Phone Accessories",
+      "Budget Phones",
+      "Flagship Phones",
+      "Charger (cable, Canduncer ...)",
+    ],
+  },
+  {
+    category: "handsfree,headphone",
+    subCategories: [
+      "Bluetooth",
+      "Wired",
+      "Noise Cancelling",
+      "Gaming Headsets",
+      "Sports",
+    ],
+  },
+  {
+    category: "laptop,tablet,ipad ...",
+    subCategories: [
+      "Laptops",
+      "Tablets",
+      "iPads",
+      "2-in-1 Devices",
+      "Laptop Accessories",
+    ],
+  },
+  {
+    category: "home appliance",
+    subCategories: [
+      "Refrigerators",
+      "Microwaves",
+      "Washing Machines",
+      "Vacuum Cleaners",
+      "Air Conditioners",
+    ],
+  },
+  {
+    category: "jeweleries",
+    subCategories: ["Necklaces", "Rings", "Bracelets", "Earrings", "Watches"],
+  },
+  {
+    category: "computer",
+    subCategories: ["Desktops", "Monitors", "Keyboards", "Mice", "Components"],
+  },
+  {
+    category: "watches",
+    subCategories: [
+      "Smartwatches",
+      "Analog Watches",
+      "Digital Watches",
+      "Luxury Watches",
+      "Fitness Trackers",
+    ],
+  },
+  {
+    category: "networks & connectivities",
+    subCategories: [
+      "WiFi Routers",
+      "Modems",
+      "Network Cables",
+      "Adapters",
+      "Range Extenders",
+    ],
+  },
+  {
+    category: "video",
+    subCategories: [
+      "Projectors",
+      "Cameras",
+      "Camcorders",
+      "Video Editing Tools",
+      "Video Accessories",
+    ],
+  },
+  {
+    category: "audio",
+    subCategories: [
+      "Speakers",
+      "Soundbars",
+      "Microphones",
+      "Studio Equipment",
+      "Home Audio Systems",
+    ],
+  },
+  {
+    category: "gaming",
+    subCategories: [
+      "Consoles",
+      "PC Gaming",
+      "Gaming Chairs",
+      "VR Gaming",
+      "Game Accessories",
+    ],
+  },
+  {
+    category: "beauty",
+    subCategories: [
+      "Skincare",
+      "Haircare",
+      "Makeup",
+      "Fragrances",
+      "Tools & Accessories",
+    ],
+  },
+  {
+    category: "others",
+    subCategories: [
+      "Office Supplies",
+      "Stationery",
+      "Toys",
+      "Outdoor Gear",
+      "Miscellaneous",
+      "others...",
+    ],
+  },
+];

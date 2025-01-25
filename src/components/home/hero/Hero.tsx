@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { homeBanners } from "../../../../constant";
-
 import { Keyboard, Pagination, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -11,6 +10,8 @@ import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 
 const Hero = () => {
+  const url = process.env.NEXT_PUBLIC_BASE_URL || "/";
+  
   return (
     <>
       <div className='relative overflow-hidden'>
@@ -35,7 +36,7 @@ const Hero = () => {
           effect='fade'>
           {homeBanners?.map((data) => (
             <SwiperSlide key={data?.id}>
-              <Link href={"/"}>
+              <Link href={url + "/features/" + data.link}>
                 <Image
                   width={2000}
                   height={900}

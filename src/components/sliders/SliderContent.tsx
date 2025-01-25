@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { TiArrowLeft, TiArrowRight } from "react-icons/ti";
 import { Button } from "@/components/ui/button";
 
@@ -22,9 +22,9 @@ const SliderContent = <T,>({
   renderItem,
 }: SliderContentProps<T>) => {
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [draggedX, setDraggedX] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const startXRef = useRef(0);
+  const draggedXRef = useRef(0);
 
   const sliderStyle = {
     transform: `translateX(-${currentIndex * 100}%)`,
@@ -34,24 +34,24 @@ const SliderContent = <T,>({
   // Dragging Handlers
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
-    setStartX(e.clientX);
+    startXRef.current = e.clientX;
     e.preventDefault();
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging) return;
-    setDraggedX(e.clientX - startX);
+    draggedXRef.current = e.clientX - startXRef.current;
   };
 
   const handleMouseUp = () => {
     if (isDragging) {
-      if (draggedX > 100) {
+      if (draggedXRef.current > 100) {
         goToPrev();
-      } else if (draggedX < -100) {
+      } else if (draggedXRef.current < -100) {
         goToNext();
       }
       setIsDragging(false);
-      setDraggedX(0);
+      draggedXRef.current = 0;
     }
   };
 

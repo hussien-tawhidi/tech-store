@@ -1,5 +1,4 @@
 "use client";
-
 import LoadingSkillate from "@/components/product-destails/LoadingSkillate";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -14,6 +13,7 @@ interface props {
   _id: string;
   loading: boolean;
   off: number;
+  imageClassName?: string;
 }
 
 const StoreOffCard = ({
@@ -24,18 +24,19 @@ const StoreOffCard = ({
   _id,
   loading,
   off,
+  imageClassName,
 }: props) => {
   const router = useRouter();
   const discountedPrice = (price - (price * off) / 100).toFixed(2);
 
   return (
-    <>
+    <div className="relative mb-5 w-full mx-auto h-full min-w-full">
       {loading ? (
         <LoadingSkillate />
       ) : (
-        <div className='border rounded-lg text-slate-600 capitalize h-full! relative overflow-hidden'>
-          <div className='md:p-5 p-3 flex flex-col items-center justify-center h-full'>
-            <div className='overflow-hidden relative'>
+        <div className='border rounded-lg text-slate-600 capitalize w-full mx-auto'>
+          <div className='md:p-5 p-3 flex relative flex-col items-center justify-center h-full'>
+            <div className='overflow-hidden '>
               <span className='bg-slate-700 text-white px-2 py-1 absolute top-0 right-0'>
                 {off}%
               </span>
@@ -45,11 +46,11 @@ const StoreOffCard = ({
                 alt={`${title} image`}
                 width={400}
                 height={400}
-                className='object-cover h-full w-auto mx-auto'
+                className={`object-cover w-auto mx-auto ${imageClassName}`}
               />
             </div>
             <h2 className='md:text-[16px] sm:text-[13px] text-[12px] md:mt-5'>
-              {title.length > 20 ? <>{title.slice(0, 20)}...</> : title}
+              {title.length > 20 ? <>{title.slice(0, 18)}...</> : title}
             </h2>
             <p className='md:text-[12px] text-center text-slate-500 mt-1 font-light'>
               {description.length > 50 ? (
@@ -60,7 +61,9 @@ const StoreOffCard = ({
             </p>
             <p className='text-slate-700 flex gap-2 border-t mt-2'>
               <span>{discountedPrice}$</span>
-              <del className="opacity-65 text-sm">{price}$</del>
+              <del className='opacity-65 md:text-[12px] italic font-thin text-[10px]'>
+                {price}$
+              </del>
             </p>
           </div>
           <Button
@@ -74,7 +77,7 @@ const StoreOffCard = ({
           </Button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -21,8 +21,7 @@ export const placeOrder = async ({
   };
 
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_ORDERS as string;
-    const response = await axios.post(apiUrl, order, {
+    const response = await axios.post("/api/admin/orders", order, {
       headers: { "Content-Type": "application/json" },
     });
 

@@ -1,16 +1,16 @@
 import { ChangeEvent, FormEvent } from "react";
 
 export interface ProductProps {
-  [x: string]: number;
   _id: string;
   name: string;
   brand: string;
   category: string | null;
   description: string | null;
   price: number | null;
-  discount: number;
+  discountPrice: number;
   stock: number;
   rating: number;
+  availability: string | null;
   images: { url: string; _id: string }[];
   availabilityStatus: string;
   warrantyInformation: string;
@@ -18,6 +18,9 @@ export interface ProductProps {
   shippingInformation: string;
   features: string[];
   colors: { name: string; hex: string }[];
+  dateAdded?: any;
+  offers?: number;
+  sales?: any;
 }
 
 interface Dimensions {
@@ -133,7 +136,7 @@ export interface createProductFormPropsTypes {
   setDiscount: (value: number | string) => void;
 
   category: string;
-  setCategory: (value: string) => void;
+  setCategory: any;
 
   stock: number | string;
   setStock: (value: number | string) => void;
@@ -196,7 +199,12 @@ export interface upateFormProps {
   setError: (error: string) => void;
   formLoading: boolean;
   data: any;
-
+  setSubcategory: (subCategory: string) => void;
+  subCategory: string;
+  brand: string;
+  setBrand: (brand: string) => void;
+  setSku: (sku: string) => void;
+  sku: string;
   // Image Handling Props
   images: any[];
   setImages?: (images: any[]) => void;
@@ -206,4 +214,31 @@ export interface upateFormProps {
   handleUpdate: () => Promise<void>;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   imageLoading: boolean;
+}
+
+export interface sortMenuProps {
+  sortType: string;
+  setSortType: (sortType: string) => void;
+  onlyAvailable: boolean;
+  setOnlyAvailable: (onlyAvailable: boolean) => void;
+  minPrice: number;
+  maxPrice: number;
+  allBrands: string[];
+  setMinPrice: (minPrice: number) => void;
+  setMaxPrice: (maxPrice: number) => void;
+  selectedBrands: string[];
+  setSelectedBrands: (selectedBrands: string[]) => void;
+  rams: string[];
+  roms: string[];
+  allNetworkTypes: string[];
+  selectedNetWork: string[];
+  setSelectedNetWork: (selectedNetWork: string[]) => void;
+  selectedRam: string[];
+  setSelectedRam: (selectedRam: string[]) => void;
+  selectRoms: string[];
+  setSelectRoms: (selectRoms: string[]) => void;
+  products?: number;
+  colors: [string, string][];
+  selectedColor: string;
+  setSelectedColor: (selectedColor: string) => void;
 }

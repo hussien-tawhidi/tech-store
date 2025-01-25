@@ -159,9 +159,11 @@ export const userMenuData = [
 export const mainMenu = [
   {
     id: 1,
-    title: "Mobile",
+    title: "Smartphones",
     icon: CiMobile1,
     image: "/features/menu/iphone_14.png",
+    link: "/smart-phone",
+    category: "smartphone",
     subMenu: [
       { id: 2, title: "mobile accessories", Link: "/" },
       { id: 3, title: "mobile materials", Link: "/" },
@@ -171,8 +173,10 @@ export const mainMenu = [
   },
   {
     id: 5,
-    title: "labtop & tablet",
+    title: "laptop, tablet, ipad",
     image: "/features/menu/ipad.png",
+    link: "/laptops-tablets",
+    category: "laptop,tablet,ipad ...",
     icon: BsLaptop,
     subMenu: [
       { id: 6, title: "labtop", Link: "/" },
@@ -183,8 +187,10 @@ export const mainMenu = [
   {
     id: 9,
     title: "earphone & headphones",
+    category: "handsfree,headphone",
     icon: CiHeadphones,
     image: "/features/menu/headphone.png",
+    link: "/earphone-headphones",
     subMenu: [
       { id: 10, title: "handsfree", Link: "/" },
       { id: 11, title: "headphone", Link: "/" },
@@ -194,8 +200,10 @@ export const mainMenu = [
   {
     id: 15,
     title: "watches",
+    category: "watches",
     icon: PiWatchThin,
     image: "/features/menu/watch.png",
+    link: "/watches",
     subMenu: [
       { id: 16, title: "smart watches", Link: "/" },
       { id: 17, title: "watches accessories", Link: "/" },
@@ -206,6 +214,8 @@ export const mainMenu = [
     title: "computer",
     icon: PiComputerTowerLight,
     image: "/features/menu/imac.png",
+    category: "computer",
+    link: "/computer",
     subMenu: [
       { id: 19, title: "computer", Link: "/" },
       { id: 18, title: "monitor", Link: "/" },
@@ -217,6 +227,8 @@ export const mainMenu = [
     title: "networks & connectivity",
     icon: PiComputerTowerLight,
     image: "/features/menu/router.png",
+    link: "/network-connectivity",
+    category: "networks & connectivities",
     subMenu: [
       { id: 21, title: "networks accessories", Link: "/" },
       { id: 22, title: "modem & others", Link: "/" },
@@ -225,9 +237,11 @@ export const mainMenu = [
   },
   {
     id: 24,
-    title: "Household appliances",
+    title: "Household applliances",
     icon: CgSmartHomeRefrigerator,
     image: "/features/menu/refgi.png",
+    link: "/household-applliance",
+    category: "home appliance",
     subMenu: [
       { id: 25, title: "refrigerator", Link: "/" },
       { id: 26, title: "cooking", Link: "/" },
@@ -238,8 +252,24 @@ export const mainMenu = [
   },
   {
     id: 30,
-    title: "video & audio",
+    title: "audio",
+    category: "audio",
     icon: MdTv,
+    link: "/audio",
+    image: "/features/menu/speaker.png",
+    subMenu: [
+      { id: 32, title: "tv", Link: "/" },
+      { id: 31, title: "speeker", Link: "/" },
+      { id: 33, title: "camera", Link: "/" },
+      { id: 34, title: "autio assistant", Link: "/" },
+    ],
+  },
+  {
+    id: 320,
+    title: "video",
+    category: "video",
+    icon: MdTv,
+    link: "/video-audio",
     image: "/features/menu/speaker.png",
     subMenu: [
       { id: 32, title: "tv", Link: "/" },
@@ -251,7 +281,9 @@ export const mainMenu = [
   {
     id: 35,
     title: "gaming",
+    category: "gaming",
     icon: RiGamepadLine,
+    link: "/gaming",
     image: "/features/menu/game.png",
     subMenu: [
       { id: 36, title: "gaming console", Link: "/" },
@@ -264,6 +296,8 @@ export const mainMenu = [
   {
     id: 41,
     title: "jewlary",
+    link: "/jewlary",
+    category: "jeweleries",
     icon: GiJewelCrown,
     image: "/features/menu/jewllery.png",
     subMenu: [
@@ -275,6 +309,8 @@ export const mainMenu = [
   {
     id: 45,
     title: "beauty",
+    link: "/beauty",
+    category: "beauty",
     icon: LiaHandHoldingHeartSolid,
     image: "/features/menu/beauty.png",
     subMenu: [
@@ -292,10 +328,34 @@ export const bottomMenu = [
 ];
 
 export const homeBanners = [
-  { id: 1, src: "/features/phone.jpg" },
-  { id: 2, src: "/features/soundBanner.jpg" },
-  { id: 3, src: "/features/beauty.jpg" },
-  { id: 4, src: "/features/watch.jpg" },
+  {
+    id: 1,
+    src: "/features/phone.jpg",
+    link: "best-phones",
+    title: "Choose your phone ",
+    category: "phone",
+  },
+  {
+    id: 2,
+    category: "handsfree",
+    src: "/features/soundBanner.jpg",
+    link: "best-sound-effects",
+    title: "best speaker, heade phone, handefree...",
+  },
+  {
+    id: 3,
+    src: "/features/beauty.jpg",
+    category: "beauty",
+    link: "health-beauty-care",
+    title: "Beauty care",
+  },
+  {
+    id: 4,
+    src: "/features/watch.jpg",
+    category: "watch",
+    link: "best-watch",
+    title: "smart watches",
+  },
 ];
 
 export const specialProduct = [

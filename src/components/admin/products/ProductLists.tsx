@@ -9,6 +9,9 @@ import { deleteProduct } from "@/actions/products";
 import ReactPaginate from "react-paginate";
 import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
 import ProductItems from "./ProductItems";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { IoMdAdd } from "react-icons/io";
 
 interface productProps {
   _id: string;
@@ -32,7 +35,6 @@ const ProductLists = () => {
   // pagination
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + 10;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = getProducts.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(getProducts.length / 10);
   const currentPage = Number(searchParams.get("page")) || 1;
@@ -53,15 +55,14 @@ const ProductLists = () => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-
-        const { data } = await axios.get("api/admin/products");
+        const { data } = await axios.get("/api/admin/products");
         if (data) setGetProducts(data?.products);
 
         // Set offset based on the current page number in URL
         const initialOffset = (currentPage - 1) * 10;
         setItemOffset(initialOffset);
       } catch (error) {
-        console.log(error, "Error getting products admin data");
+        console.log(error, "Error getting products admin data IN ADDMIN");
       } finally {
         setLoading(false);
       }
@@ -89,6 +90,16 @@ const ProductLists = () => {
   };
   return (
     <div className='overflow-hidden w-full m-5 z-10'>
+      <div className='flex items-center gap-3'>
+        <Button variant={"outline"}>
+          <Link
+            href='/dashboard/products/create'
+            className='flex gap-3 items-center'>
+            Add new <IoMdAdd />{" "}
+          </Link>
+        </Button>
+        <Button className='text-[12px]'>{getProducts.length} Products</Button>
+      </div>
       {loading && <Loading />}
       {/* products****************************************/}
       <ProductItems

@@ -1,6 +1,16 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { HeroProductProps, SubmitProductParams } from "../../types";
+import { homeBanners } from "../../constant";
+import {
+  HeroProductProps,
+  ProductDetailsProps,
+  ProductProps,
+  SubmitProductParams,
+} from "../../types";
+
+interface FetchProductsProps {
+  featuresName?: string;
+}
 
 interface FetchProductResponse {
   data: any | null;
@@ -148,7 +158,7 @@ export const fetchTopRatedProducts = async () => {
       (a: newProductsProps, b: newProductsProps) =>
         new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
     );
-    data = sortedProducts.slice(13, 16); // Update data with the fetched response
+    data = sortedProducts.slice(13, 20); // Update data with the fetched response
   } catch (err) {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
@@ -175,7 +185,6 @@ export const fetchProductById = async (
   let data = null;
 
   try {
-    
     const response = await axios.get("/api/admin/products");
     const { products } = response.data;
 
@@ -250,7 +259,6 @@ export const createProductFunction = async (
       formData.append("image", file, file.name);
     });
 
-    
     const response = await axios.post("/api/admin/products", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -276,7 +284,6 @@ export const fetchTechStoreOffers = async () => {
   let error: string | null = null; // Initialize error as null
   let data: newProductsProps[] | any = null; // Initialize data as null
   try {
-   
     const response = await axios.get("/api/admin/products");
     const { products } = await response?.data;
     // you can add hot of the week
@@ -309,7 +316,6 @@ export const fetchApplliance = async () => {
   let error: string | null = null; // Initialize error as null
   let data: newProductsProps[] | any = null; // Initialize data as null
   try {
-   
     const response = await axios.get("/api/admin/products");
     const { products } = await response?.data;
     // you can add hot of the week
@@ -317,7 +323,7 @@ export const fetchApplliance = async () => {
       (a: newProductsProps, b: newProductsProps) =>
         new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
     );
-   data = sortedProducts.slice(16, 23);
+    data = sortedProducts.slice(16, 23);
     // Update data with the fetched response
   } catch (err) {
     if (axios.isAxiosError(err)) {
@@ -403,3 +409,24 @@ export async function deleteProduct(productId: string) {
   }
   return result;
 }
+
+export const fetchProductsByCategory = async ({
+  featuresName,
+}: FetchProductsProps): Promise<ProductProps[]> => {
+  try {
+    const feature = homeBanners.find(
+      (feature) => feature.link === featuresName
+    );
+
+    const { data } = await axios.get("/api/admin/products");
+
+    const filteredProducts = data.products.filter(
+      (product: ProductDetailsProps) => product.category === featuresName
+    );
+
+    return filteredProducts;
+  } catch (error) {
+    toast.error("Failed to fetch products.");
+    return [];
+  }
+};

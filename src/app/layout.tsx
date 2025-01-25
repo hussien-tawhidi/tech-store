@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
 import ReduxProvider from "@/components/providers/ReduxProvider";
+import "./globals.css";
+import "simplebar-react/dist/simplebar.min.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,7 +39,12 @@ export default async function RootLayout({
               defaultTheme='system'
               enableSystem
               disableTransitionOnChange>
-              <link rel='icon' href='/dark.png' sizes='any' className="h-auto w-3" />
+              <link
+                rel='icon'
+                href='/dark.png'
+                sizes='any'
+                className='h-auto w-3'
+              />
               {children}
               <Toaster />
             </ThemeProvider>
@@ -47,6 +53,8 @@ export default async function RootLayout({
               rel='stylesheet'
               href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css'
             />
+
+            <script src='https://unpkg.com/hs-range-slider@1.0.2/dist/index.bundle.js'></script>
           </ReduxProvider>
         </SessionProvider>
       </body>

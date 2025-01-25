@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "../../ui/button";
 import { BiSolidOffer } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import {  BsCartPlus } from "react-icons/bs";
+import { BsCartPlus } from "react-icons/bs";
 
 interface props {
   brand: string;
@@ -14,6 +14,7 @@ interface props {
   id: string;
   image: string;
   descriptions: string;
+  className?: string;
 }
 
 const LaptopsCard = ({
@@ -23,20 +24,22 @@ const LaptopsCard = ({
   id,
   image,
   descriptions,
+  className,
 }: props) => {
   const router = useRouter();
 
   return (
-    <div className='shadow-lg cursor-pointer'>
+    <div className='shadow-lg cursor-pointer mb-1'>
       <div className='relative w-full h-full p-5 rounded-md  overflow-hidden'>
         <div className='z-10 text-left'>
           <div className='relative text-left'>
             <h1 className='text-xl font-semibold -mb-14  w-full leading-6'>
               {name?.length > 10 ? (
                 <>
-                  {/* {name?.split(" ")[0]} First word */}
+                  {/* {name?.split(" ")[0]}  */}
                   <strong className='block text-transparent stroke -z-10 text-6xl -inset-1'>
-                    {name?.split(" ")?.slice(1)?.join(" ")}{" "}
+                    {/* {name?.split(" ")?.slice(1)?.join(" ")}{" "} */}
+                    {name?.split(" ")[0]}
                   </strong>
                 </>
               ) : (
@@ -48,7 +51,7 @@ const LaptopsCard = ({
               alt='name'
               width={1000}
               height={1000}
-              className='object-cover mx-auto z-10 w-auto h-[35vh]'
+              className={`object-cover mx-auto z-10  ${className}`}
             />
           </div>
           <div className='relative'>
@@ -70,7 +73,11 @@ const LaptopsCard = ({
           </p>
         </div>
         <p className='text-[10px] sm:w-[50%] w-[90%] leading-5 text-right ml-auto opacity-45 text-muted-foreground'>
-          {descriptions}
+          {descriptions.length > 45 ? (
+            <span>{descriptions.slice(0, 45)}</span>
+          ) : (
+            descriptions
+          )}
           <span
             className='shadow-xl mx-1  text-slate-600 font-semibold'
             onClick={() =>

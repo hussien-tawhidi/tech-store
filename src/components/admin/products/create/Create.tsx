@@ -13,7 +13,8 @@ const Create = () => {
   const [price, setPrice] = useState<number | string>("");
   const [discount, setDiscount] = useState<number | string>("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+const [category, setCategory] = useState<string>("");
+
   const [subcategory, setSubcategory] = useState("");
   const [brand, setBrand] = useState("");
   const [stock, setStock] = useState<number | string>("");
@@ -42,6 +43,11 @@ const Create = () => {
         return [...prevColors, color]; // Add color if not selected
       }
     });
+  };
+
+  const handleCategoryChange = (value: string) => {
+    setCategory(value); // Update state with the selected value
+    console.log("Selected category:", value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -100,6 +106,7 @@ const Create = () => {
           sku={sku}
           stock={stock}
           subcategory={subcategory}
+        
         />
       )}
     </>

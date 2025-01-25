@@ -74,7 +74,7 @@ const ProductItems = ({
                     width={200}
                     height={200}
                     className='w-10 h-auto object-cover object-center'
-                    src={product?.images?.[0]?.url || ""}
+                    src={product?.images?.[0]?.url || "/"}
                     alt='Photo'
                   />
                 )}
