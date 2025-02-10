@@ -50,7 +50,7 @@ export const fetchHeroProducts = async () => {
   return { data, error, loading }; // Return the updated states
 };
 
-export const fetchNewProduct = async () => {
+export const fetchSmartPhones = async () => {
   let loading = true;
   let error: string | null = null; // Initialize error as null
   let data: newProductsProps[] | any = null; // Initialize data as null
@@ -58,12 +58,11 @@ export const fetchNewProduct = async () => {
   try {
     const response = await axios.get("/api/admin/products");
     const { products } = response.data;
-    const sortedProducts = products?.sort(
-      (a: newProductsProps, b: newProductsProps) =>
-        new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+    const sortedProducts = products?.filter(
+      (product: ProductProps) => product.category === "smartphone"
     );
-    // console.log(sortedProducts?.slice(0,5),"Sorted Products");
-    data = sortedProducts?.slice(0, 5); // Update data with the fetched response
+    console.log(sortedProducts);
+    data = sortedProducts?.slice(0, 10); // Update data with the fetched response
   } catch (err) {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
@@ -113,7 +112,7 @@ export const fetchHotProducts = async () => {
   return { data, error, loading }; // Return the updated states
 };
 
-export const fetchBestSells = async () => {
+export const fetchLaptops = async () => {
   let loading = true;
   let error: string | null = null; // Initialize error as null
   let data: newProductsProps[] | any = null; // Initialize data as null
@@ -122,11 +121,11 @@ export const fetchBestSells = async () => {
     const response = await axios.get("/api/admin/products");
     const { products } = await response.data;
     // you cant add best sells
-    const sortedProducts = products.sort(
-      (a: newProductsProps, b: newProductsProps) =>
-        new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+    const sortedProducts = products.filter(
+      (product: { category: string }) =>
+        product.category === "laptop,tablet,ipad ..."
     );
-    data = sortedProducts.slice(5, 13); // Update data with the fetched response
+    data = sortedProducts; // Update data with the fetched response
   } catch (err) {
     if (axios.isAxiosError(err)) {
       // Axios-specific error handling
@@ -172,7 +171,6 @@ export const fetchTopRatedProducts = async () => {
 
   return { data, error, loading };
 };
-
 
 export const fetchProductById = async (
   id: string
@@ -233,7 +231,12 @@ export const createProductFunction = async (
     // Prepare FormData
     const formData = new FormData();
     formData.append("name", name);
-    formData.append("banner", banner as Blob);
+
+    // Append banner only if it exists
+    if (banner) {
+      formData.append("banner", banner as Blob);
+    }
+
     formData.append("price", price.toString());
     formData.append("discount", discount.toString());
     formData.append("description", description);
@@ -306,22 +309,21 @@ export const fetchTechStoreOffers = async () => {
   return { data, error, loading };
 };
 
-
 export const fetchApplliance = async () => {
   let loading = true;
   let error: string | null = null; // Initialize error as null
   let data: newProductsProps[] | any = null; // Initialize data as null
   try {
     const response = await axios.get("/api/admin/products");
-  if(response&&response.data){
-  const { products } = await response.data;
-  // you can add hot of the week
-  const sortedProducts = products.sort(
-    (a: newProductsProps, b: newProductsProps) =>
-      new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
-  );
-  data = sortedProducts.slice(16, 23);    
-  }
+    if (response && response.data) {
+      const { products } = await response.data;
+      // you can add hot of the week
+      const sortedProducts = products.sort(
+        (a: newProductsProps, b: newProductsProps) =>
+          new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+      );
+      data = sortedProducts.slice(16, 23);
+    }
     // Update data with the fetched response
   } catch (err) {
     if (axios.isAxiosError(err)) {
@@ -426,3 +428,33 @@ export const fetchProductsByCategory = async ({
   }
 };
 
+export const fetchProducts = async () => {
+  let loading = true;
+  let error: string | null = null;
+  let data: newProductsProps[] | any = null;
+  try {
+    const response = await axios.get("/api/admin/products");
+    if (response && response.data) {
+      const { products } = response.data;
+      const sortedProducts = products.sort(
+        (a: newProductsProps, b: newProductsProps) =>
+          new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()
+      );
+      console.log(sortedProducts);
+      data = sortedProducts.slice(16, 23);
+    }
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      error =
+        err.response?.data?.message ||
+        "An error occurred while fetching data. [fetchTechStoreOffers]";
+    } else {
+      error = "An unexpected error occurred. [fetchTechStoreOffers]";
+    }
+    console.error("Fetch error:", err);
+  } finally {
+    loading = false;
+  }
+
+  return { data, error, loading };
+};

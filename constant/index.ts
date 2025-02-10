@@ -6,7 +6,7 @@ import { LiaShippingFastSolid } from "react-icons/lia";
 import { PiHeadsetLight } from "react-icons/pi";
 import { RiGamepadLine, RiSecurePaymentLine } from "react-icons/ri";
 import { TbTruckReturn } from "react-icons/tb";
-import { FaUsersViewfinder } from "react-icons/fa6";
+import { FaUsersViewfinder, FaWhatsapp } from "react-icons/fa6";
 import { HiOutlineCube } from "react-icons/hi2";
 import { BiStar } from "react-icons/bi";
 import { IoIosHeartEmpty } from "react-icons/io";
@@ -16,38 +16,46 @@ import { CgSmartHomeRefrigerator } from "react-icons/cg";
 import { BsLaptop } from "react-icons/bs";
 import { GiJewelCrown } from "react-icons/gi";
 import { GoGift } from "react-icons/go";
+import { CiHeadphones, CiMobile1, CiSettings } from "react-icons/ci";
+import { RiBloggerLine } from "react-icons/ri";
 import {
   PiComputerTowerLight,
   PiUsersFourThin,
   PiWatchThin,
 } from "react-icons/pi";
-import {
-  CiCoins1,
-  CiCreditCard1,
-  CiHeadphones,
-  CiMobile1,
-  CiSettings,
-} from "react-icons/ci";
-
-export const headerData = [
-  { id: 2, title: "laptops", linkTo: "/laptops" },
-  { id: 3, title: "Iphone", linkTo: "/iphone" },
-  { id: 4, title: "Samsung", linkTo: "/samsung" },
-  { id: 5, title: "Microsoft", linkTo: "/microsoft" },
-  { id: 6, title: "Huawei", linkTo: "/huawei" },
-  { id: 7, title: "Airpod", linkTo: "/airpods" },
-  { id: 8, title: "Watch", linkTo: "/watch" },
-  { id: 9, title: "Accessories", linkTo: "/accessories" },
-  { id: 10, title: "Support", linkTo: "/support" },
-];
 
 export const searchContaineDate = [
-  { id: 1, title: "visting an Am store FAQ", linkTo: "/" },
-  { id: 2, title: "airPod", linkTo: "/" },
-  { id: 3, title: "Iphone", linkTo: "/" },
-  { id: 4, title: "HeadPhone", linkTo: "/" },
-  { id: 5, title: "Samsung", linkTo: "/" },
-  { id: 6, title: "Gift", linkTo: "/" },
+  {
+    id: 1,
+    title: "visting an Am store FAQ",
+    link: "/smart-phone",
+    category: "smartphone",
+  },
+  {
+    id: 2,
+    title: "airPod & handsfree",
+    category: "handsfree,headphone",
+    link: "/earphone-headphones",
+  },
+  {
+    id: 3,
+    title: "laptops & tablets ...",
+    link: "/laptops-tablets",
+    category: "laptop,tablet,ipad ...",
+  },
+  { id: 4, title: "watches", category: "watches", link: "/watches" },
+  {
+    id: 5,
+    title: "networks & connectivities",
+    link: "/network-connectivity",
+    category: "networks & connectivities",
+  },
+  {
+    id: 6,
+    title: "Gift",
+    link: "/gifts",
+    category: "gifts",
+  },
 ];
 
 export const adminSideBarMenu = [
@@ -159,16 +167,24 @@ export const userMenuData = [
 export const mainMenu = [
   {
     id: 1,
-    title: "Smartphones",
+    title: "phones",
     icon: CiMobile1,
     image: "/features/menu/iphone_14.png",
-    link: "/smart-phone",
     category: "smartphone",
+    link: "/",
     subMenu: [
-      { id: 2, title: "mobile accessories", Link: "/" },
+      {
+        id: 44,
+        title: "all phones",
+        Link: "/smart-phone",
+      },
+      {
+        id: 2,
+        title: "mobile accessories",
+        Link: "/phone-accessories",
+        category: "phone accessories",
+      },
       { id: 3, title: "mobile materials", Link: "/" },
-      { id: 4, title: "smart phone", Link: "/" },
-      { id: 44, title: "phone", Link: "/" },
     ],
   },
   {
@@ -179,6 +195,7 @@ export const mainMenu = [
     category: "laptop,tablet,ipad ...",
     icon: BsLaptop,
     subMenu: [
+      { id: 49, title: "laptop,tablet,ipad ...", Link: "laptops-tablets" },
       { id: 6, title: "labtop", Link: "/" },
       { id: 7, title: "tablet", Link: "/" },
       { id: 8, title: "laptop accessories", Link: "/" },
@@ -188,10 +205,11 @@ export const mainMenu = [
     id: 9,
     title: "earphone & headphones",
     category: "handsfree,headphone",
+    link: "/earphone-headphones",
     icon: CiHeadphones,
     image: "/features/menu/headphone.png",
-    link: "/earphone-headphones",
     subMenu: [
+      { id: 50, title: "all", Link: "/earphone-headphones" },
       { id: 10, title: "handsfree", Link: "/" },
       { id: 11, title: "headphone", Link: "/" },
     ],
@@ -201,11 +219,13 @@ export const mainMenu = [
     id: 15,
     title: "watches",
     category: "watches",
+    link: "/watches",
     icon: PiWatchThin,
     image: "/features/menu/watch.png",
-    link: "/watches",
     subMenu: [
-      { id: 16, title: "smart watches", Link: "/" },
+      { id: 52, title: "all watches", Link: "/watches" },
+      { id: 53, title: "clocks", Link: "/clocks" },
+      { id: 16, title: "smart watches", Link: "/watches" },
       { id: 17, title: "watches accessories", Link: "/" },
     ],
   },
@@ -217,7 +237,7 @@ export const mainMenu = [
     category: "computer",
     link: "/computer",
     subMenu: [
-      { id: 19, title: "computer", Link: "/" },
+      { id: 19, title: "computer", Link: "/computer" },
       { id: 18, title: "monitor", Link: "/" },
       { id: 190, title: "computer accessories", Link: "/" },
     ],
@@ -230,6 +250,11 @@ export const mainMenu = [
     link: "/network-connectivity",
     category: "networks & connectivities",
     subMenu: [
+      {
+        id: 51,
+        title: "network & connectivity",
+        Link: "/network-connectivity",
+      },
       { id: 21, title: "networks accessories", Link: "/" },
       { id: 22, title: "modem & others", Link: "/" },
       { id: 23, title: "cctv", Link: "/" },
@@ -243,6 +268,7 @@ export const mainMenu = [
     link: "/household-applliance",
     category: "home appliance",
     subMenu: [
+      { id: 54, title: "all applliance", Link: "/household-applliance" },
       { id: 25, title: "refrigerator", Link: "/" },
       { id: 26, title: "cooking", Link: "/" },
       { id: 27, title: "tailor accessories", Link: "/" },
@@ -258,7 +284,8 @@ export const mainMenu = [
     link: "/audio",
     image: "/features/menu/speaker.png",
     subMenu: [
-      { id: 32, title: "tv", Link: "/" },
+      { id: 301, title: "all", Link: "/audio" },
+      { id: 302, title: "tv", Link: "/" },
       { id: 31, title: "speeker", Link: "/" },
       { id: 33, title: "camera", Link: "/" },
       { id: 34, title: "autio assistant", Link: "/" },
@@ -272,6 +299,7 @@ export const mainMenu = [
     link: "/video-audio",
     image: "/features/menu/speaker.png",
     subMenu: [
+      { id: 55, title: "all video", Link: "/video" },
       { id: 32, title: "tv", Link: "/" },
       { id: 31, title: "speeker", Link: "/" },
       { id: 33, title: "camera", Link: "/" },
@@ -286,6 +314,7 @@ export const mainMenu = [
     link: "/gaming",
     image: "/features/menu/game.png",
     subMenu: [
+      { id: 56, title: "all gaming", Link: "/gaming" },
       { id: 36, title: "gaming console", Link: "/" },
       { id: 37, title: "gaming handle", Link: "/" },
       { id: 38, title: "game", Link: "/game" },
@@ -301,6 +330,7 @@ export const mainMenu = [
     icon: GiJewelCrown,
     image: "/features/menu/jewllery.png",
     subMenu: [
+      { id: 57, title: "all jewelaries", Link: "/jewlary" },
       { id: 42, title: "coin", Link: "/" },
       { id: 43, title: "gold", Link: "/" },
       { id: 44, title: "watch", Link: "/" },
@@ -314,6 +344,7 @@ export const mainMenu = [
     icon: LiaHandHoldingHeartSolid,
     image: "/features/menu/beauty.png",
     subMenu: [
+      { id: 58, title: "beauty and health care", Link: "/beauty" },
       { id: 48, title: "personal", Link: "/" },
       { id: 47, title: "health-accessories", Link: "/" },
     ],
@@ -321,10 +352,10 @@ export const mainMenu = [
 ];
 
 export const bottomMenu = [
-  { id: 1, title: "offer", icon: MdOutlineLocalOffer },
-  { id: 2, title: "giftcard", icon: GoGift },
-  { id: 4, title: "payment ins.", icon: CiCreditCard1 },
-  { id: 5, title: "golden off", icon: CiCoins1 },
+  { id: 1, title: "offer", icon: MdOutlineLocalOffer, link: "/tech-store-off" },
+  { id: 2, title: "giftcard", icon: GoGift, link: "/gift-card" },
+  { id: 5, title: "blogs", icon: RiBloggerLine, link: "/blog" },
+  { id: 6, title: "contact Us", icon: FaWhatsapp, link: "/contact" },
 ];
 
 export const homeBanners = [
@@ -364,21 +395,24 @@ export const specialProduct = [
     title: "Cool & secure",
     des: "Select the best phone, with hight security and cool design",
     image: "/features/iphone.jpg",
-    link: "/",
+    link: "/smart-phone",
+    category: "smartphone",
   },
   {
     id: 2,
     title: "Look Gentle & awesome",
     des: "Best brand show your favorites, you could have better,self confidence",
     image: "/features/watchGentle.jpg",
-    link: "/",
+    link: "/watches",
+    category: "watches",
   },
   {
     id: 3,
     title: "Modern & realistic sound",
     des: "Apple offer you the best and cool airpod in any where you can use that",
     image: "/features/airPodPro.jpg",
-    link: "/",
+    link: "/earphone-headphones",
+    category: "smartphone",
   },
 ];
 
@@ -388,35 +422,35 @@ export const mobileBrands = [
     title: "iPhone",
     des: "Apple offer you the best phone in any kind of people , it has cover all thing you need",
     image: "/features/iphoneBrand.jpg",
-    link: "/",
+    link: "/iphone",
   },
   {
     id: 2,
     title: "Samsung",
     des: "Samsung is so different from other phones, it has so many kind with different price and different models",
     image: "/features/samsungBrand.jpg",
-    link: "/",
+    link: "/samung",
   },
   {
     id: 3,
     title: "Xiaomi",
     des: "Xiaomi is one of the new phones that enter in markets, it has import day by day not as good as samsung and apples",
     image: "/features/xiamiBrand.jpg",
-    link: "/",
+    link: "/xiami",
   },
   {
     id: 4,
     title: "honor",
     des: "Honor like xiami has less market but if the people want to cheap and easy phone they could buy it",
     image: "/features/honorBrand.jpg",
-    link: "/",
+    link: "/honor",
   },
   {
     id: 5,
     title: "Poco",
     des: "Poco are growing so fast, if they go the same way they could have all markets in futures",
     image: "/features/pocoBrand.jpg",
-    link: "/",
+    link: "/poco",
   },
 ];
 
@@ -426,35 +460,35 @@ export const laptopsBrand = [
     title: "Acer",
     des: "Collection of best from acer laptops",
     image: "/features/acer.jpg",
-    link: "/",
+    link: "/laptops/acer-brands",
   },
   {
     id: 2,
     title: "Sureface",
     des: "Best of the colest laptop from microsoft",
     image: "/features/surface.jpg",
-    link: "/",
+    link: "/laptops/surface",
   },
   {
     id: 3,
     title: "MacBook",
     des: "I think no one can ingore macbook is so cool and prefession",
     image: "/features/macbook.jpg",
-    link: "/",
+    link: "/laptops/features",
   },
   {
     id: 4,
     title: "Dell",
     des: "Dell has alot of user, so everyone know that this is the best",
     image: "/features/dell.jpg",
-    link: "/",
+    link: "/laptops/dell-brand",
   },
   {
     id: 5,
     title: "Hp",
     des: "hp notebooks are so cool and have alot of fun for using",
     image: "/features/hp.jpg",
-    link: "/",
+    link: "/laptops/hp-brand",
   },
 ];
 

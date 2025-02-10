@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { CiSearch } from "react-icons/ci";
-import SearchConainer from "../header/SearchConainer";
+import SearchConainer from "../header/search/SearchConainer";
 import { useState } from "react";
 import { ToggleTheme } from "../providers/ToggleTheme";
 import Logout from "../icons/Logout";

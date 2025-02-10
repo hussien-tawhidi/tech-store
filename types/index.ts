@@ -1,3 +1,4 @@
+import { productProps } from "@/components/home/laptops/Laptops";
 import { ChangeEvent, FormEvent } from "react";
 
 export interface ProductProps {
@@ -21,6 +22,7 @@ export interface ProductProps {
   dateAdded?: any;
   offers?: number;
   sales?: any;
+  subCategories?: string;
 }
 
 interface Dimensions {
@@ -241,4 +243,32 @@ export interface sortMenuProps {
   colors: [string, string][];
   selectedColor: string;
   setSelectedColor: (selectedColor: string) => void;
+}
+
+export interface TechStoreOffProps {
+  sortType: string;
+  setSortType: (sortType: string) => void;
+  onlyAvailable: boolean;
+  setOnlyAvailable: (onlyAvailable: boolean) => void;
+  minPrice: number;
+  maxPrice: number;
+  allBrands: string[]|any[];
+  setMinPrice: (minPrice: number) => void;
+  setMaxPrice: (maxPrice: number) => void;
+  selectedBrands: string[];
+  setSelectedBrands: (selectedBrands: string[]) => void;
+  rams: string[];
+  roms: string[];
+  allNetworkTypes: string[];
+  selectedNetWork: string[];
+  setSelectedNetWork: (selectedNetWork: string[]) => void;
+  selectedRam: string[];
+  setSelectedRam: (selectedRam: string[]) => void;
+  selectRoms: string[];
+  setSelectRoms: (selectRoms: string[]) => void;
+
+  colors: [string, string][];
+  selectedColor: string;
+  setSelectedColor: (selectedColor: string) => void;
+  data: productProps[];
 }

@@ -1,10 +1,11 @@
 import Create from "@/components/admin/products/create/Create";
 import { Button } from "@/components/ui/button";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
 import { IoChevronBackOutline } from "react-icons/io5";
 
-const page = () => {
+const CreateProduct = () => {
   return (
     <div className=''>
       <div className='flex items-center m-5 border-b pb-3'>
@@ -23,4 +24,12 @@ const page = () => {
   );
 };
 
-export default page;
+export default CreateProduct;
+export async function generateMetadata(): Promise<Metadata> {
+  const title = "Create Product";
+
+  return {
+    title,
+    description: "This is a dynamically generated title for a static page",
+  };
+}

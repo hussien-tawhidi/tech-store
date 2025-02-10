@@ -1,11 +1,7 @@
-import {  NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import Product from "@/model/Product";
 import { dbConnect } from "@/lib/db";
-import {
- 
-  uploadbannerToCloudinary,
-  uploadToCloudinary,
-} from "@/lib/cloudinary";
+import { uploadbannerToCloudinary, uploadToCloudinary } from "@/lib/cloudinary";
 import { MongoServerError } from "mongodb";
 import mongoose from "mongoose";
 
@@ -50,7 +46,7 @@ export async function POST(req: Request) {
     : [];
 
   const image = form.getAll("image") as File[];
-  const banner = form.get("banner") as File;
+  const banner = form.get("banner") as File | null; // Allow banner to be null
 
   // Validate required fields
   const missingFields = [];
@@ -69,19 +65,23 @@ export async function POST(req: Request) {
   try {
     await dbConnect();
 
-    // Upload banner image
-    const uploadedImageData = await uploadbannerToCloudinary(
-      banner,
-      `tech-store/banner/${name}`
-    );
-    const imageUrl = uploadedImageData.secure_url;
+    let imageUrl = ""; // Default empty string for optional banner
+
+    // Upload banner image if provided
+    if (banner) {
+      const uploadedImageData = await uploadbannerToCloudinary(
+        banner,
+        `tech-store/banner/${name}`
+      );
+      imageUrl = uploadedImageData.secure_url;
+    }
 
     // Upload product images
-    let imageUrls: { url: any; public_id: any }[] = [];
+    let imageUrls: { url: string; public_id: string }[] = [];
     if (image.length > 0) {
       const uploadedImages = await uploadToCloudinary(
         image,
-        `tech-store/${name}`
+        `tech-store/${category}/${name}`
       );
       imageUrls = uploadedImages;
     }
@@ -95,7 +95,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const product = await Product.create({
+    // Create product object
+    const productData: any = {
       name,
       price,
       discountPrice,
@@ -110,8 +111,14 @@ export async function POST(req: Request) {
       features,
       colors,
       images: imageUrls,
-      banner: imageUrl,
-    });
+    };
+
+    // Only add banner if it exists
+    if (imageUrl) {
+      productData.banner = imageUrl;
+    }
+
+    const product = await Product.create(productData);
 
     return NextResponse.json(
       { message: "Product created successfully", product },
@@ -131,6 +138,7 @@ export async function POST(req: Request) {
     );
   }
 }
+
 
 export async function PATCH(req: Request) {
   const form = await req.formData();
@@ -194,14 +202,17 @@ export async function PATCH(req: Request) {
     if (stock) updateData.stock = parseInt(stock, 10);
 
     const brand = form.get("brand")?.toString();
-    if (brand) updateData.brand=brand;
+    if (brand) updateData.brand = brand;
 
     // Handle image updates
     const newImages = form.getAll("addImage") as File[];
     let imageUrls: { url: string; public_id: string }[] = [];
 
     if (newImages.length > 0) {
-      const uploadedImages = await uploadToCloudinary(newImages, name);
+      const uploadedImages = await uploadToCloudinary(
+        newImages,
+        `tech-store/${category}/${name}`
+      );
       imageUrls = uploadedImages; // New images to add
     }
 

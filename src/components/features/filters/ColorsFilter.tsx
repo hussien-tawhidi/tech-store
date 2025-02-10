@@ -38,7 +38,7 @@ const ColorsFilter = ({ selectedColor, setSelectedColor, colors }: Props) => {
                 }}></span>
             )}
         </span>
-        <span className='absolute right-2'>
+        <span className='absolute right-2 '>
           {isOpen ? (
             <MdOutlineKeyboardArrowUp />
           ) : (
@@ -50,7 +50,7 @@ const ColorsFilter = ({ selectedColor, setSelectedColor, colors }: Props) => {
         <SimpleBar
           autoHide
           style={{ maxHeight: 300 }}
-          className='absolute z-10 bg-white border rounded shadow-md mt-1'>
+          className='absolute z-10 bg-slate-50 border rounded shadow-md mt-1'>
           <li
             className='p-2 cursor-pointer hover:bg-gray-100'
             onClick={() => {

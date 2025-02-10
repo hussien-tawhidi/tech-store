@@ -12,11 +12,12 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { useRouter } from "next/navigation";
 
 const StoreOff = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
-
+  const router = useRouter();
   useEffect(() => {
     const getDate = async () => {
       setLoading(true);
@@ -43,7 +44,10 @@ const StoreOff = () => {
   return (
     <div className='shadow-lg'>
       <div className='flex items-center text-slate-100 bg-gradient-to-r animated-background from-slate-800  via-slate-700 to-slate-600 md:p-5 p-3 justify-between'>
-        <Button className='' variant={"outline"}>
+        <Button
+          className=''
+          variant={"outline"}
+          onClick={() => router.push("/tech-store-off")}>
           all
         </Button>
         <p className='flex items-center font-semibold md:text-xl sm:text-sm text-[12px]'>

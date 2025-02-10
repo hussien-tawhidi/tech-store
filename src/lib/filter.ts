@@ -146,3 +146,5 @@ export const getUniqueColors = (products: ProductProps[]) => {
 
   return Array.from(colorSet.entries()); // Convert Map to an array of [name, hex] pairs
 };
+
+

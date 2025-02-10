@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchBestSells } from "@/actions/products";
+import { fetchLaptops } from "@/actions/products";
 import CardLoader from "@/components/cards/CardLoader";
 import { useEffect, useState } from "react";
 import LaptopsCard from "./LaptopsCard";
@@ -9,6 +9,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { laptopsBrand } from "../../../../constant";
 import OverlayForBanner from "../OverlayForBanner";
 import ResponsiveSlider from "@/components/sliders/ResponsiveSlider";
+import Link from "next/link";
 
 export interface productProps {
   ratings: number;
@@ -21,6 +22,7 @@ export interface productProps {
   discountPrice: number;
   price: number;
   colors: { name: string; hex: string }[];
+  category?: string;
 }
 
 const Laptops = () => {
@@ -31,7 +33,7 @@ const Laptops = () => {
   useEffect(() => {
     const loadProduct = async () => {
       setLoading(true);
-      const { data, error } = await fetchBestSells();
+      const { data, error } = await fetchLaptops();
       setData(data);
       setError(error);
       setLoading(false);
@@ -39,7 +41,7 @@ const Laptops = () => {
 
     loadProduct();
   }, []);
-
+  console.log(data, "Laptops");
   const renderLaptopCard = (product: productProps) => (
     <LaptopsCard
       descriptions={product.description}
@@ -58,14 +60,18 @@ const Laptops = () => {
     <div className=''>
       {/* All Laptops Button */}
       <div className='flex flex-col my-20 border py-10'>
-        <div className=''>
+        <div className='ml-3'>
           <Button
             variant={"outline"}
             className='flex items-center font-normal gap-2 text-sm hover:text-slate-950 border-slate-500 hover:border-slate-900'>
             all laptops <MdKeyboardArrowRight className='text-2xl mt-1' />
           </Button>
         </div>
-        {error && <p className="text-red-500 border border-red-500 py-2 px-5 rounded">{error}</p>}
+        {error && (
+          <p className='text-red-500 border border-red-500 py-2 px-5 rounded'>
+            {error}
+          </p>
+        )}
         {/* Slider */}
         {loading ? (
           <CardLoader />
@@ -77,27 +83,32 @@ const Laptops = () => {
       {/* Laptops Brand Grid */}
       <div className='grid md:grid-cols-5 grid-cols-2 md:gap-3 gap-2 my-10'>
         {laptopsBrand.map((laptops) => (
-          <OverlayForBanner
-            src={laptops.image}
-            des={laptops.des}
-            title={laptops.title}
-            key={laptops.id}
-          />
+          <Link href={laptops.link} key={laptops.id} target='_blank'>
+            <OverlayForBanner
+              src={laptops.image}
+              des={laptops.des}
+              title={laptops.title}
+            />
+          </Link>
         ))}
       </div>
 
       {/* Additional Banner Section */}
       <div className='my-10 grid sm:gap-4 gap-2 sm:grid-cols-2'>
-        <OverlayForBanner
-          des='We suggest the best laptop, those our user satisfy with using of that'
-          src='/features/laptopSuggestBanner.jpg'
-          title='Laptop Suggested'
-        />
-        <OverlayForBanner
-          des='We suggest the best laptop, those our user satisfy with using of that'
-          src='/features/laptopAccessories.jpg'
-          title='Laptop Accessories'
-        />
+        <Link href={"/latops/suggestion"} target='_blank'>
+          <OverlayForBanner
+            des='We suggest the best laptop, those our user satisfy with using of that'
+            src='/features/laptopSuggestBanner.jpg'
+            title='Laptop Suggested'
+          />
+        </Link>
+        <Link href={"/latops/laptop-Accessories"} target='_blank'>
+          <OverlayForBanner
+            des='We suggest the best laptop, those our user satisfy with using of that'
+            src='/features/laptopAccessories.jpg'
+            title='Laptop Accessories'
+          />
+        </Link>
       </div>
     </div>
   );

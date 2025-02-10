@@ -95,19 +95,24 @@ export async function deleteImageFromCloudinary(publicId: string) {
     throw new Error("Cloudinary configuration is missing");
   }
 
+  const timestamp = Math.round(new Date().getTime() / 1000);
+  const signature = cloudinary.utils.api_sign_request(
+    { public_id: publicId, timestamp },
+    apiSecret
+  );
+
   try {
+    const formData = new FormData();
+    formData.append("public_id", publicId);
+    formData.append("api_key", apiKey);
+    formData.append("timestamp", String(timestamp));
+    formData.append("signature", signature);
+
     const response = await fetch(
       `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`,
       {
         method: "POST",
-        body: JSON.stringify({
-          public_id: publicId,
-          api_key: apiKey,
-          api_secret: apiSecret,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: formData,
       }
     );
 
@@ -125,4 +130,5 @@ export async function deleteImageFromCloudinary(publicId: string) {
     throw new Error("Failed to delete image from Cloudinary");
   }
 }
+
 

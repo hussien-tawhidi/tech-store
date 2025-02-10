@@ -23,7 +23,7 @@ const SliderCard = ({ product }: ProductCardProps) => {
           }
           width={1000}
           height={1000}
-          alt={product?.name}
+          alt={`image ${product.title}`}
           className='object-cover w-[100vw] md:h-[100vh] h-auto'
         />
       )}

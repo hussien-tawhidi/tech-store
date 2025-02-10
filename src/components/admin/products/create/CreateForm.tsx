@@ -1,12 +1,14 @@
+"use client";
+
 import TextInput from "@/components/Input";
 import TextareaInput from "@/components/TextareaInput";
 import { Button } from "@/components/ui/button";
-import { LuHardDriveUpload } from "react-icons/lu";
-import FileInput from "@/components/FileInput";
 import Colors from "./Colors";
 import { createProductFormPropsTypes } from "../../../../../types";
 import Categories from "../../Categories";
 import { categoriesData } from "../../../../../constant/categoryData";
+import SelectBrands from "../SelectBrands";
+import BannerUpload from "../BannerUpload";
 
 const CreateForm = ({
   name,
@@ -39,6 +41,7 @@ const CreateForm = ({
   const filteredSubCategories =
     categoriesData.find((item) => item.category === category)?.subCategories ||
     [];
+
   return (
     <form
       className='w-full mb-10 flex flex-col items-center'
@@ -85,27 +88,29 @@ const CreateForm = ({
           categoriesData={categoriesData.map((item) => item.category)} // Pass only category names
         />
         {category && (
-          <Categories
-            setCategory={setSubcategory}
-            category={subcategory}
-            categoriesData={filteredSubCategories} // Pass subcategories for the selected category
-          />
-        )}
+          <>
+            <Categories
+              setCategory={setSubcategory}
+              category={subcategory}
+              categoriesData={filteredSubCategories} // Pass subcategories for the selected category
+            />
 
+            <SelectBrands
+              brand={brand}
+              setBrand={setBrand}
+              category={category}
+            />
+          </>
+        )}
+      </div>
+      <div className='grid grid-cols-2'>
         <TextInput
           type='number'
           onChange={(e) => setStock(e.target.value)}
           value={stock}
           placeholder='Stock'
         />
-      </div>
-      <div className='grid md:grid-cols-3 grid-cols-1 gap-4 mt-4'>
-        <TextInput
-          type='text'
-          onChange={(e) => setBrand(e.target.value)}
-          value={brand}
-          placeholder='Brand'
-        />
+
         <TextInput
           type='text'
           onChange={(e) => setSku(e.target.value)}
@@ -113,27 +118,12 @@ const CreateForm = ({
           placeholder='SKU (e.g., model-a1-00)'
         />
       </div>
+
       <Colors colors={colors} handleColorChange={handleColorChange} />
-      <div className='flex items-center justify-evenly gap-3 mt-6'>
-        <div>
-          <FileInput onChange={handleImageChange} />
-        </div>
-        <div>
-          <label
-            htmlFor='banner'
-            className='mb-2 text-slate-200 transition-all hover:bg-slate-50 hover:text-slate-700 cursor-pointer text-sm gap-5 p-5 bg-slate-600 rounded-md  flex items-center justify-center relative'>
-            <input
-              type='file'
-              id='banner'
-              className='hidden'
-              onChange={handleBannerChange}
-            />
-            <p className='flex items-center gap-3'>
-              <LuHardDriveUpload className='text-xl' /> Banner of product
-            </p>
-          </label>
-        </div>
-      </div>
+      <BannerUpload
+        handleBannerChange={handleBannerChange}
+        handleImageChange={handleImageChange}
+      />
       <Button
         variant='outline'
         type='submit'

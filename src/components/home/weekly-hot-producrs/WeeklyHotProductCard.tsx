@@ -26,7 +26,7 @@ const WeeklyHotProductCard = ({
           width={500}
           height={500}
           src={images[0].url}
-          alt={title}
+          alt={"some text"}
           className='h-40 w-full object-contain'
         />
       </div>

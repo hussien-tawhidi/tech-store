@@ -60,9 +60,9 @@ const Menu = ({ hideTheMenu, menu }: Props) => {
             key={menu.id}
             className='flex flex-col font-semibold pl-5 animate__animated animate__fadeInUp capitalize border-b justify-center pt-3  text-slate-600 transition-all bg-white'
             onMouseEnter={() => setHoveredMenuId(menu.id)}
+            onTouchStart={() => setHoveredMenuId(menu.id)}
             onMouseLeave={() => setHoveredMenuId(null)}>
-            <Link
-              href={"/"}
+            <p
               className={
                 menu
                   ? "transition-all flex gap-2 items-center p-1  duration-700 delay-200 py-3"
@@ -75,7 +75,7 @@ const Menu = ({ hideTheMenu, menu }: Props) => {
               ) : (
                 <MdArrowDropDown />
               )}
-            </Link>
+            </p>
             {/* {hoveredMenuId === menu.id && ( */}
             <div
               className={
@@ -85,7 +85,8 @@ const Menu = ({ hideTheMenu, menu }: Props) => {
               }>
               {menu.subMenu.map((subMenu) => (
                 <Link
-                  href={"/"}
+                  onClick={hideTheMenu}
+                  href={subMenu.Link}
                   key={subMenu.id}
                   className='transition-all sm:text-sm text-[10px] hover:underline text-left'>
                   {subMenu.title}

@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 import { dbConnect } from "@/lib/db";
 import Product from "@/model/Product";
+import {
+  deleteImageFromCloudinary,
+  uploadToCloudinary,
+} from "@/lib/cloudinary";
 
 export async function DELETE(req: Request) {
   const { productId, imageIdToDelete } = await req.json();
@@ -49,11 +53,14 @@ export async function DELETE(req: Request) {
 }
 
 export async function PATCH(req: Request) {
-  const { productId, imageIdToReplace, newImage } = await req.json();
+  const { productId, imageIdToReplace, newImageFile } = await req.json();
 
-  if (!productId || !imageIdToReplace || !newImage) {
+  if (!productId || !imageIdToReplace || !newImageFile) {
     return NextResponse.json(
-      { error: "Product ID, image ID to replace, and new image are required." },
+      {
+        error:
+          "Product ID, image ID to replace, and new image file are required.",
+      },
       { status: 400 }
     );
   }
@@ -70,18 +77,22 @@ export async function PATCH(req: Request) {
       );
     }
 
-    // Upload new image to Cloudinary
-    const uploadedImage = await cloudinary.uploader.upload(newImage, {
-      folder: "tech-store",
-    });
+    // Upload the new image to Cloudinary
+    const [uploadedImage] = await uploadToCloudinary(
+      [newImageFile],
+      `tech-store/${product.category}/${product.name}`
+    ); // Passing as an array
+    if (!uploadedImage) {
+      throw new Error("Failed to upload new image to Cloudinary");
+    }
 
-    // Remove old image from Cloudinary
-    await cloudinary.uploader.destroy(imageIdToReplace);
+    // Remove the old image from Cloudinary
+    await deleteImageFromCloudinary(imageIdToReplace);
 
-    // Update the product's images
+    // Update the product's images in the database
     product.images = product.images.map((img: any) =>
       img.public_id === imageIdToReplace
-        ? { public_id: uploadedImage.public_id, url: uploadedImage.secure_url }
+        ? { public_id: uploadedImage.public_id, url: uploadedImage.url }
         : img
     );
 

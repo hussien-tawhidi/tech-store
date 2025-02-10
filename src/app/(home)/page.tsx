@@ -15,7 +15,7 @@ import OverlayForBanner from "@/components/home/OverlayForBanner";
 
 export default function Home() {
   return (
-    <main className='overflow-hidden z-0 relative mt-16'>
+    <main className='overflow-hidden z-0 relative'>
       <Hero />
       <Menu />
       <HomeFeauters />

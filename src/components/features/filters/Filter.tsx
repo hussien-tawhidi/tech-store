@@ -26,9 +26,10 @@ interface Props {
   setSelectedRam: (selectedRam: string[]) => void;
   selectRoms: string[];
   setSelectRoms: (selectRoms: string[]) => void;
-  colors: [string,string][];
+  colors: [string, string][];
   selectedColor: string;
   setSelectedColor: (selectedColor: string) => void;
+  categoryName?: string;
 }
 
 const Filter = ({
@@ -53,9 +54,14 @@ const Filter = ({
   colors,
   setSelectedColor,
   selectedColor,
+  categoryName,
 }: Props) => {
+  const isCategoryValid =
+    categoryName === "smartphone" ||
+    categoryName === "laptop,tablet,ipad ..." ||
+    categoryName === "computer";
   return (
-    <div className='w-full'>
+    <div className='w-full bg-slate-50 text-slate-600 h-auto'>
       <OnlyAvailable
         onlyAvailable={onlyAvailable}
         setOnlyAvailable={setOnlyAvailable}
@@ -71,12 +77,20 @@ const Filter = ({
         setSelectedBrands={setSelectedBrands}
         brands={allBrands}
       />
-      <RamFilter
-        ram={rams}
-        selectRam={selectedRam}
-        setSelectRam={setSelectedRam}
-      />
-      <Roms roms={roms} selectRom={selectRoms} setSelectRom={setSelectRoms} />
+      {isCategoryValid && (
+        <>
+          <RamFilter
+            ram={rams}
+            selectRam={selectedRam}
+            setSelectRam={setSelectedRam}
+          />
+          <Roms
+            roms={roms}
+            selectRom={selectRoms}
+            setSelectRom={setSelectRoms}
+          />
+        </>
+      )}
       <NetWork
         networks={allNetworkTypes}
         selectedNetWork={selectedNetWork}
@@ -90,6 +104,5 @@ const Filter = ({
     </div>
   );
 };
-
 
 export default Filter;

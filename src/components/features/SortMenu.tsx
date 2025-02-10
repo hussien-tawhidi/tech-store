@@ -46,7 +46,7 @@ const SortMenu = ({
   colors,
 }: sortMenuProps) => {
   return (
-    <div className='flex flex-nowrap justify-between overflow-x-auto items-center md:gap-5 gap-3  md:text-[14px] text-[12px] bg-slate-600 p-2 rounded w-full text-slate-200'>
+    <div className='flex mt-5 flex-nowrap justify-between overflow-x-auto items-center md:gap-5 gap-3  md:text-[14px] text-[12px] bg-slate-50 p-2 w-full text-slate-600'>
       <div className='flex custom-scrollbar items-center justify-center md:gap-5 gap-3'>
         <Dialog>
           <DialogTrigger asChild>
@@ -93,14 +93,14 @@ const SortMenu = ({
               <span
                 className={
                   sortType === option.value
-                    ? "bg-slate-700 h-[70%] w-[1px] absolute bottom-auto top-auto right-0"
+                    ? "bg-slate-500 h-[70%] w-[1px] absolute bottom-auto top-auto right-0"
                     : " h-[70%] w-[1px] bg-slate-300 absolute bottom-auto top-auto right-0"
                 }></span>
               <span
                 className={
                   sortType === option.value
-                    ? "text-slate-50 font-normal cursor-pointer shadow-none"
-                    : "text-slate-200 font-light cursor-pointer shadow-none hover:text-slate-50 transition-all"
+                    ? "text-slate-600 font-normal cursor-pointer shadow-none"
+                    : "text-slate-700 font-light cursor-pointer shadow-none hover:text-slate-900 transition-all"
                 }>
                 {option.label}
               </span>

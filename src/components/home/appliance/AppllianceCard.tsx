@@ -41,7 +41,7 @@ const MobileCard = ({
               src={image}
               width={500}
               height={500}
-              alt={name}
+              alt={`${name} images`}
               className='mx-auto object-cover'
             />
           </div>

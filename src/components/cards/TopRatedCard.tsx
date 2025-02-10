@@ -25,7 +25,6 @@ const TopRatedCard: React.FC<TopRatedCardProps> = ({
   colors,
   id,
 }) => {
- 
   return (
     <div className='relative mx-auto mb-10 max-w-sm rounded-3xl shadow-xl text-slate-600 p-6 w-full flex flex-col  justify-between'>
       {/* Product Image */}
@@ -34,7 +33,7 @@ const TopRatedCard: React.FC<TopRatedCardProps> = ({
           width={400}
           height={400}
           src={productImage}
-          alt={productName}
+          alt={`image ${productName}`}
           className='h-48 w-auto object-contain rounded-xl'
         />
       </div>

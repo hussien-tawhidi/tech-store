@@ -32,7 +32,7 @@ const ExampleSlider = () => {
             width={1000}
             height={1000}
             src={product.images[0].url}
-            alt={product.name}
+            alt={"image"}
             className='object-cover w-full h-[30vh] rounded-md'
           />
           <div className='text-center mt-2'>

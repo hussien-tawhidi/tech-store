@@ -1,22 +1,36 @@
+import Link from "next/link";
 import SideBar from "@/components/admin/SideBar";
 import { auth } from "../../../auth";
 import { Button } from "@/components/ui/button";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { CiUser } from "react-icons/ci";
-import Link from "next/link";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const session = await auth();
+  const isSpecialPage = true; // Replace with your own condition
+  const title = isSpecialPage
+    ? `${session?.user?.name} | ADMIN`
+    : "User Dashboard";
+
+  return {
+    title,
+    description: "This is a dynamically generated title for a static page",
+  };
+}
 
 const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth();
   if (session?.user?.role === "admin")
     return (
-      <div>
+      <>
         <div className='flex relative'>
           <div className='h-screen sticky top-0'>
             <SideBar />
           </div>
           <div className='w-full'>{children}</div>
         </div>
-      </div>
+      </>
     );
   return (
     <div className='h-[100vh] flex items-center justify-center'>

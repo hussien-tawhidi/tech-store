@@ -1,16 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { CiLocationOn, CiSearch } from "react-icons/ci";
+import { CiSearch } from "react-icons/ci";
 import { HiMiniLanguage, HiOutlineShoppingBag } from "react-icons/hi2";
 import { useState } from "react";
-import SearchConainer from "./SearchConainer";
 import { useSession } from "next-auth/react";
-import UserMenu from "./UserMenu";
-import Link from "next/link";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import SearchConainer from "./search/SearchConainer";
+import UserMenu from "./UserMenu";
+import Location from "./Location";
 
 const HeaderTop = () => {
   const router = useRouter();
@@ -36,7 +37,7 @@ const HeaderTop = () => {
         />
         {/* <ToggleTheme /> */}
         <HiMiniLanguage className='animate__animated animate__backInDown' />
-        <CiLocationOn className='animate__animated animate__backInDown' />
+        <Location />
       </div>
       <div className='flex items-center md:text-2xl md:gap-3 gap-2 text-xl font-bold'>
         <CiSearch
@@ -64,6 +65,8 @@ const HeaderTop = () => {
           <div className='flex items-center justify-center gap-3 text-slate-600'>
             <Link
               href={`${homeUrl}/user-register`}
+              target='_blank'
+              rel='noopener noreferrer'
               className='flex items-center'>
               <span className='text-[12px] cursor-pointer hover:text-slate-900 transition-all'>
                 SignUp

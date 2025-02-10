@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Loading from "@/components/Loading";
 import CreateForm from "./CreateForm";
 import { createProductFunction } from "@/actions/products";
@@ -17,17 +17,21 @@ const Create = () => {
   const [category, setCategory] = useState<string>("");
 
   const [subcategory, setSubcategory] = useState("");
-  const [brand, setBrand] = useState("");
+  const [brand, setBrand] = useState("other");
   const [stock, setStock] = useState<number | string>("");
   const [sku, setSku] = useState("");
-  const [features, setFeatures] = useState<string>(""); // New features state
+  const [features, setFeatures] = useState<string>("");
   const [colors, setColors] = useState<{ name: string; hex: string }[]>([]);
-  // Colors state
   const [createdBy, setCreatedBy] = useState("");
   const [loading, setLoading] = useState(false);
 
   const { data: session } = useSession();
-  setCreatedBy(session?.user._id);
+
+  useEffect(() => {
+    if (session?.user?._id) {
+      setCreatedBy(session.user._id);
+    }
+  }, [session]); // Only update when session data changes
 
   const handleImageChange = (files: File[]) => {
     setImage(files);
@@ -42,13 +46,12 @@ const Create = () => {
     setColors((prevColors) => {
       const exists = prevColors.some((c) => c.name === color.name);
       if (exists) {
-        return prevColors.filter((c) => c.name !== color.name); // Remove color if already selected
+        return prevColors.filter((c) => c.name !== color.name);
       } else {
-        return [...prevColors, color]; // Add color if not selected
+        return [...prevColors, color];
       }
     });
   };
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,7 +73,6 @@ const Create = () => {
       image,
     };
 
-    // Call the helper function
     await createProductFunction(productData, setLoading, router);
   };
 

@@ -127,7 +127,7 @@ const Update = ({ productId }: { productId: string }) => {
         body: JSON.stringify({
           productId: data?._id,
           imageIdToReplace: selectedImageId,
-          newImage: base64,
+          newImageFile: base64,
         }),
       });
 

@@ -12,9 +12,10 @@ const MobileBrands = () => {
       <div className='grid lg:grid-cols-5 md:gap-3 text-slate-600 grid-cols-2 gap-2 md:grid-cols-3'>
         {mobileBrands.map((brand) => (
           <Link
-            href={brand.link}
+            href={"/mobile-brand"}
             className='relative overflow-hidden rounded group '
-            key={brand.id}>
+            key={brand.id}
+            target='_blank'>
             <OverlayForBanner
               src={brand.image}
               title={brand.title}

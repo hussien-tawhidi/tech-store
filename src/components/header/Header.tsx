@@ -1,5 +1,6 @@
 "use client";
 
+import Banner from "@/components/home/Banner";
 import { useEffect, useState } from "react";
 import HeaderTop from "./HeaderTop";
 import Bottom from "./main/Bottom";
@@ -34,6 +35,7 @@ const Header = () => {
       className={`fixed z-50 top-0 w-full bg-white shadow-md transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}>
+      <Banner />
       <div className='sm:px-5 px-2 md:py-3 py-1.5 border-b'>
         <HeaderTop />
         <Bottom />

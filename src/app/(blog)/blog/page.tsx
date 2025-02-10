@@ -1,6 +1,11 @@
+import CommingSoon from "@/components/CommingSoon";
 
 const BlogPage = () => {
-  return <div>This is blog</div>
-}
+  return (
+    <div className='text-slate-800'>
+      <CommingSoon />
+    </div>
+  );
+};
 
-export default BlogPage
+export default BlogPage;
